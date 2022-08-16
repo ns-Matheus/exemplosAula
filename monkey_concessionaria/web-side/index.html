@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Fontawesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+	<!-- CSS personalizado -->
+	<link rel="stylesheet" href="css/estilo.css">
+
+	<!-- Title -->
+	<title>Dealer Ship</title>
+
+</head>
+
+
+<body>
+	<div id="app">
+
+		<div v-if="show_vue">
+
+
+			<!-- 
+	================================================================================================================================================================================================================================================================================================================================ 
+		MENU DE CIMA
+	================================================================================================================================================================================================================================================================================================================================
+-->
+			<header>
+
+				<section class="caixa_search_css">
+					<input class="caixa_texto_css" placeholder="Pesquisar Carros" v-model="pesquisa">
+					<a class="botao_search_css" href="#">
+						<i class="fas fa-search"></i>
+					</a>
+				</section>
+
+				<div class="icones_css">
+
+
+					<div v-if="show_icone === false" @click="show_icone = true" class="icones_css">
+						<a onclick="sair()" class="iconesair_css" href="#">
+							<img class="img_sair_css" src="img/sair.png" alt="sair">
+						</a>
+						<a onclick="abrirPortas()" class="iconeportasabertas_css" href="#">
+							<img class="img_portas_abertas_css" src="img/porta-aberta.png" alt="porta-abertas">
+						</a>
+						<a onclick="tecladoOn()" class="iconeolhos_css" href="#">
+							<img class="img_olhos_css" src="img/esconderolhos.png" alt="olhos">
+						</a>
+						<a onclick="fecharPortas()" class="iconeportafechada_css" href="#">
+							<img class="img_porta_fechada_css" src="img/portafechada.png" alt="porta-fechada">
+						</a>
+					</div>
+					
+
+					<div class="icones_css">
+						<a class="iconemaiszoom_css" href="#">
+							<img class="img_mais_zoom_css" src="img/mais-zoom.png" alt="Mais Zoom">
+						</a>
+						<a class="iconereduzirzoom_css" href="#">
+							<img class="img_reduzir_zoom_css" src="img/reduzir-zoom.png" alt="reduzir-zoom">
+						</a>
+						<a @click="show_icone = false" class="iconeolhos_css" href="#">
+							<img class="img_olhos_css" src="img/olhos.png" alt="olhos">
+						</a>
+						<a class="iconesetadireita_css" href="#">
+							<img class="img_seta_direita_css" src="img/proximodireita.png" alt="seta-direita">
+						</a>
+						<a class="iconesetaesquerda_css" href="#">
+							<img class="img_seta_esquerda_css" src="img/proximoesquerda.png" alt="seta-esquerda">
+						</a>
+					</div>
+
+					<!-- Icones do Footer -->
+					<!-- <a class="proximacordireita_css" href="img/proximodireita.png">
+						<img class="img_proxima_cor_direita_css" src="img/proximodireita.png" alt="proxima-direita">
+					</a>
+					<a class="proximacoresquerda_css" href="img/proximoesquerda.png">
+						<img class="img_proxima_cor_esquerda_css" src="img/proximoesquerda.png" alt="proxima-esquerda">
+					</a> -->
+				</div>
+
+			</header>
+
+
+
+
+			<!-- 
+	================================================================================================================================================================================================================================================================================================================================ 
+		MENU LATERAL DIREITA
+	================================================================================================================================================================================================================================================================================================================================
+-->
+
+
+			<div>
+				<div class="desc_nome_carro_css">{{nome_carro_vue}}</div>
+				<div class="right_texto_css desc_valor_css">R$: {{valor_vue}}</div>
+				<div class="right_texto_css desc_kg_css">Kg: {{kg_vue}}</div>
+				<!-- <div class="right_texto_css desc_acel_css">{{aceleracao_vue}}</div>
+				<div class="right_texto_css desc_vel_css">{{velocidade_vue}}</div>
+				<div class="right_texto_css desc_ade_css">{{aderencia_vue}}</div>
+				<div class="right_texto_css desc_fre_css">{{frenagem_vue}}</div> -->
+			</div>
+
+
+
+
+
+			<!-- 
+	================================================================================================================================================================================================================================================================================================================================ 
+		MENU LATERAL ESQUERDA
+	================================================================================================================================================================================================================================================================================================================================
+-->
+
+
+
+			<div v-if="show_icone === false" class="menucarros_css">
+
+				<div class="left_perspective_css" v-for="carro in lista_vue">
+					<div class="card_image_css" @click="mostrarCarro(carro)">
+						<div class="left_nome_carro_css">{{carro.nome}}
+							<div class="kg_css">Kg: {{carro.kg}}</div>
+						</div>
+
+						<img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'" />
+
+						<div class="valor_css">R$:{{carro.preco}}</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+
+
+			<!-- 
+	================================================================================================================================================================================================================================================================================================================================ 
+		MENU DE BAIXO
+	================================================================================================================================================================================================================================================================================================================================
+-->
+			<Footer v-if="show_icone === false">
+				<!-- Cores -->
+				<div class="cores_css" v-for="cor in cores_vue" @click="mudarCor(cor)">
+					<div class="cor_css" :style="'background-color: rgba('+cor.r+','+cor.g+','+cor.b+');'"></div>
+				</div>
+				<button style="right: 25%;" onclick="testeDrive()">Teste Drive</button>
+				<button onclick="comprar()">Comprar</button>
+			</Footer>
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+	<!-- Vue js  -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+	<!-- Jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+	<!-- VueJS personalizado -->
+	<script src="js/vue.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- CSS personalizado -->
+	<link rel="stylesheet" href="css/estilo.css">
+	<title>ModalTeste</title>
+</head>
+
+
+<body>
+	<div class="app">
+
+
+		<div class="corpo" v-if="show" >
+			
+			<div class="titulo">
+				{{ titulo }}
+				<button class="fechar" @click="fechar()">X</button>
+			</div>
+			<hr>
+			<div class="conteudo">
+				{{titulo}}
+			</div>
+			<hr>
+			<div class="footer">
+				{{ titulo }}
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Jquery js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            
+    <!-- Vue js  -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+	<!-- VueJS personalizado -->
+	<script src="js/script.js"></script>
+
+</body>
+
+</html>
