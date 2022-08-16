@@ -13,7 +13,7 @@ var app = new Vue({
     aderencia_vue: 0,
     frenagem_vue: 0,
     cores_vue: [
-      { r: 0, g: 0, b: 0 },
+      
       { r: 0, g: 160, b: 0 },
       { r: 127, g: 255, b: 0 },
       { r: 0, g: 255, b: 0 },
@@ -42,10 +42,11 @@ var app = new Vue({
       { r: 255, g: 255, b: 0 },
       { r: 240, g: 230, b: 140 },
       { r: 255, g: 192, b: 203 },
-      { r: 255, g: 255, b: 255 }
+      { r: 255, g: 255, b: 255 },
+      { r: 0, g: 0, b: 0 }
     ]
   },
-  // Funcao filtro barra de pesquisa
+  // Funcao filtro da barra de pesquisa
   watch: {
     pesquisa: function (event) {
       let valorPesquisa = event.toLowerCase()
@@ -104,6 +105,7 @@ function mudarCor(cor) {
 
 
 function abrirPortas() {
+ 
   fetch("http://monkey_concessionaria/abrirPortas", {
     method: 'POST'
   }).then(function (response) {
@@ -121,7 +123,7 @@ function abrirPortas() {
 
 
 function fecharPortas() {
-
+  
   fetch("http://monkey_concessionaria/fecharPortas", {
     method: 'POST'
   }).then(function (response) {
@@ -154,18 +156,30 @@ function testeDrive() {
   }).catch(function () {
     console.error()
   })
-
-
 }
 
 // =================================================
 // Comprar o carro
 // =================================================
 
-function comprar() {
+function comprarCarro() {
 
+  fetch("http://monkey_concessionaria/comprarCarro", {
+    method: 'POST',
+    body: JSON.stringify({ nome: app.nome_carro_vue, preco: app.valor_vue })
+  }).then(function (response) {
+    return response.json()
+    console.log(response)
+  }).then(function (json) {
+
+  }).catch(function () {
+    console.error()
+  })
 }
 
+// =================================================
+// TecladoOn ao clicar F para ativar modo visualização
+// =================================================
 function tecladoOn() {
   fetch("http://monkey_concessionaria/tecladoOn", {
     method: 'POST'
@@ -179,6 +193,9 @@ function tecladoOn() {
   })
 }
 
+// =================================================
+// TecladoOff ao clicar F para desativar modo visualização
+// =================================================
 function tecladoOff() {
   fetch("http://monkey_concessionaria/tecladoOff", {
     method: 'POST'
@@ -216,6 +233,25 @@ function sair() {
 
 
 // =================================================
+// Escoder HUD 
+// =================================================
+function esconderHUD() {
+
+  fetch("http://monkey_concessionaria/esconderHUD", {
+    method: 'POST'
+
+  }).then(function (response) {
+    return response.json()
+  }).then(function (json) {
+
+  }).catch(function () {
+
+  })
+}
+
+
+
+// =================================================
 // Evento de chamada 
 // =================================================
 var valida = true
@@ -237,9 +273,11 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 
   document.onkeyup = function (data) {
+
     if (data.which == 27) {
       sair(false)
     }
+
     if (data.which == 70) {
       if (valida != false) {
         app.show_icone = true
@@ -247,6 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         app.show_icone = false
         valida = true
+        tecladoOff()
       }
     }
   }

@@ -1,189 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap;');
 @import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,400;1,600;1,700&display=swap;Rubik+Dirt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&family=Shadows+Into+Light&display=swap');
 
-
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     border: none;
     background: transparent;
 }
 
 body {
     font-family: 'Noto Sans', sans-serif;
-    background: transparent;
     color: #f1f1f1;
     overflow: hidden;
     margin: 0;
     padding: 0;
+
+
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 79%, rgba(0, 0, 0, 1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 79%, rgba(0, 0, 0, 1) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 79%, rgba(0, 0, 0, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
+
 }
 
 
-
-
-
-/* ---------------- Barra de Pesquisa ---------------- */
-
-
-.caixa_search_css {
+.pressF {
     position: fixed;
-    top: 6.5%;
-    right: 75%;
-    transform: translate(50%, -50%);
-    background-color: rgb(0, 0, 0, 0.8);
-    height: 40px;
-    border-radius: 30px;
-    border: 0.1px solid;
-    padding: 5px;
+    color: white;
+    font-size: 17px;
+    font-family: 'Shadows Into Light', cursive;
+    right: 2%;
+    top: 20%;
+    /* transform: translatey(-10px) rotatez(-5deg);*/
 }
 
-.caixa_search_css:hover>.caixa_texto_css {
-    width: 150px;
-    padding: 0 40px;
+.pressF strong {
+    text-transform: uppercase;
+    padding: 1px;
+    font-size: 18px;
 }
 
-.botao_search_css {
-    color: #f1f1f1;
-    float: right;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-    align-items: center;
-    transition: 0.4s;
+.pressF p {
+    text-align: right;
 }
 
-.caixa_search:hover>.botao_search{
-    color: #f1f1f1;
-    margin-left: 3px;
+.pressF span {
+    text-align: center;
+    transform: scale(0.9);
+    display: inline-block;
 }
 
-.caixa_texto_css {
-    border: none;
-    background-color: rgb(0, 0, 0, 0.1);
-    outline: none;
-    float: left;
-    padding: 0;
-    color: #f1f1f1;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
-    cursor: pointer;
+.pressF span:first-child {
+    animation: efeitoF 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+}
+
+.pressF span:last-child {
+    animation: efeitoL 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
 }
 
 
+@keyframes efeitoF {
+    0% {
+        transform: scale(0.9);
+    }
 
-
-/* ---------------- Icones ---------------- */
-
-.icones_css {
-    background-color: transparent;
+    50%,
+    100% {
+        transform: scale(1);
+    }
 }
 
-.icones_css img{
-    filter: invert(1);
-}
+@keyframes efeitoL {
+    0% {
+        transform: scale(0.9);
+    }
 
-/* Direita */
-
-.iconesair_css {
-    position: fixed;
-    top: 3.5%;
-    right: 32%;
-}
-
-.img_sair_css {
-    width: 43px;
-    height: 43px;
-}
-
-.iconereduzirzoom_css {
-    position: fixed;
-    top: 3%;
-    right: 37%;
-}
-
-.img_reduzir_zoom_css {
-    width: 40px;
-    height: 40px;
-    transform: rotate(-2deg);
-}
-
-.iconemaiszoom_css {
-    position: fixed;
-    top: 3%;
-    right: 42%;
-}
-
-.img_mais_zoom_css {
-    width: 40px;
-    height: 40px;
-    transform: rotate(90deg);
-}
-
-
-.iconeportasabertas_css {
-    position: fixed;
-    top: 3%;
-    right: 43%;
-}
-
-.img_portas_abertas_css {
-    width: 50px;
-    height: 50px;
-}
-
-
-.iconeolhos_css{
-    position: fixed;
-    top: 2.8%;
-    right: 50%;
-}
-
-.img_olhos_css {
-    width: 70px;
-    height: 70px;
+    80%,
+    100% {
+        transform: scale(1) rotateZ(-3deg);
+    }
 }
 
 
 
-/* Esquerda */
 
 
-.iconeportafechada_css{
-    position: fixed;
-    top: 3.3%;
-    left: 38%;
-}
-
-.img_porta_fechada_css{
-    width: 52px;
-    height: 52px;
-}
-
-.iconesetaesquerda_css{
-    position: fixed;
-    top: 3.3%;
-    left: 20%;
-}
-
-.img_seta_esquerda_css{
-    width: 40px;
-    height: 40px;
-}
-
-.iconesetadireita_css{
-    position: fixed;
-    top: 3.3%;
-    left: 25%;
-}
-
-.img_seta_direita_css{
-    width: 40px;
-    height: 40px;
-}
 
 
 
@@ -345,58 +246,6 @@ body {
     animation: moveToLeft 1.4s alternate-reverse;
 
 }
-/* 
-.desc_acel_css {
-    position: fixed;
-    top: 19%;
-    right: 0;
-    width: 15%;
-    height: 50px;
-    color: #f1f1f1;
-
-    animation: moveToLeft 1.6s alternate-reverse;
-
-}
-
-
-.desc_vel_css {
-    position: fixed;
-    top: 25%;
-    right: 0;
-    width: 15%;
-    height: 50px;
-    color: #f1f1f1;
-
-    animation: moveToLeft 1.8s alternate-reverse;
-
-}
-
-.desc_ade_css {
-    position: fixed;
-    top: 31%;
-    right: 0;
-    width: 15%;
-    height: 50px;
-    color: #f1f1f1;
-
-    animation: moveToLeft 2s alternate-reverse;
-
-}
-
-
-.desc_fre_css {
-    position: fixed;
-    top: 37%;
-    right: 0;
-    width: 15%;
-    height: 50px;
-    color: #f1f1f1;
-
-    animation: moveToLeft 2.2s alternate-reverse;
-
-
-} 
-*/
 
 @keyframes moveToLeft {
     0% {
@@ -422,12 +271,181 @@ footer {
     bottom: 0;
     color: #000;
     width: calc(100% - 300px);
-    height: 150px;
-    line-height: 50px;
-    text-align: center;
     justify-content: center;
+    text-align: center;
     right: 0px;
-    overflow-x: scroll;
+}
+
+.footer_items {
+    background-color: rgb(0, 0, 0, 1.0);
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.footer_button {
+     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+0,e86c57+0,ea2803+0,ff6600+69,c72200+100&0.9+36,0.9+99 */
+     background: -moz-linear-gradient(left, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
+     /* FF3.6-15 */
+     background: -webkit-linear-gradient(left, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
+     /* Chrome10-25,Safari5.1-6 */
+     background: linear-gradient(to right, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
+     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6ea2803', endColorstr='#e6c72200', GradientType=1);
+     /* IE6-9 */
+ 
+}
+
+.footer_button_modal {
+
+    
+background: -moz-linear-gradient(top,  rgba(30,87,153,0.5) 0%, rgba(30,87,153,1) 10%, rgba(30,87,153,1) 26%, rgba(41,137,216,1) 50%, rgba(30,87,153,1) 75%, rgba(30,87,153,1) 91%, rgba(30,87,153,0.5) 100%); 
+background: -webkit-linear-gradient(top,  rgba(30,87,153,0.5) 0%,rgba(30,87,153,1) 10%,rgba(30,87,153,1) 26%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 75%,rgba(30,87,153,1) 91%,rgba(30,87,153,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(30,87,153,0.5) 0%,rgba(30,87,153,1) 10%,rgba(30,87,153,1) 26%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 75%,rgba(30,87,153,1) 91%,rgba(30,87,153,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#801e5799', endColorstr='#801e5799',GradientType=0 ); /* IE6-9 */
+}
+
+
+/*---------------- Botao ----------------*/
+
+button {
+    padding: 0.5%;
+    margin: 1%;
+    width: 10%;
+    height: 5%;
+    color: #f1f1f1;
+    cursor: pointer;
+    float: right;
+   
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    -moz-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    -webkit-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    -o-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    -ms-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    transform: translate(5px, 0px) skew(-18deg, 0deg);
+}
+
+button:hover {
+    transition: 0.5s;
+    background-color: rgb(0, 0, 0, 1.0);
+}
+
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ---------------- Icones ---------------- */
+
+.icones_css {
+    position: absolute;
+    background-color: transparent;
+    bottom: 5%;
+    left: 30%;
+}
+
+.icones_css img {
+    filter: invert(1);
+}
+
+
+
+
+.iconesair_css {
+    margin: 0 40px;
+}
+
+
+.img_sair_css {
+    width: 40px;
+    height: 38px;
+    line-height: 40px;
+}
+
+
+.iconeportasabertas_css {
+    margin: 0 40px;
+}
+
+
+.img_portas_abertas_css {
+    width: 43px;
+    line-height: 43px;
+}
+
+
+.iconeportafechada_css {
+    margin: 0 40px;
+}
+
+
+.img_porta_fechada_css {
+    width: 45px;
+    line-height: 45px;
+}
+
+/* ---------------- Barra de Pesquisa ---------------- */
+
+
+.caixa_search_css {
+    position: absolute;
+    height: 40px;
+    border-radius: 30px;
+    border: 0.1px solid;
+    padding: 1px;
+    bottom: 5%;
+    left: 5%;
+}
+
+.caixa_search_css:hover>.caixa_texto_css {
+    width: 150px;
+    padding: 0 40px;
+}
+
+.botao_search_css {
+    color: #f1f1f1;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.caixa_search:hover>.botao_search {
+    color: #f1f1f1;
+    margin-left: 3px;
+}
+
+.caixa_texto_css {
+    border: none;
+    background-color: rgb(0, 0, 0, 0.1);
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #f1f1f1;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    cursor: pointer;
 }
 
 
@@ -435,6 +453,9 @@ footer {
     display: inline-flex;
     margin: 2px;
     cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 
@@ -442,6 +463,7 @@ footer {
     border: 2px solid #fff;
     height: 60px;
     width: 30px;
+
 
     -moz-transform: skew(-20deg, 0deg);
     -webkit-transform: skew(-20deg, 0deg);
@@ -468,42 +490,4 @@ footer {
     -webkit-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
-}
-
-
-button {
-    padding: 5px;
-    right: 10%;
-    bottom: 1%;
-    width: 12%;
-    height: 5%;
-    color: #f1f1f1;
-    position: fixed;
-    display: block;
-    cursor: pointer;
-
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+0,e86c57+0,ea2803+0,ff6600+69,c72200+100&0.9+36,0.9+99 */
-    background: -moz-linear-gradient(left, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6ea2803', endColorstr='#e6c72200', GradientType=1);
-    /* IE6-9 */
-
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-
-    -moz-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    -webkit-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    -o-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    -ms-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    transform: translate(5px, 0px) skew(-18deg, 0deg);
-}
-
-button:hover {
-    transition: 0.5s;
-    background-color: rgb(0, 0, 0, 1.0);
 }

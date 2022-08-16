@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 	<!-- Fontawesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
 		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -32,60 +33,30 @@
 -->
 			<header>
 
-				<section class="caixa_search_css">
-					<input class="caixa_texto_css" placeholder="Pesquisar Carros" v-model="pesquisa">
-					<a class="botao_search_css" href="#">
-						<i class="fas fa-search"></i>
-					</a>
-				</section>
+				<div v-if="show_icone === false" @click="show_icone = true" class="pressF">
+					<span>
+						Pressione <strong> F </strong> para o modo de visualização
+					</span>
+				</div>
 
-				<div class="icones_css">
-
-
-					<div v-if="show_icone === false" @click="show_icone = true" class="icones_css">
-						<a onclick="sair()" class="iconesair_css" href="#">
-							<img class="img_sair_css" src="img/sair.png" alt="sair">
-						</a>
-						<a onclick="abrirPortas()" class="iconeportasabertas_css" href="#">
-							<img class="img_portas_abertas_css" src="img/porta-aberta.png" alt="porta-abertas">
-						</a>
-						<a onclick="tecladoOn()" class="iconeolhos_css" href="#">
-							<img class="img_olhos_css" src="img/esconderolhos.png" alt="olhos">
-						</a>
-						<a onclick="fecharPortas()" class="iconeportafechada_css" href="#">
-							<img class="img_porta_fechada_css" src="img/portafechada.png" alt="porta-fechada">
-						</a>
-					</div>
-					
-
-					<div class="icones_css">
-						<a class="iconemaiszoom_css" href="#">
-							<img class="img_mais_zoom_css" src="img/mais-zoom.png" alt="Mais Zoom">
-						</a>
-						<a class="iconereduzirzoom_css" href="#">
-							<img class="img_reduzir_zoom_css" src="img/reduzir-zoom.png" alt="reduzir-zoom">
-						</a>
-						<a @click="show_icone = false" class="iconeolhos_css" href="#">
-							<img class="img_olhos_css" src="img/olhos.png" alt="olhos">
-						</a>
-						<a class="iconesetadireita_css" href="#">
-							<img class="img_seta_direita_css" src="img/proximodireita.png" alt="seta-direita">
-						</a>
-						<a class="iconesetaesquerda_css" href="#">
-							<img class="img_seta_esquerda_css" src="img/proximoesquerda.png" alt="seta-esquerda">
-						</a>
-					</div>
-
-					<!-- Icones do Footer -->
-					<!-- <a class="proximacordireita_css" href="img/proximodireita.png">
-						<img class="img_proxima_cor_direita_css" src="img/proximodireita.png" alt="proxima-direita">
-					</a>
-					<a class="proximacoresquerda_css" href="img/proximoesquerda.png">
-						<img class="img_proxima_cor_esquerda_css" src="img/proximoesquerda.png" alt="proxima-esquerda">
-					</a> -->
+				<div v-if="show_icone === true" @click="show_icone = false" class="pressF">
+					<span>
+						Pressione <strong> A </strong> e <strong> D </strong> para<br> rotacionar o carro ou <strong> W
+						</strong> e <strong> S </strong> para dar Zoom no carro. <br><br>
+					</span>
+					<p>
+						Pressione <strong> F </strong> para voltar.
+					</p>
 				</div>
 
 			</header>
+
+			<!-- 
+	================================================================================================================================================================================================================================================================================================================================ 
+		Pressionar F para modo visualização
+	================================================================================================================================================================================================================================================================================================================================
+-->
+
 
 
 
@@ -139,6 +110,39 @@
 
 
 
+			<!-- exemplo
+			<div v-if="show_icone === true" class="box">
+				<a href="#m3_o" class="link_1" id="m3_c">Meus Carros</a>
+
+				<div class="modal_container" id="m3_o" style="--m-background: var(--global-background);">
+					<div class="modal">
+						<h1 class="modal_title">Modal 3 Title</h1>
+						<p class="modal_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ex dicta
+							maiores libero minus obcaecati iste optio, eius labore repellendus.</p>
+						<button class="modal_btn">Selecionar um Carro &rarr;</button>
+						<button class="modal_btn">Transferir &rarr;</button>
+						<a href="#m3_c" class="link_2"></a>
+					</div>
+				</div>
+			</div>
+-->
+	
+
+<!-- modal -->
+	<div class="box">
+		<a href="#m3_o" class="link_1" id="m3_c">Meus Carros</a>
+	  
+		<div class="modal_container" id="m3_o">
+		  <div class="modal" >
+			<h1 class="modal_title">Modal 3 Title</h1>
+			<p class="modal_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ex dicta maiores libero minus obcaecati iste optio, eius labore repellendus.</p>
+			<button class="modal_btn">Selecionar um Carro &rarr;</button>
+			<button class="modal_btn">Transferir &rarr;</button>
+			<a href="#m3_c" class="link_2"></a>
+		  </div>
+		</div>
+	  </div>
+
 
 			<!-- 
 	================================================================================================================================================================================================================================================================================================================================ 
@@ -150,12 +154,38 @@
 				<div class="cores_css" v-for="cor in cores_vue" @click="mudarCor(cor)">
 					<div class="cor_css" :style="'background-color: rgba('+cor.r+','+cor.g+','+cor.b+');'"></div>
 				</div>
-				<button style="right: 25%;" onclick="testeDrive()">Teste Drive</button>
-				<button onclick="comprar()">Comprar</button>
+
+
+				<div class="footer_items">
+
+
+					<div class="caixa_search_css">
+						<input class="caixa_texto_css" placeholder="Pesquisar Carros" v-model="pesquisa">
+						<a class="botao_search_css" href="#">
+							<i class="fas fa-search"></i>
+						</a>
+					</div>
+
+
+					<div class="icones_css">
+						<a onclick="abrirPortas()" class="iconeportasabertas_css" href="#">
+							<img class="img_portas_abertas_css" src="img/porta-aberta.png" alt="porta-abertas">
+						</a>
+						<a onclick="fecharPortas()" class="iconeportafechada_css" href="#">
+							<img class="img_porta_fechada_css" src="img/portafechada.png" alt="porta-fechada">
+						</a>
+						<a onclick="sair()" class="iconesair_css" href="#">
+							<img class="img_sair_css" src="img/sair.png" alt="sair">
+						</a>
+					</div>
+
+
+					<button class="footer_button" onclick="comprarCarro()">Comprar</button>
+					<button class="footer_button" onclick="testeDrive()">Teste Drive</button>
+					
+				</div>
+
 			</Footer>
-
-
-
 
 
 		</div>
@@ -175,6 +205,7 @@
 
 	<!-- Vue js  -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
 
 	<!-- Jquery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"

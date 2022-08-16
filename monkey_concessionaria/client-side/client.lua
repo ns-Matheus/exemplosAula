@@ -99,6 +99,18 @@ end)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 -- ====================================================================================================
 -- Funcoes de Retorno - START
 -- ====================================================================================================
@@ -107,6 +119,16 @@ RegisterNUICallback("mostrarCarro", function(data)
     local nome_carro = data.nome
     SpawnVehicleLocal(nome_carro, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z,
         Config.vitrine_car.grau)
+
+end)
+
+RegisterNUICallback("mudarCor", function(data)
+
+    local r, g, b = parseInt(data.r), parseInt(data.g), parseInt(data.b)
+    -- cor primária
+    SetVehicleCustomPrimaryColour(veiculo, r, g, b)
+    -- cor secundária
+    SetVehicleCustomSecondaryColour(veiculo, r, g, b)
 
 end)
 
@@ -142,17 +164,6 @@ RegisterNUICallback("testeDrive", function(data)
 end)
 
 
-RegisterNUICallback("mudarCor", function(data)
-
-    local r, g, b = parseInt(data.r), parseInt(data.g), parseInt(data.b)
-    -- cor primária
-    SetVehicleCustomPrimaryColour(veiculo, r, g, b)
-    -- cor secundária
-    SetVehicleCustomSecondaryColour(veiculo, r, g, b)
-
-end)
-
-
 RegisterNUICallback("tecladoOff", function(data)
 
     SetNuiFocus(true, true)
@@ -167,9 +178,38 @@ RegisterNUICallback("tecladoOn", function(data)
     
 end)
 
+
+RegisterNUICallback("comprarCarro", function(data)
+
+    local nome_carro = data.nome
+    local preco = data.preco
+    vSERVER.insertVehicleOnGarage(nome_carro,parseInt(preco))
+
+end)
+
+
+RegisterNUICallback("esconderHUD" , function (data)
+    
+    TriggerEvent("hudActived",false)
+
+end)
+
+
 -- ====================================================================================================
 -- Funcoes de Retorno- END
 -- ====================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -308,10 +348,10 @@ Citizen.CreateThread(function()
             timeDistance = 1
 
             if IsControlJustPressed(0, 23) then
+                SetNuiFocus(true, true)
                 SendNUIMessage({
                     foco = false
                 })
-                SetNuiFocus(true, true)
             end
 
             if IsControlJustPressed(0, 31) then
