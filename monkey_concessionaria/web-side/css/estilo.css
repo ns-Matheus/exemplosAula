@@ -1,106 +1,116 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap;');
-@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,400;1,600;1,700&display=swap;Rubik+Dirt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inspiration&family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belgrano&family=Mouse+Memoirs&family=Noto+Sans:wght@400;600;700&family=Rubik+Dirt&family=Shadows+Into+Light&family=Suez+One&display=swap');
+
 
 ::-webkit-scrollbar {
     border: none;
     background: transparent;
 }
 
+:root {
+    --background_preto: rgb(0.0, 0.0, 0.0, 1);
+    --background_preto2: rgb(0.0, 0.0, 0.0, 0.6);
+    --background_preto3: rgb(0.0, 0.0, 0.0, 0.1);
+    --background_vender: rgb(0, 255, 0);
+    --background_trans: rgb(0, 0, 255);
+}
+
 body {
     font-family: 'Noto Sans', sans-serif;
-    color: #f1f1f1;
+    color: #fff;
     overflow: hidden;
     margin: 0;
     padding: 0;
 
-
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 79%, rgba(0, 0, 0, 1) 100%);
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 79%, rgba(0, 0, 0, 1) 100%);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 79%, rgba(0, 0, 0, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
-
 }
 
+
+/*---------------- Botao ----------------*/
+button {
+    font-family: 'Belgrano', serif;
+    padding: 0.5%;
+    margin: 1%;
+    width: 10%;
+    height: 5%;
+    color: #f1f1f1;
+    cursor: pointer;
+    float: right;
+    font-size: 10px;
+    text-transform: uppercase;
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    -moz-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    -webkit-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    -o-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    -ms-transform: translate(5px, 0px) skew(-18deg, 0deg);
+    transform: translate(5px, 0px) skew(-18deg, 0deg);
+}
+
+button:hover {
+    transition: 0.5s;
+    background-color: rgb(0, 0, 0, 1.0);
+}
+
+
+/*---------------- Botao PressF ----------------*/
 
 .pressF {
     position: fixed;
-    color: white;
-    font-size: 17px;
+    color: var(--background_preto);
     font-family: 'Shadows Into Light', cursive;
-    right: 2%;
-    top: 20%;
+    right: 1%;
+    margin-top: 1%;
     /* transform: translatey(-10px) rotatez(-5deg);*/
 }
 
-.pressF strong {
+.pressRotate{
+    position: fixed;
+    color: var(--background_preto);
+    left: 5%;
+    top: 9%;
+    text-align: center;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.pressFback{
+    position: fixed;
+    color: var(--background_preto);
+    font-size: 20px;
+    font-family: 'Shadows Into Light', cursive;
+    right: 1%;
+}
+
+.pressF,
+.pressRotate,
+strong{
     text-transform: uppercase;
     padding: 1px;
-    font-size: 18px;
+    font-size: 25px;
 }
 
-.pressF p {
-    text-align: right;
-}
-
-.pressF span {
+.pressF,
+.pressRotate,
+span {
     text-align: center;
-    transform: scale(0.9);
-    display: inline-block;
 }
 
-.pressF span:first-child {
-    animation: efeitoF 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
-}
 
-.pressF span:last-child {
+.pressF, 
+.pressRotate,
+ span:last-child {
     animation: efeitoL 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
-}
-
-
-@keyframes efeitoF {
-    0% {
-        transform: scale(0.9);
-    }
-
-    50%,
-    100% {
-        transform: scale(1);
-    }
 }
 
 @keyframes efeitoL {
     0% {
         transform: scale(0.9);
     }
-
     80%,
     100% {
-        transform: scale(1) rotateZ(-3deg);
+        transform: scale(1) rotateZ(-5deg);
     }
-}
-
-
-
-
-
-
-
-
-/* ---------------- Imagens ---------------- */
-
-.card_image_css {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 10px;
-    margin: 5px;
-    text-align: center;
-
-}
-
-.card_image_css img {
-    width: 180px;
-    left: 0;
 }
 
 
@@ -125,8 +135,6 @@ body {
     -ms-transform: skew(0deg, 12deg);
     transform: skew(0deg, 12deg);
 
-    z-index: 998;
-
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -ms-transition: all 0.2s linear;
@@ -141,7 +149,6 @@ body {
     -ms-transform: skew(0deg, 2deg);
     transform: skew(0deg, 2deg);
     background-color: rgba(0, 0, 0, 1.0);
-    z-index: 999;
     cursor: pointer;
 }
 
@@ -159,76 +166,53 @@ body {
     text-align: right;
 }
 
+.card_image_css {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+
+}
+
+.card_image_css img {
+    width: 180px;
+    left: 0;
+}
 
 
 
-
-
-/* ---------------- Menu da Direita ---------------- */
-
+/* ---------------- Menu da Direita ---------------- 
 
 .right_texto_css {
+    position: fixed;
     font-family: 'Mouse Memoirs', sans-serif;
     background-color: rgba(0, 0, 0, 0.8);
-    text-align: center;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
-
-    -moz-transform: skew(-10deg, -3deg);
-    -webkit-transform: skew(-10deg, -3deg);
-    -o-transform: skew(-10deg, -3deg);
-    -ms-transform: skew(-10deg, -3deg);
-    transform: skew(-10deg, -3deg);
+    font-size: 35px;
+    border-left: 5px solid #ff3535;
+    border-radius: 5px 0px 0px 5px;
 }
 
-.right_texto_css:hover {
-    -moz-transform: scale(1.1) skew(0deg, -3deg);
-    -webkit-transform: scale(1.1) skew(0deg, -3deg);
-    -o-transform: scale(1.1) skew(0deg, -3deg);
-    -ms-transform: scale(1.1) skew(0deg, -3deg);
-    transform: scale(1.1) skew(0deg, -3deg);
-}
 
 .desc_nome_carro_css {
-    position: fixed;
-    right: 0;
-    top: 2%;
     width: 30%;
     height: 10%;
+    right: 0;
+    top: 0;
     color: #f1f1f1;
-    background-color: rgba(0, 0, 0, 0.8);
-    text-align: center;
-    justify-content: center;
-    align-items: center;
     font-family: 'Rubik Dirt', cursive;
     font-size: 40px;
 
-    animation: moveToLeft 1s alternate-reverse;
+    animation: moveToRight 1s alternate-reverse;
 
-    -moz-transform: skew(-10deg, -3deg);
-    -webkit-transform: skew(-10deg, -3deg);
-    -o-transform: skew(-10deg, -3deg);
-    -ms-transform: skew(-10deg, -3deg);
-    transform: skew(-10deg, -3deg);
 }
-
-
-.desc_nome_carro_css:hover {
-    -moz-transform: scale(1.1) skew(0deg, -3deg);
-    -webkit-transform: scale(1.1) skew(0deg, -3deg);
-    -o-transform: scale(1.1) skew(0deg, -3deg);
-    -ms-transform: scale(1.1) skew(0deg, -3deg);
-    transform: scale(1.1) skew(0deg, -3deg);
-}
-
 
 .desc_valor_css {
-    position: fixed;
-    top: 12%;
-    right: 1%;
+    top: 10%;
     width: 14%;
-    height: 50px;
+    height: 7%;
+    right: 0;
     color: #f1f1f1;
 
     animation: moveToLeft 1.4s alternate-reverse;
@@ -236,16 +220,40 @@ body {
 }
 
 .desc_kg_css {
-    position: fixed;
-    top: 13.2%;
-    right: 17%;
-    width: 11%;
-    height: 50px;
+    top: 17%;
+    width: 10%;
+    height: 7%;
+    right: 0;
     color: #f1f1f1;
-
-    animation: moveToLeft 1.4s alternate-reverse;
+    
+    animation: moveToLeft 1.6s alternate-reverse;
 
 }
+
+.iCarRight_texto_css {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: rgb(255, 255, 255);
+
+
+}
+
+.iCoinRight_texto_css {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: rgb(254, 191, 1);
+
+}
+
+.iBalanceRight_texto_css {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: #9b9393f3;
+}
+
 
 @keyframes moveToLeft {
     0% {
@@ -257,97 +265,199 @@ body {
     }
 }
 
+@keyframes moveToRight {
+    0% {
+        transform: translateY(0px);
+    }
 
+    100% {
+        transform: translateY(-100px);
+    }
+}
+*/
 
+/*------------- Modal -------------*/
 
-
-
-
-/* ---------------- Menu das Cores ---------------- */
-
-footer {
+.modal_corpo_css {
     position: fixed;
-    margin: 0;
-    bottom: 0;
-    color: #000;
-    width: calc(100% - 300px);
-    justify-content: center;
+    background-color: transparent;
+    width: 90vw;
+    height: 80vh;
+    margin-left: 4.5%;
+    margin-top: 4.5%;
     text-align: center;
-    right: 0px;
+    z-index: 99;
 }
 
-.footer_items {
-    background-color: rgb(0, 0, 0, 1.0);
-    justify-items: center;
-    align-items: center;
-    overflow: hidden;
+.modal_conteudo_css {
+    background-color: var(--background_preto2);
+    width: 100%;
+    height: 80%;
+    overflow-y: auto;
+    border-left: 5px solid #ff3535;
 }
 
-.footer_button {
-     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+0,e86c57+0,ea2803+0,ff6600+69,c72200+100&0.9+36,0.9+99 */
-     background: -moz-linear-gradient(left, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
-     /* FF3.6-15 */
-     background: -webkit-linear-gradient(left, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
-     /* Chrome10-25,Safari5.1-6 */
-     background: linear-gradient(to right, rgba(234, 40, 3, 0.9) 0%, rgba(245, 72, 1, 0.9) 36%, rgba(255, 102, 0, 0.9) 69%, rgba(201, 36, 0, 0.9) 99%, rgba(199, 34, 0, 0.9) 100%);
-     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6ea2803', endColorstr='#e6c72200', GradientType=1);
-     /* IE6-9 */
- 
+.modal_ {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.footer_button_modal {
-
-    
-background: -moz-linear-gradient(top,  rgba(30,87,153,0.5) 0%, rgba(30,87,153,1) 10%, rgba(30,87,153,1) 26%, rgba(41,137,216,1) 50%, rgba(30,87,153,1) 75%, rgba(30,87,153,1) 91%, rgba(30,87,153,0.5) 100%); 
-background: -webkit-linear-gradient(top,  rgba(30,87,153,0.5) 0%,rgba(30,87,153,1) 10%,rgba(30,87,153,1) 26%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 75%,rgba(30,87,153,1) 91%,rgba(30,87,153,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  rgba(30,87,153,0.5) 0%,rgba(30,87,153,1) 10%,rgba(30,87,153,1) 26%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 75%,rgba(30,87,153,1) 91%,rgba(30,87,153,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#801e5799', endColorstr='#801e5799',GradientType=0 ); /* IE6-9 */
-}
-
-
-/*---------------- Botao ----------------*/
-
-button {
-    padding: 0.5%;
-    margin: 1%;
-    width: 10%;
-    height: 5%;
-    color: #f1f1f1;
-    cursor: pointer;
-    float: right;
-   
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-
-    -moz-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    -webkit-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    -o-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    -ms-transform: translate(5px, 0px) skew(-18deg, 0deg);
-    transform: translate(5px, 0px) skew(-18deg, 0deg);
-}
-
-button:hover {
-    transition: 0.5s;
-    background-color: rgb(0, 0, 0, 1.0);
-}
-
-
-
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    display: none;
+.modal_card_css {
+    background-color: var(--background_preto);
+    margin-left: 1%;
+    margin-top: 1%;
+    width: 15%;
+    height: 30%;
+    border-right: 3px #ff3535 solid;
+    border-radius: 5px;
+    text-align: center;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
 }
 
+.modal_card_css:hover {
+    background-color: var(--background_preto2);
+    transition: 1s;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.modal_card_css img {
+    margin: 1% 15% 0 15%;
+    max-width: 172px;
+    min-width: 62px;
+    max-height: 172px;
+    min-height: 62px;
+}
+
+.modal_desc_carro_css {
+    margin-top: 2%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_titulo_css {
+    background-color: var(--background_preto);
+    width: 100%;
+    height: 10%;
+    border-left: 5px solid #ff3535;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal_titulo_css p {
+    margin: -7px;
+    width: 100%;
+}
+
+.modal_footer_css {
+    background-color: var(--background_preto);
+    text-align: center;
+    width: 100%;
+    height: 10%;
+    border-left: 5px solid #ff3535;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.modal_footer_css p {
+    margin: 0;
+}
+
+.modal_fechar_css {
+    color: #f1f1f1;
+    background-color: rgb(200, 21, 21);
+    top: 0;
+    padding: 0;
+    margin: 0 15px 0 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modal_fechar_css:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+    transition: 0.5s;
+
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.modal_desc_css {
+    width: 100%;
+    height: 38%;
+}
+
+.modal_btnTransferir_css {
+    width: 35%;
+    height: 30%;
+    margin-right: 3vh;
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+}
+
+.modal_btnTransferir_css:hover,
+.modal_btnTransferir_css:active {
+    transition: 1.5s;
+    background-color: #f1f1f1;
+    color: #FF4742;
+
+    -moz-transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0);
+}
+
+.modal_btnTransferir_css:active {
+    opacity: .5;
+}
+
+
+.modal_btnVender_css {
+    width: 35%;
+    height: 30%;
+    margin-right: 2vh;
+    background: #00BD68;
+    border: 1px solid #00BD68;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+}
+
+.modal_btnVender_css:hover,
+.modal_btnVender_css:active {
+    transition: 1.5s;
+    background-color: #f1f1f1;
+    color: #00BD68;
+
+    -moz-transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0);
+}
+
+.modal_btnVender_css:active {
+    opacity: .5;
+}
 
 /* ---------------- Icones ---------------- */
 
@@ -359,65 +469,66 @@ button:hover {
 }
 
 .icones_css img {
-    filter: invert(1);
+    /*filter: invert(1);*/
 }
-
-
-
 
 .iconesair_css {
     margin: 0 40px;
 }
 
-
 .img_sair_css {
-    width: 40px;
+    width: 38px;
     height: 38px;
-    line-height: 40px;
+    line-height: 38px;
 }
-
 
 .iconeportasabertas_css {
     margin: 0 40px;
 }
 
-
 .img_portas_abertas_css {
-    width: 43px;
-    line-height: 43px;
+    width: 45px;
+    line-height: 45px;
 }
-
 
 .iconeportafechada_css {
     margin: 0 40px;
 }
-
 
 .img_porta_fechada_css {
     width: 45px;
     line-height: 45px;
 }
 
-/* ---------------- Barra de Pesquisa ---------------- */
 
+/* ---------------- Barra de Pesquisa ---------------- */
 
 .caixa_search_css {
     position: absolute;
     height: 40px;
     border-radius: 30px;
-    border: 0.1px solid;
+    border: 1px solid;
     padding: 1px;
-    bottom: 5%;
-    left: 5%;
+    background-color: #f1f1f1;
 }
 
-.caixa_search_css:hover>.caixa_texto_css {
-    width: 150px;
-    padding: 0 40px;
+.caixa_texto_css {
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    padding: 0;
+    color: var(--background_preto);
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    cursor: pointer;
+    background-color: transparent;
+    font-family: 'Mouse Memoirs', sans-serif;
 }
 
 .botao_search_css {
-    color: #f1f1f1;
+    color: var(--background_preto);
     float: right;
     width: 40px;
     height: 40px;
@@ -429,25 +540,18 @@ button:hover {
     transition: 0.4s;
 }
 
-.caixa_search:hover>.botao_search {
-    color: #f1f1f1;
+.caixa_search_css:hover>.caixa_texto_css {
+    width: 150px;
+    padding: 0 10px;
+}
+
+.caixa_search_css:hover>.botao_search {
+    color: var(--background_preto);
     margin-left: 3px;
 }
 
-.caixa_texto_css {
-    border: none;
-    background-color: rgb(0, 0, 0, 0.1);
-    outline: none;
-    float: left;
-    padding: 0;
-    color: #f1f1f1;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
-    cursor: pointer;
-}
 
+/*---------------- Cores ----------------*/
 
 .cores_css {
     display: inline-flex;
@@ -458,9 +562,8 @@ button:hover {
     align-items: center;
 }
 
-
 .cor_css {
-    border: 2px solid #fff;
+    border: 1px solid #000;
     height: 60px;
     width: 30px;
 
@@ -490,4 +593,69 @@ button:hover {
     -webkit-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+
+/* ---------------- Menu das Cores ---------------- */
+
+footer {
+    position: fixed;
+    margin: 0;
+    bottom: 0;
+    color: #000;
+    width: calc(100% - 300px);
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    right: 0px;
+}
+
+.footer_items {
+    justify-items: center;
+    align-items: center;
+}
+
+.footer_button {
+    text-transform: uppercase;
+    background-size: 200% auto;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0px 0px 14px -7px #f09819;
+    background-image: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%);
+    touch-action: manipulation;
+}
+
+.footer_button:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer_button:active {
+    transform: scale(0.95);
+}
+
+.footer_button_modal {
+    text-transform: uppercase;
+    background-size: 300% auto;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0px 0px 14px -7px #19f03d;
+    background-image: linear-gradient(45deg, #027e37fd 0%, #19f03d 51%, #027e37fd 100%);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.footer_button_modal:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer_button_modal:active {
+    transform: scale(0.95);
 }

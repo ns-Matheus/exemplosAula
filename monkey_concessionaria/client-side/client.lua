@@ -38,11 +38,10 @@ Citizen.CreateThread(function()
 
             if distance < 10 then
                 DrawMarker(36, value.x, value.y, value.z, 0, 0, 0, 0, 0, 0, 0.80, 0.80, 0.80, 255, 0, 0, 100, 0, 0, 0, 1)
-                DrawMarker(27, value.x, value.y, value.z - 0.99, 0, 0, 0, 0, 0, 0, 1.00, 1.00, 1.00, 255, 0, 0, 100, 0, 0
-                    , 0, 1)
+                DrawMarker(27, value.x, value.y, value.z - 0.99, 0, 0, 0, 0, 0, 0, 1.00, 1.00, 1.00, 255, 0, 0, 100, 0, 0, 0, 1)
                 if distance < 1.2 then
                     if IsControlJustPressed(0, 38) then
-
+                        TriggerEvent("hudActived",false)
                         coords_ped_conc = GetEntityCoords(ped)
                         coords_ped = coords_ped_conc
 
@@ -59,6 +58,7 @@ Citizen.CreateThread(function()
                         SetNuiFocus(true, true)
                         SendNUIMessage({
                             acao = true,
+                            onModal = true,
                             carros = vSERVER.TodosVeiculos()
                         })
 
@@ -81,7 +81,13 @@ Citizen.CreateThread(function()
 end)
 
 
+
+
+-- ====================================================================================================
+-- Funcoes de Retorno - START
+-- ====================================================================================================
 RegisterNUICallback("sair", function(data)
+    TriggerEvent("hudActived",true)
     concessionaria_aberta = false
     DoScreenFadeOut(500)
     Wait(500)
@@ -96,31 +102,41 @@ RegisterNUICallback("sair", function(data)
 end)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- ====================================================================================================
--- Funcoes de Retorno - START
--- ====================================================================================================
 RegisterNUICallback("mostrarCarro", function(data)
 
     local nome_carro = data.nome
     SpawnVehicleLocal(nome_carro, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z,
         Config.vitrine_car.grau)
-
 end)
+
+
+RegisterNUICallback("getCarrosPlayer",function(data,cb)
+	local carros = vSERVER.getCarrosPlayer()
+	cb(carros.carros)
+end)
+
+RegisterNUICallback("carrosVenda",function(data,cb)
+    local nomeVeiculo = data.vehicle
+    print(nomeVeiculo)
+    local nomePlaca = data.plate
+    print(nomePlaca)
+    local valor = data.sell
+	local carros = vSERVER.getVehiclesSell(nomeVeiculo, nomePlaca, valor)
+
+	cb(carros.carros)
+end)
+
+
+RegisterNUICallback("carroTransfer",function(data,cb)
+    local nomeVeiculo = data.vehicle
+    local nomePlaca = data.plate
+    local idUsuario = data.idUser
+
+    local carros = vSERVER.getVehiclesTransfer(nomeVeiculo, nomePlaca, idUsuario)
+
+	cb(carros.carros)
+end)
+
 
 RegisterNUICallback("mudarCor", function(data)
 
@@ -163,7 +179,6 @@ RegisterNUICallback("testeDrive", function(data)
 
 end)
 
-
 RegisterNUICallback("tecladoOff", function(data)
 
     SetNuiFocus(true, true)
@@ -171,13 +186,13 @@ RegisterNUICallback("tecladoOff", function(data)
     
 
 end)
+
 RegisterNUICallback("tecladoOn", function(data)
 
     SetNuiFocus(false, true)
 
     
 end)
-
 
 RegisterNUICallback("comprarCarro", function(data)
 
@@ -187,26 +202,23 @@ RegisterNUICallback("comprarCarro", function(data)
 
 end)
 
-
 RegisterNUICallback("esconderHUD" , function (data)
     
     TriggerEvent("hudActived",false)
 
 end)
 
+RegisterNUICallback("tituloMostrar", function(data, cb)
+    local titulo = data.titulo -- passo o titulo que crio no meu fetch para a variavel local titulo
+    print(titulo)
+    cb({ titulo = "Teste CB de mudar o titulo." })
+end)
+
+
 
 -- ====================================================================================================
 -- Funcoes de Retorno- END
 -- ====================================================================================================
-
-
-
-
-
-
-
-
-
 
 
 
@@ -246,8 +258,6 @@ RegisterCommand('testeDrive', function(source, args, rawCommand)
     test_drive(args[1])
 end)
 
-
-
 RegisterCommand('testeConcessionariaSair', function(source, args, rawCommand)
     concessionaria_aberta = false
     disableCam()
@@ -283,14 +293,11 @@ RegisterCommand('testeConcessionariaPortasFechar', function(source, args, rawCom
 
 end)
 
-
-
-
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ENABLECAM
 -----------------------------------------------------------------------------------------------------------------------------------------
 function enableCam()
-
+    
     RenderScriptCams(false, false, 0, 1, 0)
     DestroyCam(cam, false)
 
@@ -304,7 +311,6 @@ function enableCam()
 
         SetCamRot(cam, -25.0, 0.0, Config.camera.grau)
     end
-
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -355,7 +361,7 @@ Citizen.CreateThread(function()
             end
 
             if IsControlJustPressed(0, 31) then
-                if qtd_zoom < 15 then
+                if qtd_zoom < 8 then
                     qtd_zoom = qtd_zoom + 1
                     distance = distance + 0.1
                     SetCamCoord(cam, Config.vitrine_car.x, distance, (Config.vitrine_car.z + 2.0) + (0.1 * qtd_zoom))
@@ -364,9 +370,9 @@ Citizen.CreateThread(function()
                         root_cam_x = -25.0
                     end
                     SetCamRot(cam, root_cam_x, 0.0, Config.camera.grau)
-
                 end
             end
+
             if IsControlJustPressed(0, 32) then
                 if qtd_zoom > -10 then
                     qtd_zoom = qtd_zoom - 1
@@ -379,26 +385,25 @@ Citizen.CreateThread(function()
                     SetCamRot(cam, root_cam_x, 0.0, Config.camera.grau)
                 end
             end
+
             if IsControlPressed(0, 34) then
                 qtd_giros = qtd_giros + 1.0
-
                 SetEntityHeading(veiculo, Config.vitrine_car.grau + qtd_giros)
-
             end
             if IsControlPressed(0, 35) then
                 qtd_giros = qtd_giros - 1.0
-
                 SetEntityHeading(veiculo, Config.vitrine_car.grau + qtd_giros)
             end
         end
-
         Citizen.Wait(timeDistance)
     end
 end)
 
 
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SPAWNVEHICLES
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 function SpawnVehicleLocal(model, c_x, c_y, c_z, c_g)
 
@@ -508,38 +513,39 @@ RegisterCommand('sw', function(source, args, rawCommand)
 end)
 
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TEST DRIVE
+-----------------------------------------------------------------------------------------------------------------------------------------
 function test_drive(model)
-
     local ped = PlayerPedId()
 
     DoScreenFadeOut(500)
-
+    Wait(500)
     spawnVeiculo_testeDrive(model)
-
-
     SetPedIntoVehicle(ped, veiculo_testeDrive, -1)
 
-
-    Wait(500)
+    --Wait(500)
     --SetEntityCoords(veiculo_testeDrive,Config.teste_drive.x+0.01, Config.teste_drive.y+0.01, Config.teste_drive.z+0.02,1,0,0,1)
     --SetEntityHeading(veiculo_testeDrive,Config.teste_drive.grau)
     Wait(500)
     DoScreenFadeIn(500)
+    TriggerEvent("hudActived",true)
 
     FreezeEntityPosition(veiculo_testeDrive, false)
-
+    
     local rtime = 60
 
     while rtime > 0 do
         if GetPedInVehicleSeat(veiculo_testeDrive, -1) ~= ped then
             DoScreenFadeOut(500)
+            TriggerEvent("hudActived",false)
             Wait(500)
             SetEntityCoords(ped, coords_ped.x, coords_ped.y, coords_ped.z, 1, 0, 0, 1)
             if IsEntityAVehicle(veiculo_testeDrive) then
                 DeleteEntity(veiculo_testeDrive)
             end
             Wait(500)
+            TriggerEvent("hudActived",true)
             DoScreenFadeIn(500)
             return
         end
@@ -548,12 +554,14 @@ function test_drive(model)
     end
     if IsEntityAVehicle(veiculo_testeDrive) then
         DoScreenFadeOut(500)
+        TriggerEvent("hudActived",false)
         Wait(500)
         SetEntityCoords(ped, coords_ped.x, coords_ped.y, coords_ped.z, 1, 0, 0, 1)
         if IsEntityAVehicle(veiculo_testeDrive) then
             DeleteEntity(veiculo_testeDrive)
         end
         Wait(500)
+        TriggerEvent("hudActived",true)
         DoScreenFadeIn(500)
     end
 end
