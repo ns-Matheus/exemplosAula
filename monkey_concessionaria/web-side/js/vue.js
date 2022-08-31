@@ -2,7 +2,7 @@ var app = new Vue({
   el: '#app',
   data: {
     tituloModal: "Teste de Modal para Concessionaria",
-    show_vue: false,
+    show_vue: true,
     show_icone: false,
     show_modal: false,
     lista_vue: [],

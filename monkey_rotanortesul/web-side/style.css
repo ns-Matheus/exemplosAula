@@ -1,0 +1,330 @@
+:root {
+  --bgColor: #000;
+  --borderCl: #be0a0a;
+  --textColor: #ffffff;
+  --tooltip: #292929;
+  --bgModal: rgb(255, 255, 255, 0.6);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu&display=swap');
+
+
+
+#app {
+  width: 100%;
+  height: 100%;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+/*======================== Modal ========================*/
+
+.modal_css {
+  position: fixed;
+  width: 80%;
+  height: 87%;
+  left: 10%;
+  margin-top: 2%;
+  border-top: 5px solid var(--borderCl);
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-image: url(https://cdn.discordapp.com/attachments/932365024440229919/940986016389550180/brooklyn.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50%;
+  background-color: #000;
+}
+
+
+/*======================== Menu rota Norte&Sul ========================*/
+
+.rotas_css {
+  width: 50%;
+  height: 100%;
+  perspective: 800px;
+
+}
+
+.title_css {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.title_css i {
+  color: rgb(255, 168, 76);
+}
+
+.title_css p {
+  margin: 0;
+  margin-left: 2%;
+  font-size: 5vh;
+  filter: invert(1);
+  font-family: 'Butcherman', cursive;
+}
+
+
+/*======================== Eletronic, Plastic, Drogas, Mochila ========================*/
+.card_css {
+  width: 100%;
+  height: 15%;
+  margin-top: 20px;
+  background-color: var(--bgModal);
+  transition: 0.5s ease-in;
+}
+
+.card_css:hover {
+  transform: rotateX(0.5turn);
+}
+
+
+.eletronic_css {
+  width: 100%;
+  height: 80%;
+  filter: invert(0);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+.eletronic_css span {
+  display: block;
+}
+
+.eletronic_css:hover {
+  transition: 0.8s;
+  transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+
+.plastic_css {}
+
+.drogas_css {}
+
+.mochila_css {}
+
+
+
+/*======================== Map rota Norte&Sul ========================*/
+.rotasulnorte_css {
+  width: 50%;
+  height: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--bgColor);
+}
+
+/* NORTE */
+.norte_css {
+  width: 100%;
+  height: 50%;
+  background-image: url(https://media.discordapp.net/attachments/918143224420376608/1014222172564230214/norte.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.norte_css:hover {
+  border: 1px solid #ffffff;
+  transition: 1s;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  z-index: 99;
+}
+
+.iconNorte {
+  width: 20%;
+  height: 20vh;
+}
+
+.iconNorte:hover {
+  transition: 1s;
+  -moz-transform: translate(0px, -10px);
+  -webkit-transform: translate(0px, -10px);
+  -o-transform: translate(0px, -10px);
+  -ms-transform: translate(0px, -10px);
+  transform: translate(0px, -10px);
+}
+
+/* SUL */
+.sul_css {
+  width: 100%;
+  height: 50%;
+  background-image: url(https://media.discordapp.net/attachments/918143224420376608/1014222172962701392/sul.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sul_css:hover {
+  border: 1px solid #ffffff;
+  transition: 1s;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  z-index: 99;
+}
+
+.iconSul {
+  width: 20%;
+  height: 20vh;
+}
+
+.iconSul:hover {
+  transition: 1s;
+  -moz-transform: translate(0px, 10px);
+  -webkit-transform: translate(0px, 10px);
+  -o-transform: translate(0px, 10px);
+  -ms-transform: translate(0px, 10px);
+  transform: translate(0px, 10px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.card-goup{
+  width: 20%;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+}
+.cards{
+  width: 100%;
+}
+.card{
+  width: 60%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--bgColor);
+  border-left: var(--borderCl) solid 4px;
+  color: var(--textColor);
+  border-radius: 8px;
+  margin: 6px;
+  text-align: center;
+}
+.card-body{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0px 4px;
+}
+.card-img{
+  width: 50%;
+  height: 100%;
+}
+.card-img img{
+  width: 50%;
+  height: 100%;
+}
+.card-text{
+  text-align: center;
+  margin: 0px 6px;
+}
+
+.card-text i{
+  font-size: 20px;
+}
+
+.card:hover{
+  -webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-o-transition: all all 0.5s ease-out;
+  border-left: #498f08 6px solid;
+  cursor: pointer;
+}
+
+.modal{
+  width: 500px;
+  height: 400px;
+  background-color: var(--bgColor);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--textColor);
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  position: fixed;
+  border-left: #be0a0a solid 4px;
+  top: 5%;
+  left: 30%;
+}
+.modal h3{
+  width: 100%;
+}
+.modalImg{
+  width: 80%;
+}
+.modalImg:hover{
+  -webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-o-transition: all all 0.5s ease-out;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+.modalImg img{
+  width: 40%;
+}
+*/
