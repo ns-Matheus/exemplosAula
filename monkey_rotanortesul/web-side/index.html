@@ -10,42 +10,33 @@
    <script src="https://kit.fontawesome.com/90aefad7d4.js" crossorigin="anonymous"></script>
    <!-- Import CSS -->
    <link rel="stylesheet" href="style.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap" rel="stylesheet">
 </head>
 
 <body>
    <div id="app" v-if="ver">
-      <div class="modal_css" v-if="verModal === false">
-         <div class="rotas_css">
+
+
+      <div class="modal_css" v-if="verModal" >
+         <div class="rotas_css" >
             <div class="title_css">
-               <i class="fa-solid fa-map fa-2x"></i>
+               <i class="fa-solid fa-map fa-3x"></i>
                <p> {{titulo}}</p>
             </div>
             <div class="card_css">
-               <div class="eletronic_css">
-                  <span>aaaaaaaaaaaaaaaaa</span>
-               </div>
-            </div>
-            <div class="card_css">
-               <div class="plastic_css">
-
-               </div>
-            </div>
-            <div class="card_css">
-               <div class="drogas_css">
-
-               </div>
-            </div>
-            <div class="card_css">
-               <div class="mochila_css">
-
-               </div>
+                  <button v-for="rotasCard in rotas" @click="'setarTipoRota(\''+rotasCard.nome+'\')'">
+                     <i :class="'fa-solid '+rotasCard.icon"></i>
+                     {{rotasCard.nome.toUpperCase()}}
+                  </button>
             </div>
          </div>
          <div class="rotasulnorte_css">
-            <div class="norte_css">
+            <div class="norte_css" @click="'iniciar(norte)'">
                <img class="iconNorte" src="assets/norte-icon.png" alt="Icone Norte">
             </div>
-            <div class="sul_css">
+            <div class="sul_css" @click="'iniciar(sul)'">
                <img class="iconSul" src="assets/sul-icon.png" alt="Icone Sul">
             </div>
          </div>

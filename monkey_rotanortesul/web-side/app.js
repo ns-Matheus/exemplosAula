@@ -2,13 +2,12 @@ var app = new Vue({
    el: '#app',
    data:{
       titulo:"Rotas de Trabalho" ,
-      ver: true ,
-      trabahoOn: 1,
+      ver: false,
       rotas: [
       {nome:'arma', icon:'fa-gun'}, 
       {nome:'lavagem', icon:'fa-money-bill-1-wave'}, 
       {nome : 'elêtronico', icon:'fa-microchip'},
-      {nome:'plástico', icon: 'fa-sheet-plastic'},
+      {nome:'plástico', icon: 'fa-sheet-plastic' },
    ],
       tipoRota:[
       {nome:'norte'},
