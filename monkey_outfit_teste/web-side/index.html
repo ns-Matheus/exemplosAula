@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="style.css">
+    <title>Blip Roupas</title>
+</head>
+
+<body>
+    <div id="app">
+
+
+        <div id="modalRoupas" class="modal_css" v-if="show">
+            <div class="title_css">{{titulo}}<i id="alert" class="close_css fa-solid fa-x"></i></div>
+            <div class="cards_css">
+                <div class="card_css" v-for="roupas in lista_roupa">
+                    <div class="listaCard_css">
+                        {{roupas.nome}}
+                        <i class="closeCard_css fa-solid fa-x"></i>
+                    </div>
+                    <div class="btnCard_css">
+                        <button>Aplicar Outfit</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rodape_css">
+                    <button class="btnRodape">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <!--SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.29/dist/sweetalert2.all.min.js"></script>
+    <!--Vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- FontAwesome snMatheus-->
+    <script src="https://kit.fontawesome.com/b99e0b6ba4.js" crossorigin="anonymous"></script>
+    <!--JS personalizado-->
+    <script src="app.js"></script>
+</body>
+
+</html>

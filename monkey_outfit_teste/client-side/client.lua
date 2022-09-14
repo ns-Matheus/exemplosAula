@@ -151,6 +151,22 @@ Citizen.CreateThread(function()
     end
 end)
 
+
+RegisterNUICallback("sair", function(data)
+	SetNuiFocus(false, false)
+end)
+
+RegisterNUICallback("sair", function(data)
+	
+end)
+
+
+
+
+
+
+
+
 function cnVRP.CarregarBlips()
     outfits = vSERVER.CarregarBlips()
 end

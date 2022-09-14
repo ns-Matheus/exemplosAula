@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Cutive+Mono&family=Source+Code+Pro&display=swap');
+
+:root {
+    --modalbg: rgba(0.0, 0.0, 0.0, 0.8);
+    --borderbg: rgba(255, 0.0, 0.0, 0.9);
+    --bgFundoRed: rgba(255, 0.0, 0.0);
+    --bgFundoBlack: rgba(0.0, 0.0, 0.0);
+    --bgScrollBar: rgba(0.0, 0.0, 0.0, 0.4);
+    --textColor: rgba(255, 255, 255);
+    --textColor2: rgba(255, 255, 255, 0.8);
+    --bgBtnsuccess: rgba(0.0, 255, 0.0, 0.8);
+    --bgBtninfo: rgba(0.0, 0.0, 200, 0.8);
+}
+
+body {}
+
+
+#app {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+
+.modal_css {
+    position: fixed;
+    width: 30%;
+    height: 80%;
+    margin-top: 5%;
+    left: 35%;
+    background-color: var(--modalbg);
+    border: 1px solid var(--borderbg);
+}
+
+
+.title_css {
+    position: sticky;
+    width: 100%;
+    height: 5%;
+    margin: 5px 0px 10px -5px;
+    color: var(--textColor);
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.close_css {
+    float: right;
+    color: var(--bgFundoRed);
+    cursor: pointer;
+}
+
+.close_css:hover {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+
+.cards_css {
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.cards_css {
+    scrollbar-width: thin;
+    scrollbar-color: var(--bgFundoBlack) var(--bgScrollBar);
+}
+
+.card_css {
+    width: 90%;
+    height: 15%;
+    margin: 5%;
+    border: 1px solid var(--bgFundoBlack);
+}
+
+
+.listaCard_css {
+    width: 100%;
+    height: 50%;
+    text-align: start;
+    margin-left: 2%;
+}
+
+.closeCard_css {
+    float: right;
+    margin-top: 1%;
+    margin-right: 3%;
+    color: var(--bgFundoRed);
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.closeCard_css:hover {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+
+.btnCard_css {
+    width: 100%;
+    height: 50%;
+}
+
+.btnCard_css button {
+    float: right;
+    width: 10vw;
+    height: 4vh;
+    margin-right: 1%;
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    outline: none;
+    text-align: center;
+    color: var(--textColor);
+    background-color: var(--modalbg);
+    border: none;
+    cursor: pointer;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.btnCard_css button:hover {
+    transition: 0.5s;
+    color: var(--textColor);
+    background-color: var(--borderbg);
+}
+
+.rodape_css {
+    width: 100%;
+}
+
+.rodape_css button {
+    float: right;
+    width: 10%;
+    height: 10%;
+    font-size: 30px;
+    margin: 3%;
+    color: var(--textColor);
+    background-color: transparent;
+    border: 1px solid var(--bgBtnsuccess);
+    cursor: pointer;
+
+    -moz-transform: skew(-15deg, 0deg);
+    -webkit-transform: skew(-15deg, 0deg);
+    -o-transform: skew(-15deg, 0deg);
+    -ms-transform: skew(-15deg, 0deg);
+    transform: skew(-15deg, 0deg);
+}
+
+.rodape_css button:hover {
+    transition: 0.5s;
+    color: var(--bgFundoBlack);
+    background-color: rgba(0.0, 200, 0.0, 0.7);
+
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
