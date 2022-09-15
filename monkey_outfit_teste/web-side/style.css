@@ -2,7 +2,7 @@
 
 :root {
     --modalbg: rgba(0.0, 0.0, 0.0, 0.8);
-    --borderbg: rgba(255, 0.0, 0.0, 0.9);
+    --borderbg: rgba(255, 0.0, 0.0, 0.7);
     --borderbgsecondary: rgba(255, 0.0, 0.0, 0.5);
     --bgFundoRed: rgba(255, 0.0, 0.0);
     --bgFundoBlack: rgba(0.0, 0.0, 0.0);
@@ -76,25 +76,25 @@ body {}
 /* Chrome, Edge, and Safari */
 .cards_css::-webkit-scrollbar {
     width: 10px;
-  }
+}
 
-  .cards_css::-webkit-scrollbar-track {
+.cards_css::-webkit-scrollbar-track {
     background-color: var(--bgScrollBar);
-  }
+}
 
-  .cards_css::-webkit-scrollbar-thumb {
+.cards_css::-webkit-scrollbar-thumb {
     overflow-x: hidden;
     scrollbar-width: thin;
     background-color: var(--bgFundoBlack);
     border-radius: 10px;
     border: 1px solid var(--textColor);
-  }
+}
 
 .card_css {
     width: 90%;
     height: 15%;
     margin: 5%;
-    border: 1px solid var(--bgFundoBlack);
+    border: 1px solid var(--textColor2);
 }
 
 
@@ -105,9 +105,10 @@ body {}
     margin-left: 2%;
     color: var(--textColor);
 }
+
 .fa-shirt {
     color: var(--borderbgsecondary);
-} 
+}
 
 .closeCard_css {
     float: right;
@@ -125,7 +126,6 @@ body {}
     -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
-
 
 .btnCard_css {
     width: 100%;
@@ -162,8 +162,8 @@ body {}
     text-align: center;
 }
 
-.rodape_css button {
-    
+.btnRodapeAdicionar {
+
     width: 20%;
     height: 10%;
     margin: 3%;
@@ -179,10 +179,37 @@ body {}
     transform: skew(-15deg, 0deg);
 }
 
-.rodape_css button:hover {
+.btnRodapeAdicionar:hover {
     transition: 0.5s;
-    color: var(--bgFundoBlack);
+    color: var(--textColor);
     background-color: rgba(0.0, 200, 0.0, 0.7);
+
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.btnRodapeExcluir {
+    width: 20%;
+    height: 10%;
+    color: var(--textColor);
+    background-color: transparent;
+    border: 1px solid var(--bgFundoRed);
+    cursor: pointer;
+
+    -moz-transform: skew(-15deg, 0deg);
+    -webkit-transform: skew(-15deg, 0deg);
+    -o-transform: skew(-15deg, 0deg);
+    -ms-transform: skew(-15deg, 0deg);
+    transform: skew(-15deg, 0deg);
+}
+
+.btnRodapeExcluir:hover {
+    transition: 0.5s;
+    color: var(--textColor);
+    background-color: rgba(200, 0.0, 0.0, 0.7);
 
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);

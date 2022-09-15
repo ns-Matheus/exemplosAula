@@ -92,52 +92,53 @@ Citizen.CreateThread(function()
     cnVRP.CarregarBlips()
 
     while true do
-
         local time = 500
-
         local ped = PlayerPedId()
         local coords = GetEntityCoords(ped)
-
         for key, value in pairs(outfits) do
-
             local distance = #
-                (vector3(coords[1], coords[2], coords[3]) - vector3(parseInt(value.x), parseInt(value.y), parseInt(value.z)))
-
+                (
+                vector3(coords[1], coords[2], coords[3]) -
+                    vector3(parseInt(value.x), parseInt(value.y), parseInt(value.z)))
             if distance < 10 then
-
                 if debug then
-                    DrawText3D(value.x + 0.0, value.y + 0.0, value.z + 0.0, string.upper(value.id .. " - " .. value.nome .. (value.masculino == true and " (Masculino)" or " (Feminino)")), 255, 255, 255)
+                    DrawText3D(value.x + 0.0, value.y + 0.0, value.z + 0.0,
+                        string.upper(value.id ..
+                            " - " .. value.nome .. (value.masculino == true and " (Masculino)" or " (Feminino)")), 255,
+                        255, 255)
                 end
-                DrawMarker(23, value.x + 0.0, value.y + 0.0, value.z - 0.95, 0, 0, 0, 0, 0, 0, 1.00, 1.00, 1.00, 0, 191, 143, 100, 0, 0, 0, 0)
+                DrawMarker(23, value.x + 0.0, value.y + 0.0, value.z - 0.95, 0, 0, 0, 0, 0, 0, 1.00, 1.00, 1.00, 0, 191,
+                    143, 100, 0, 0, 0, 0)
                 time = 1
-
-                if distance < 2.0 then
+                if distance < 1.2 then
+                    drawTxt("PRESSIONE  ~r~E~w~  PARA SELECIONAR UM MODELO DE ROUPA", 4, 0.5, 0.93, 0.50, 255, 255, 255,
+                        180)
                     if IsControlJustPressed(1, 38) then
-
                         if vSERVER.verificarPermissao(value.permissao) then
+                        SetNuiFocus(true, true)
+                        SendNUIMessage({
+                            show = true,
+                            id = value.id
+                        })
 
-                            SendNUIMessage({
-                                show = true
-                            })
+                        -- local model = GetEntityModel(ped)
 
-                            -- local model = GetEntityModel(ped)
+                        -- if value.masculino == true then
+                        --     if model == GetHashKey("mp_m_freemode_01") then
+                        --          vSERVER.salvarClotesOutfit(value.id)
+                        --     end
+                        -- else
+                        --     if model == GetHashKey("mp_f_freemode_01") then
+                        --        vSERVER.salvarClotesOutfit(value.id)
+                        --    end
+                        -- end
 
-                            -- if value.masculino == true then
-                            --     if model == GetHashKey("mp_m_freemode_01") then
-                            --          vSERVER.salvarClotesOutfit(value.id)
-                            --     end
-                            -- else
-                            --     if model == GetHashKey("mp_f_freemode_01") then
-                            --        vSERVER.salvarClotesOutfit(value.id)
-                            --    end
-                            -- end
+                        --TriggerEvent("monkey:setClothingOutFit",json.encode(value.roupa))
 
-                            --TriggerEvent("monkey:setClothingOutFit",json.encode(value.roupa))
+                        --TriggerClientEvent("updateRoupas",source,result)
 
-                            --TriggerClientEvent("updateRoupas",source,result)
-
-                        else
-                            vSERVER.chamarNotificar('Sem permissão')
+                        -- else
+                        --     vSERVER.chamarNotificar('Sem permissão')
                         end
                     end
                 end
@@ -145,27 +146,48 @@ Citizen.CreateThread(function()
             end
 
         end
-
         Citizen.Wait(time)
 
     end
 end)
 
 
-RegisterNUICallback("sair", function(data)
-	SetNuiFocus(false, false)
+RegisterNUICallback("sair", function(data, cb)
+    show = false
+    SetNuiFocus(false, false)
+    cb(show)
 end)
 
-RegisterNUICallback("", function(data)
-	
+RegisterNUICallback("addOutfit", function(data,cb)
+
+    local id = data.outfit_id
+    local nome = data.outfit_nome
+    vSERVER.
+    cb("Sucesso")
+end)
+
+
+RegisterNUICallback("delOutfit", function(data, cb)
+    vSERVER.deletaroutfitmonkey(args[1])
+    cnVRP.CarregarBlips()
 end)
 
 
 
 
-
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- FUNÇÕES
+-----------------------------------------------------------------------------------------------------------------------------------------
+function drawTxt(text, font, x, y, scale, r, g, b, a)
+    SetTextFont(font)
+    SetTextScale(scale, scale)
+    SetTextColour(r, g, b, a)
+    SetTextOutline()
+    SetTextCentre(1)
+    SetTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawText(x, y)
+end
 
 function cnVRP.CarregarBlips()
     outfits = vSERVER.CarregarBlips()

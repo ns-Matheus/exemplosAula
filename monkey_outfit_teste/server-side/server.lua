@@ -1,6 +1,6 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
-local autorizado = true
+-- local autorizado = true
 
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
@@ -12,21 +12,21 @@ vSKINSHOP = Tunnel.getInterface("skinshop")
 
 -- validação
 
-Citizen.CreateThread(function ()
-    for i = 1, 3, 1 do
-        if autorizado == true then
-            break
-        end
-        VerificarModulo()
-        Citizen.Wait(5000)
-    end
-    print('autorizado ', autorizado)
-end)
+-- Citizen.CreateThread(function ()
+--     for i = 1, 3, 1 do
+--         if autorizado == true then
+--             break
+--         end
+--         VerificarModulo()
+--         Citizen.Wait(5000)
+--     end
+--     print('autorizado ', autorizado)
+-- end)
 
-function VerificarModulo()
-    local url = "http://bravorp.online:8082/ModuleValidator/validator/module?module=outfit".."&login="..Config.login.."&password="..Config.senha
-    PerformHttpRequest(url, function(status, text, headers) if status == 200 then autorizado = true end end, 'GET', nil, nil)
-end
+-- function VerificarModulo()
+--     local url = "http://bravorp.online:8082/ModuleValidator/validator/module?module=outfit".."&login="..Config.login.."&password="..Config.senha
+--     PerformHttpRequest(url, function(status, text, headers) if status == 200 then autorizado = true end end, 'GET', nil, nil)
+-- end
 
 -- Prepares
 
@@ -38,8 +38,12 @@ vRP.prepare("insert_monkey_outfit_init", "INSERT INTO vrp_srv_data (dkey, dvalue
 vRP.prepare("select_monkey_outfit_init", "select * from vrp_srv_data where dkey = @key;")
 vRP.prepare("update_monkey_outfit_init", "UPDATE vrp_srv_data SET dvalue=@value WHERE dkey=@key;")
 vRP.prepare("select_monkey_outfit_by_id", "select * from monkey_outfit where id = @id;")
--- Threads
 
+vRP.prepare("create_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id_outfit = @id_outfit;")
+vRP.prepare("insert_monkey_outfit_roupas", "INSERT INTO monkey_outfit_roupas (id_outfit, nome, roupa) VALUES (@id_outfit, @nome, @roupa);")
+vRP.prepare("delete_monkey_outfit_roupas", "DELETE FROM monkey_outfit_roupas WHERE id=@id;")
+
+-- Threads
 Citizen.CreateThread(function ()
     vRP.execute("create_monkey_outfit", {})
 end)
@@ -48,7 +52,6 @@ end)
 
 function cnVRP.CarregarBlips()
     local rows = vRP.query("select_monkey_outfit", {})
-
     return rows
 end
 
@@ -99,6 +102,8 @@ function cnVRP.criarOutfitinit(data)
         TriggerClientEvent("Notify", source, "amarelo", "Outfit fit salvo com sucesso, todos o players iniciarão com essa roupa do sexo "..sexo, 20000)
     end
 end
+
+
 
 function cnVRP.aplicarOutfitInit(masculino)
     local source = source
@@ -190,7 +195,7 @@ function cnVRP.chamarNotificar(msg)
 end
 
 function cnVRP.verificarPermissao(permissao)
-    if autorizado == true then
+    -- if autorizado == true then
         if permissao == "" then
             return true
         end
@@ -201,11 +206,13 @@ function cnVRP.verificarPermissao(permissao)
             return true
         end
     
-        return false
-    end
+        -- return false
+    -- end
     return false
 end
 
+
+-- Adicionar Outfits
 function cnVRP.adicionarOutfit(data)
     local source = source
     local result = json.decode(data)
@@ -213,6 +220,9 @@ function cnVRP.adicionarOutfit(data)
     TriggerClientEvent("Notify", source, "amarelo", "Outfit aplicado com sucesso.", 5000)
 end
 
+
+
+-- Salvar Outfits
 function cnVRP.salvarClotesOutfit(id)
     local source = source
     local user_id = vRP.getUserId(source)
@@ -228,9 +238,30 @@ function cnVRP.salvarClotesOutfit(id)
 end
 
 
-
-
-
+-- Deletar Outfits
 function cnVRP.deletaroutfitmonkey(data)
     vRP.execute("delete_monkey_outfit", {id = data})
+end
+
+
+
+-- Adicionar Outfits_teste
+function cnVRP.AdicionarOutfit(id, nome, roupa)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local result = vRP.getUData(parseInt(user_id), "Clothings")
+
+    local rows = vRP.query("insert_monkey_outfit_roupas", {id_outfit = id , nome = nome, roupa = roupa})
+
+    if result and result ~= "" then  
+        local clothes = json.decode(result)  
+        --local custom = json.encode(vSKINSHOP.getCustomization(source))
+        vRP.execute("insert_monkey_outfit_roupas", {roupa = json.encode(clothes)})
+    end
+    
+end
+
+-- Deletar Outfits_teste
+function cnVRP.deletaroutfitmonkey(data)
+    vRP.execute("delete_monkey_outfit_roupas", {id = data})
 end
