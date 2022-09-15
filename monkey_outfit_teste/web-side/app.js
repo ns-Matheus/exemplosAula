@@ -41,9 +41,10 @@ var app = new Vue({
     }
  })
 
- $('.close').click(function(event){
+ $('.close_css').click(function(event){
     $('#alert').fadeOut();
     event.preventDefault();
+    app.show = false
 });
 
 window.addEventListener("message",(event)=>{
@@ -52,16 +53,16 @@ window.addEventListener("message",(event)=>{
    app.rotas = data.rotas
 })
 
- document.addEventListener('DOMContentLoaded', function () {
-    document.onkeyup = function (data) {
-       if (data.which == 27) {
-          sair()
-       }
-    }
- })
- 
- function sair() {
-    app.show = false
-    $.post('http://monkey_rotanortesul/sair')
- }
 
+function sair() {
+   app.show = false
+   $.post('http://monkey_outfit/sair')
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+   document.onkeyup = function (data) {
+      if (data.which == 27) {
+         sair()
+      }
+   }
+})

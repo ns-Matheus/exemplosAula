@@ -3,6 +3,7 @@
 :root {
     --modalbg: rgba(0.0, 0.0, 0.0, 0.8);
     --borderbg: rgba(255, 0.0, 0.0, 0.9);
+    --borderbgsecondary: rgba(255, 0.0, 0.0, 0.5);
     --bgFundoRed: rgba(255, 0.0, 0.0);
     --bgFundoBlack: rgba(0.0, 0.0, 0.0);
     --bgScrollBar: rgba(0.0, 0.0, 0.0, 0.4);
@@ -26,7 +27,7 @@ body {}
 .modal_css {
     position: fixed;
     width: 30%;
-    height: 80%;
+    height: 70%;
     margin-top: 5%;
     left: 35%;
     background-color: var(--modalbg);
@@ -63,14 +64,31 @@ body {}
 
 
 .cards_css {
-    height: 80%;
-    overflow-y: scroll;
+    height: 85%;
+    overflow-y: auto;
 }
 
 .cards_css {
     scrollbar-width: thin;
     scrollbar-color: var(--bgFundoBlack) var(--bgScrollBar);
 }
+
+/* Chrome, Edge, and Safari */
+.cards_css::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .cards_css::-webkit-scrollbar-track {
+    background-color: var(--bgScrollBar);
+  }
+
+  .cards_css::-webkit-scrollbar-thumb {
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    background-color: var(--bgFundoBlack);
+    border-radius: 10px;
+    border: 1px solid var(--textColor);
+  }
 
 .card_css {
     width: 90%;
@@ -85,7 +103,11 @@ body {}
     height: 50%;
     text-align: start;
     margin-left: 2%;
+    color: var(--textColor);
 }
+.fa-shirt {
+    color: var(--borderbgsecondary);
+} 
 
 .closeCard_css {
     float: right;
@@ -136,13 +158,14 @@ body {}
 
 .rodape_css {
     width: 100%;
+    color: var(--textColor);
+    text-align: center;
 }
 
 .rodape_css button {
-    float: right;
-    width: 10%;
+    
+    width: 20%;
     height: 10%;
-    font-size: 30px;
     margin: 3%;
     color: var(--textColor);
     background-color: transparent;

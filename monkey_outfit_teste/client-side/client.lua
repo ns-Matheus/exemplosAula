@@ -156,7 +156,7 @@ RegisterNUICallback("sair", function(data)
 	SetNuiFocus(false, false)
 end)
 
-RegisterNUICallback("sair", function(data)
+RegisterNUICallback("", function(data)
 	
 end)
 
