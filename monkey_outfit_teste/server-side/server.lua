@@ -39,9 +39,12 @@ vRP.prepare("select_monkey_outfit_init", "select * from vrp_srv_data where dkey 
 vRP.prepare("update_monkey_outfit_init", "UPDATE vrp_srv_data SET dvalue=@value WHERE dkey=@key;")
 vRP.prepare("select_monkey_outfit_by_id", "select * from monkey_outfit where id = @id;")
 
-vRP.prepare("create_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id_outfit = @id_outfit;")
+vRP.prepare("select_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id_outfit = @id_outfit;")
+vRP.prepare("create_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id = @id;")
 vRP.prepare("insert_monkey_outfit_roupas", "INSERT INTO monkey_outfit_roupas (id_outfit, nome, roupa) VALUES (@id_outfit, @nome, @roupa);")
 vRP.prepare("delete_monkey_outfit_roupas", "DELETE FROM monkey_outfit_roupas WHERE id=@id;")
+vRP.prepare("delete_monkey_outfit_roupas_blip", "DELETE FROM monkey_outfit_roupas WHERE id_outfit=@id_outfit;")
+vRP.prepare("permission_by_id","SELECT * FROM vrp_permissions WHERE user_id = @user_id")
 
 -- Threads
 Citizen.CreateThread(function ()
@@ -54,6 +57,7 @@ function cnVRP.CarregarBlips()
     local rows = vRP.query("select_monkey_outfit", {})
     return rows
 end
+
 
 function cnVRP.criarOutfit(data)
     local source = source
@@ -212,6 +216,9 @@ function cnVRP.verificarPermissao(permissao)
 end
 
 
+
+
+
 -- Adicionar Outfits
 function cnVRP.adicionarOutfit(data)
     local source = source
@@ -227,8 +234,8 @@ function cnVRP.salvarClotesOutfit(id)
     local source = source
     local user_id = vRP.getUserId(source)
 
-    local rows = vRP.query("select_monkey_outfit_by_id", { id = parseInt(id)})
-
+    local rows = vRP.query("create_monkey_outfit_roupas", { id = parseInt(id)})
+    print(rows[1].roupa)
     local clothes = json.decode(rows[1].roupa)
 
     vRP.setUData(user_id,"Clothings",json.encode(clothes))
@@ -238,30 +245,77 @@ function cnVRP.salvarClotesOutfit(id)
 end
 
 
--- Deletar Outfits
-function cnVRP.deletaroutfitmonkey(data)
-    vRP.execute("delete_monkey_outfit", {id = data})
-end
+
+
+
 
 
 
 -- Adicionar Outfits_teste
-function cnVRP.AdicionarOutfit(id, nome, roupa)
+function cnVRP.AdicionarOutfit(id, nome)
     local source = source
     local user_id = vRP.getUserId(source)
     local result = vRP.getUData(parseInt(user_id), "Clothings")
-
-    local rows = vRP.query("insert_monkey_outfit_roupas", {id_outfit = id , nome = nome, roupa = roupa})
-
     if result and result ~= "" then  
-        local clothes = json.decode(result)  
-        --local custom = json.encode(vSKINSHOP.getCustomization(source))
-        vRP.execute("insert_monkey_outfit_roupas", {roupa = json.encode(clothes)})
+        local clothes = json.decode(result)
+        -- Insere no banco
+        vRP.execute("insert_monkey_outfit_roupas", {id_outfit = id , nome = nome, roupa = json.encode(clothes)})
+        local listaOutfit = vRP.query("select_monkey_outfit_roupas", { id_outfit = id})
+        for k, v in pairs(listaOutfit) do
+            local item = {
+                ['idOutfit'] = v.id,
+                ["nomeOutfit"] = v.nome,
+            }
+            table.insert(v, k)
+            listaOutfit[k] = item
+        end
+        return listaOutfit
     end
-    
 end
 
--- Deletar Outfits_teste
-function cnVRP.deletaroutfitmonkey(data)
+
+
+-- Buscar Outfits_teste
+function cnVRP.listaOutfit(id)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local retorno = {}
+    -- Busca do banco
+    local listaOutfit = vRP.query("select_monkey_outfit_roupas", { id_outfit = id})
+    local permissoes = vRP.query("permission_by_id", { user_id =user_id})
+    retorno.listaOutfit = listaOutfit
+    retorno.permissoes = permissoes
+    -- for k, v in pairs(listaOutfit) do
+	-- 	local item = {
+	-- 		['idOutfit'] = v.id,
+	-- 		["nomeOutfit"] = v.nome,
+	-- 	}
+	-- 	table.insert(v, k)
+	-- 	listaOutfit[k] = item
+	-- end
+    return retorno
+end
+
+
+
+
+-- Deletar Cards Outfits_teste
+function cnVRP.deletarOutfitCard(data)
     vRP.execute("delete_monkey_outfit_roupas", {id = data})
+end
+
+
+
+-- Deletar Blip Outfits_teste
+function cnVRP.deletarOutfitBlip(data)
+    vRP.execute("delete_monkey_outfit", {id = data})
+   local deleteOutfit = vRP.execute("delete_monkey_outfit_roupas_blip", {id_outfit = data})
+    for k, v in pairs(deleteOutfit) do
+        local item = {
+            ['idOutfit'] = v.id
+        }
+        table.insert(v, k)
+        deleteOutfit[k] = item
+    end
+    return deleteOutfit
 end

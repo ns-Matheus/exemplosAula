@@ -20,20 +20,20 @@
         <div class="modal_css" v-if="show_vue">
             <div class="title_css">{{titulo}}<i class="close_css fa-solid fa-x" onclick="sair()"></i></div>
             <div class="cards_css">
-                <div class="card_css" v-for="roupas in lista_roupa">
+                <div class="card_css" :id="roupas.id_outfit" v-for="roupas in lista_roupa">
                     <div class="listaCard_css">
                         <i class="fa-sharp fa-solid fa-shirt"></i>
-                        {{roupas.nome}}
-                        <i class="closeCard_css fa-solid fa-x"></i>
+                        {{roupas.nome}} {{roupas.id_outfit}}
+                        <i class="closeCard_css fechar fa-solid fa-x" @click="delOutfitCard(roupas.idOutfit)" v-if="permissoes.includes('Admin')"></i>
                     </div>
                     <div class="btnCard_css">
-                        <button>Aplicar Outfit</button>
+                        <button :onclick="'aplicarOutfit('+roupas.idOutfit+')'">Aplicar Outfit</button>
                     </div>
                 </div>
             </div>
 
-            <div class="rodape_css">
-                <button class="btnRodapeExcluir" @click="delOutfit()">Excluir Blip</button>
+            <div class="rodape_css" v-if="permissoes.includes('Admin')">
+                <button class="btnRodapeExcluir" @click="delOutfitBlip()">Excluir Blip</button>
                 <button class="btnRodapeAdicionar" @click="addOutfit()">Adicionar +</button>
             </div>
         </div>

@@ -114,15 +114,21 @@ Citizen.CreateThread(function()
                     drawTxt("PRESSIONE  ~r~E~w~  PARA SELECIONAR UM MODELO DE ROUPA", 4, 0.5, 0.93, 0.50, 255, 255, 255,
                         180)
                     if IsControlJustPressed(1, 38) then
+                        local k = value.id
                         if vSERVER.verificarPermissao(value.permissao) then
+                            retorno = vSERVER.listaOutfit(k)
+                            -- print(lista[1].nomeOutfit)
+
                         SetNuiFocus(true, true)
                         SendNUIMessage({
                             show = true,
-                            id = value.id
+                            id = value.id,
+                            lista = retorno.listaOutfit,
+                            permissoes = retorno.permissoes
                         })
 
-                        -- local model = GetEntityModel(ped)
 
+                        -- local model = GetEntityModel(ped)
                         -- if value.masculino == true then
                         --     if model == GetHashKey("mp_m_freemode_01") then
                         --          vSERVER.salvarClotesOutfit(value.id)
@@ -132,11 +138,8 @@ Citizen.CreateThread(function()
                         --        vSERVER.salvarClotesOutfit(value.id)
                         --    end
                         -- end
-
                         --TriggerEvent("monkey:setClothingOutFit",json.encode(value.roupa))
-
                         --TriggerClientEvent("updateRoupas",source,result)
-
                         -- else
                         --     vSERVER.chamarNotificar('Sem permissão')
                         end
@@ -158,18 +161,27 @@ RegisterNUICallback("sair", function(data, cb)
     cb(show)
 end)
 
-RegisterNUICallback("addOutfit", function(data,cb)
-
-    local id = data.outfit_id
-    local nome = data.outfit_nome
-    vSERVER.
-    cb("Sucesso")
+RegisterNUICallback("aplicarOutfit", function(data,cb)
+    local idAplicar = data.outfitCard_id
+    vSERVER.salvarClotesOutfit(idAplicar)
 end)
 
+RegisterNUICallback("delOutfitCard", function(data, cb)
+    local id_Card = data.outfitCard_id
+    local deleteBlip = vSERVER.deletarOutfitCard(id_Card)
+    cb(deleteBlip)
+end)
 
-RegisterNUICallback("delOutfit", function(data, cb)
-    vSERVER.deletaroutfitmonkey(args[1])
-    cnVRP.CarregarBlips()
+RegisterNUICallback("addOutfit", function(data,cb)
+    local id = data.outfit_id
+    local nome = data.outfit_nome
+    local lista = vSERVER.AdicionarOutfit(id, nome) 
+    cb(lista)
+end)
+
+RegisterNUICallback("delOutfitBlip", function(data, cb)
+    local id = data.outfit_id
+    vSERVER.deletarOutfitBlip(id)
 end)
 
 

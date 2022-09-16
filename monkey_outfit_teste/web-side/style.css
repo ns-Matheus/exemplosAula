@@ -94,7 +94,7 @@ body {}
     width: 90%;
     height: 15%;
     margin: 5%;
-    border: 1px solid var(--textColor2);
+    border: 1px solid var(--borderbgsecondary);
 }
 
 
@@ -116,7 +116,7 @@ body {}
     margin-right: 3%;
     color: var(--bgFundoRed);
     cursor: pointer;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .closeCard_css:hover {

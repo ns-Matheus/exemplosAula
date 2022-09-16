@@ -4,48 +4,29 @@ var app = new Vue({
       titulo: "Selecione um modelo de roupa",
       show_vue: false,
       id_outfit: 0,
-      nomeOutfit: 0,
-      roupaOutfit: 0,
-      lista_roupa: [
-         { nome: "roupa numero 1" },
-         { nome: "roupa numero 2" },
-         { nome: "roupa numero 3" },
-         { nome: "roupa numero 4" },
-         { nome: "roupa numero 5" },
-         { nome: "roupa numero 6" },
-         { nome: "roupa numero 7" },
-         { nome: "roupa numero 8" },
-         { nome: "roupa numero 9" },
-         { nome: "roupa numero 10" },
-         { nome: "roupa numero 11" },
-         { nome: "roupa numero 12" },
-         { nome: "roupa numero 13" },
-         { nome: "roupa numero 14" },
-         { nome: "roupa numero 15" },
-         { nome: "roupa numero 10" },
-         { nome: "roupa numero 11" },
-         { nome: "roupa numero 12" },
-         { nome: "roupa numero 13" },
-         { nome: "roupa numero 14" },
-         { nome: "roupa numero 15" },
-         { nome: "roupa numero 10" },
-         { nome: "roupa numero 11" },
-         { nome: "roupa numero 12" },
-         { nome: "roupa numero 13" },
-         { nome: "roupa numero 14" },
-         { nome: "roupa numero 15" },
-         { nome: "roupa numero 10" },
-         { nome: "roupa numero 11" },
-         { nome: "roupa numero 12" },
-         { nome: "roupa numero 13" },
-         { nome: "roupa numero 14" },
-         { nome: "roupa numero 15" },
-      ]
+      permissoes: [],
+      lista_roupa: []
    }
 })
 
 
-
+window.addEventListener("message", (event) => {
+   let data = event.data
+   if (data.show == true) {
+      app.show_vue = true
+      app.id_outfit = data.id
+      app.lista_roupa = data.lista
+      app.permissoes = []
+      data.permissoes.forEach(permissao => {
+         app.permissoes.push(permissao.permiss)
+      });
+   }
+   document.onkeyup = (data) => {
+      if (data.which == 27) {
+         sair()
+      }
+   }
+})
 
 
 function sair() {
@@ -55,8 +36,37 @@ function sair() {
 }
 
 
-function addOutfit() {
+function delOutfitCard(id) {
+   $(".fechar").click(() => {
+      $('#' + id).fadeOut('slow', () => {
+         fetch('http://monkey_outfit_teste/delOutfitCard', {
+            method: 'POST',
+            body: JSON.stringify({
+               outfitCard_id: id
+            })
+         })
+      })
+   })
+}
 
+
+function aplicarOutfit(id) {
+   fetch('http://monkey_outfit_teste/aplicarOutfit', {
+      method: 'POST',
+      body: JSON.stringify({
+         outfitCard_id: id
+      })
+   }).then((res) => {
+      return res.json()
+   }).then(data => {
+
+   }).catch(error => {
+
+   })
+}
+
+
+function addOutfit() {
    Swal.fire({
       title: 'Adicione um nome para seu Outfit',
       input: 'text',
@@ -65,11 +75,10 @@ function addOutfit() {
       },
       showCancelButton: true,
       confirmButtonText: 'Adicionar',
-      confirmButtonColor: 'var(--bgBtnsuccess)',
+      confirmButtonColor: 'rgb(41,154,11)',
       cancelButtonText: 'Cancelar',
-      canelButtonColor: '#d33',
+      cancelButtonColor: 'rgb(255,48,25)',
       showLoaderOnConfirm: true,
-      // allowOutsideClick: () => !Swal.isLoading()
    }).then((res) => {
       if (res.isConfirmed) {
          fetch('http://monkey_outfit_teste/addOutfit', {
@@ -78,6 +87,12 @@ function addOutfit() {
                outfit_id: app.id_outfit,
                outfit_nome: res.value
             })
+         }).then((res) => {
+            return res.json()
+         }).then(data => {
+            app.lista_roupa = data
+         }).catch(error => {
+
          })
          Swal.fire(
             'Sucesso!',
@@ -92,25 +107,36 @@ function addOutfit() {
          )
       }
    })
-
 }
 
-function delOutfit() {
+
+function delOutfitBlip() {
    Swal.fire({
       title: 'Excluir Blip de Outfit?',
       text: "Após deletado não há como reverter!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: 'var(--bgBtnsuccess)',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Sim, deletar!',
+      confirmButtonColor: 'rgb(41,154,11)',
       cancelButtonText: 'Não, cancelar!',
+      cancelButtonColor: 'rgb(255,48,25)',
    }).then((res) => {
       if (res.isConfirmed) {
-         $.post('http://monkey_outfit_teste/delOutfit')
+         fetch('http://monkey_outfit_teste/delOutfitBlip', {
+            method: 'POST',
+            body: JSON.stringify({
+               outfit_id: app.id_outfit
+            })
+         }).then((res) => {
+            return res.json()
+         }).then(data => {
+            app.lista_roupa = data
+         }).catch(error => {
+
+         })
          Swal.fire(
-            'Deleted!',
-            'Outfit deletado com sucesso.',
+            'Deletado!',
+            'Blip Outfit deletado com sucesso.',
             'success'
          )
       } else if (res.dismiss === Swal.DismissReason.cancel) {
@@ -121,50 +147,4 @@ function delOutfit() {
          )
       }
    })
-
-   // swalWithBootstrapButtons.fire({
-   //    title: 'Excluir Blip de Outfit?',
-   //    text: "Você não poderá reverter está ação!",
-   //    icon: 'warning',
-   //    showCancelButton: true,
-   //    confirmButtonText: 'Sim, deletar!',
-   //    cancelButtonText: 'Não, cancelar!',
-   //    confirmButtonColor: 'var(--bgBtnInfo)',
-   //    cancelButtonColor: '#d33',
-   //    reverseButtons: true
-   // }).then((result) => {
-   //    if (result.isConfirmed) {
-   //       $.post('http://monkey_outfit_teste/delOutfit')
-   //       swalWithBootstrapButtons.fire(
-   //          'Deletado!',
-   //          'Blip de Outfit deletado.',
-   //          'success'
-   //       )
-   //    } else if (
-   //       result.dismiss === Swal.DismissReason.cancel
-   //    ) {
-   //       swalWithBootstrapButtons.fire(
-   //          'Cancelado',
-   //          'Ação cancelada',
-   //          'error'
-   //       )
-   //    }
-   // })
 }
-
-
-window.addEventListener("message", (event) => {
-   let data = event.data
-   if (data.show == true) {
-      app.show_vue = true
-      app.id_outfit = data.id
-   }
-
-   document.onkeyup = (data) => {
-      if (data.which == 27) {
-         sair()
-      }
-   }
-
-})
-
