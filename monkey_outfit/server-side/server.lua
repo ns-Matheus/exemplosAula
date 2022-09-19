@@ -32,7 +32,7 @@ vSKINSHOP = Tunnel.getInterface("skinshop")
 
 vRP.prepare("create_monkey_outfit", "CREATE TABLE IF NOT EXISTS monkey_outfit (id BIGINT auto_increment NOT NULL, x varchar(20) NOT NULL, y varchar(20) NOT NULL, z varchar(20) NOT NULL, nome varchar(20) NOT NULL, permissao varchar(20) NOT NULL, roupa text NOT NULL, masculino BIT NOT NULL, CONSTRAINT NewTable_pk PRIMARY KEY (id)) ;")
 vRP.prepare("select_monkey_outfit", "select id, x, y, z, nome, permissao, masculino from monkey_outfit")
-vRP.prepare("insert_monkey_outfit", "INSERT INTO monkey_outfit (x, y, z, nome, permissao, roupa, masculino) VALUES(@x, @y, @z, @nome, @permissao, @roupa, @masculino);")
+vRP.prepare("insert_monkey_outfit", "INSERT INTO monkey_outfit (x, y, z, nome, permissao, masculino) VALUES(@x, @y, @z, @nome, @permissao, @masculino);")
 vRP.prepare("delete_monkey_outfit", "DELETE FROM monkey_outfit WHERE id=@id;")
 vRP.prepare("insert_monkey_outfit_init", "INSERT INTO vrp_srv_data (dkey, dvalue) VALUES(@key,@value);")
 vRP.prepare("select_monkey_outfit_init", "select * from vrp_srv_data where dkey = @key;")
@@ -40,16 +40,12 @@ vRP.prepare("update_monkey_outfit_init", "UPDATE vrp_srv_data SET dvalue=@value 
 vRP.prepare("select_monkey_outfit_by_id", "select * from monkey_outfit where id = @id;")
 
 vRP.prepare("select_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id_outfit = @id_outfit;")
-vRP.prepare("create_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id = @id;")
+vRP.prepare("buscar_roupa_monkey_outfit_roupas", "select * from monkey_outfit_roupas where id = @id;")
 vRP.prepare("insert_monkey_outfit_roupas", "INSERT INTO monkey_outfit_roupas (id_outfit, nome, roupa) VALUES (@id_outfit, @nome, @roupa);")
 vRP.prepare("delete_monkey_outfit_roupas", "DELETE FROM monkey_outfit_roupas WHERE id=@id;")
 vRP.prepare("delete_monkey_outfit_roupas_blip", "DELETE FROM monkey_outfit_roupas WHERE id_outfit=@id_outfit;")
 vRP.prepare("permission_by_id","SELECT * FROM vrp_permissions WHERE user_id = @user_id")
 
--- Threads
-Citizen.CreateThread(function ()
-    vRP.execute("create_monkey_outfit", {})
-end)
 
 -- Functions
 
@@ -65,13 +61,13 @@ function cnVRP.criarOutfit(data)
     local nome = vRP.prompt(source, "Nome do outfit?", "")
     local permissao = vRP.prompt(source, "Qual a permissão?", "")
     
-    local result = vRP.getUData(parseInt(user_id), "Clothings")
+    --local result = vRP.getUData(parseInt(user_id), "Clothings")
 
-    if result and result ~= "" then  
-        local clothes = json.decode(result)  
+    --if result and result ~= "" then  
+        --local clothes = json.decode(result)  
         --local custom = json.encode(vSKINSHOP.getCustomization(source))
-        vRP.execute("insert_monkey_outfit", {x = data.x, y = data.y, z = data.z, nome = nome, permissao = permissao, roupa = json.encode(clothes), masculino = data.masculino})
-    end
+        vRP.execute("insert_monkey_outfit", {x = data.x, y = data.y, z = data.z, nome = nome, permissao = permissao, masculino = data.masculino})
+    --end
 
 end
 
@@ -134,37 +130,37 @@ function cnVRP.aplicarOutfitInit(masculino)
 end
 
 
-function cnVRP.criarOutfitPrisao(data)
-    local source = source
-    local user_id = vRP.getUserId(source)
-    --local custom = json.encode(vSKINSHOP.getCustomization(source))
+-- function cnVRP.criarOutfitPrisao(data)
+--     local source = source
+--     local user_id = vRP.getUserId(source)
+--     --local custom = json.encode(vSKINSHOP.getCustomization(source))
 
-    local result = vRP.getUData(parseInt(user_id), "Clothings")
-    if result and result ~= "" then
+--     local result = vRP.getUData(parseInt(user_id), "Clothings")
+--     if result and result ~= "" then
 
-        local sexo = ""
+--         local sexo = ""
 
-        if data.masculino then
-            local rows = vRP.query("select_monkey_outfit_init", { key = "roupas_prisao_masculina"})
-            if #rows >= 1 then
-                vRP.execute("update_monkey_outfit_init", { value = result, key = "roupas_prisao_masculina"})
-            else
-                vRP.execute("insert_monkey_outfit_init", { value = result, key = "roupas_prisao_masculina"})
-            end
-            sexo = "masculino"
-        else
-            local rows = vRP.query("select_monkey_outfit_init", { key = "roupas_prisao_feminino"})
-            if #rows >= 1 then
-                vRP.execute("update_monkey_outfit_init", { value = result, key = "roupas_prisao_feminino"})
-            else
-                vRP.execute("insert_monkey_outfit_init", { value = result, key = "roupas_prisao_feminino"})
-            end
-            sexo = "feminino"
-        end
+--         if data.masculino then
+--             local rows = vRP.query("select_monkey_outfit_init", { key = "roupas_prisao_masculina"})
+--             if #rows >= 1 then
+--                 vRP.execute("update_monkey_outfit_init", { value = result, key = "roupas_prisao_masculina"})
+--             else
+--                 vRP.execute("insert_monkey_outfit_init", { value = result, key = "roupas_prisao_masculina"})
+--             end
+--             sexo = "masculino"
+--         else
+--             local rows = vRP.query("select_monkey_outfit_init", { key = "roupas_prisao_feminino"})
+--             if #rows >= 1 then
+--                 vRP.execute("update_monkey_outfit_init", { value = result, key = "roupas_prisao_feminino"})
+--             else
+--                 vRP.execute("insert_monkey_outfit_init", { value = result, key = "roupas_prisao_feminino"})
+--             end
+--             sexo = "feminino"
+--         end
 
-        TriggerClientEvent("Notify", source, "amarelo", "Outfit fit salvo com sucesso, todos o players que forem presos usarão essa roupa do sexo "..sexo, 20000)
-    end
-end
+--         TriggerClientEvent("Notify", source, "amarelo", "Outfit fit salvo com sucesso, todos o players que forem presos usarão essa roupa do sexo "..sexo, 20000)
+--     end
+-- end
 
 
 function cnVRP.aplicarOutfitPrisao(masculino)
@@ -192,7 +188,6 @@ function cnVRP.aplicarOutfitPrisao(masculino)
 end
 
 
-
 function cnVRP.chamarNotificar(msg)
     local source = source
     TriggerClientEvent("Notify", source, "amarelo", msg, 5000)
@@ -203,39 +198,38 @@ function cnVRP.verificarPermissao(permissao)
         if permissao == "" then
             return true
         end
-    
         local user_id = vRP.getUserId(source)
-    
         if vRP.hasPermission(user_id, permissao) then
             return true
         end
-    
         -- return false
     -- end
     return false
 end
 
 
-
-
-
--- Adicionar Outfits
-function cnVRP.adicionarOutfit(data)
-    local source = source
-    local result = json.decode(data)
-    --TriggerClientEvent("updateRoupas",source, json.encode(result))
-    TriggerClientEvent("Notify", source, "amarelo", "Outfit aplicado com sucesso.", 5000)
+function cnVRP.verificarPermissaoAdmin()
+    return Config.Admin
 end
 
+-- ADICIIONAR Outfits
+-- function cnVRP.adicionarOutfit(data)
+--     local source = source
+--     local result = json.decode(data)
+--     TriggerClientEvent("updateRoupas",source, json.encode(result))
+--     TriggerClientEvent("Notify", source, "amarelo", "Outfit aplicado com sucesso.", 5000)
+-- end
 
 
--- Salvar Outfits
-function cnVRP.salvarClotesOutfit(id)
+
+
+-- SALVAR Outfits_teste
+function cnVRP.aplicarClotesOutfit(id)
     local source = source
     local user_id = vRP.getUserId(source)
 
-    local rows = vRP.query("create_monkey_outfit_roupas", { id = parseInt(id)})
-    print(rows[1].roupa)
+    local rows = vRP.query("buscar_roupa_monkey_outfit_roupas", { id = parseInt(id)})
+  
     local clothes = json.decode(rows[1].roupa)
 
     vRP.setUData(user_id,"Clothings",json.encode(clothes))
@@ -245,37 +239,7 @@ function cnVRP.salvarClotesOutfit(id)
 end
 
 
-
-
-
-
-
-
--- Adicionar Outfits_teste
-function cnVRP.AdicionarOutfit(id, nome)
-    local source = source
-    local user_id = vRP.getUserId(source)
-    local result = vRP.getUData(parseInt(user_id), "Clothings")
-    if result and result ~= "" then  
-        local clothes = json.decode(result)
-        -- Insere no banco
-        vRP.execute("insert_monkey_outfit_roupas", {id_outfit = id , nome = nome, roupa = json.encode(clothes)})
-        local listaOutfit = vRP.query("select_monkey_outfit_roupas", { id_outfit = id})
-        for k, v in pairs(listaOutfit) do
-            local item = {
-                ['idOutfit'] = v.id,
-                ["nomeOutfit"] = v.nome,
-            }
-            table.insert(v, k)
-            listaOutfit[k] = item
-        end
-        return listaOutfit
-    end
-end
-
-
-
--- Buscar Outfits_teste
+-- LISTAR Outfits_teste
 function cnVRP.listaOutfit(id)
     local source = source
     local user_id = vRP.getUserId(source)
@@ -297,25 +261,32 @@ function cnVRP.listaOutfit(id)
 end
 
 
+-- ADICIONAR Outfits_teste
+function cnVRP.AdicionarOutfit(id, nome)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local result = vRP.getUData(parseInt(user_id), "Clothings")
+    if result and result ~= "" then  
+        local clothes = json.decode(result)
+        -- Insere no banco
+        vRP.execute("insert_monkey_outfit_roupas", {id_outfit = id , nome = nome, roupa = json.encode(clothes)})
+        local retorno = {}
+        -- Busca do banco
+        local listaOutfit = vRP.query("select_monkey_outfit_roupas", { id_outfit = id})
+        retorno.listaOutfit = listaOutfit
+        return retorno.listaOutfit
+    end
+end
 
 
--- Deletar Cards Outfits_teste
+-- DELETAR CARDS Outfits_teste
 function cnVRP.deletarOutfitCard(data)
     vRP.execute("delete_monkey_outfit_roupas", {id = data})
 end
 
 
-
--- Deletar Blip Outfits_teste
+-- DELETAR BLIP Outfits_teste
 function cnVRP.deletarOutfitBlip(data)
     vRP.execute("delete_monkey_outfit", {id = data})
-   local deleteOutfit = vRP.execute("delete_monkey_outfit_roupas_blip", {id_outfit = data})
-    for k, v in pairs(deleteOutfit) do
-        local item = {
-            ['idOutfit'] = v.id
-        }
-        table.insert(v, k)
-        deleteOutfit[k] = item
-    end
-    return deleteOutfit
+    vRP.execute("delete_monkey_outfit_roupas_blip", {id_outfit = data})
 end

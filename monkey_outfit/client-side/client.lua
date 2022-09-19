@@ -9,12 +9,13 @@ vSERVER = Tunnel.getInterface("monkey_outfit")
 local outfits
 local debug = false
 
+local id_card_aberto = 0
+
 -- RegisterCommands
 
 RegisterCommand('createoutfitmonkey', function(source, args, rawCommand)
 
-    local temPermissao = vSERVER.verificarPermissao('owner')
-
+    local temPermissao = vSERVER.verificarPermissaoAdmin()
     if temPermissao then
         local ped = PlayerPedId()
         local coords = GetEntityCoords(ped)
@@ -29,7 +30,7 @@ end)
 
 RegisterCommand('createoutfitmonkeyinit', function(source, args, rawCommand)
 
-    local temPermissao = vSERVER.verificarPermissao('Admin')
+    local temPermissao = vSERVER.verificarPermissaoAdmin()
 
     if temPermissao then
         local ped = PlayerPedId()
@@ -52,7 +53,7 @@ end)
 
 RegisterCommand('createoutfitmonkeyprisao', function(source, args, rawCommand)
 
-    local temPermissao = vSERVER.verificarPermissao('Admin')
+    local temPermissao = vSERVER.verificarPermissaoAdmin()
 
     if temPermissao then
         local ped = PlayerPedId()
@@ -96,53 +97,55 @@ Citizen.CreateThread(function()
         local ped = PlayerPedId()
         local coords = GetEntityCoords(ped)
         for key, value in pairs(outfits) do
-            local distance = #
-                (
-                vector3(coords[1], coords[2], coords[3]) -
-                    vector3(parseInt(value.x), parseInt(value.y), parseInt(value.z)))
+            local distance = #(vector3(coords[1], coords[2], coords[3]) - vector3(value.x, value.y, value.z))
             if distance < 10 then
                 if debug then
-                    DrawText3D(value.x + 0.0, value.y + 0.0, value.z + 0.0,
-                        string.upper(value.id ..
-                            " - " .. value.nome .. (value.masculino == true and " (Masculino)" or " (Feminino)")), 255,
-                        255, 255)
+                    DrawText3D(value.x, value.y, value.z,string.upper(value.id.." - "..value.nome..(value.masculino == true and " (Masculino)" or " (Feminino)")), 255,255, 255)
                 end
-                DrawMarker(23, value.x + 0.0, value.y + 0.0, value.z - 0.95, 0, 0, 0, 0, 0, 0, 1.00, 1.00, 1.00, 0, 191,
-                    143, 100, 0, 0, 0, 0)
+                --DrawMarker(23, value.x + 0.0, value.y + 0.0, value.z - 0.95, 0, 0, 0, 0, 0, 0, 1.00, 1.00, 1.00, 0, 191,143, 100, 0, 0, 0, 0)
+                DrawMarker(21,value.x, value.y, value.z-0.2,0,0,0,0,0,0,0.50,0.50,0.65,2,149,255,100,0,0,0,1)
+                
                 time = 1
                 if distance < 1.2 then
-                    drawTxt("PRESSIONE  ~r~E~w~  PARA SELECIONAR UM MODELO DE ROUPA", 4, 0.5, 0.93, 0.50, 255, 255, 255,
-                        180)
+                    if value.masculino == true then
+                        drawTxt("PRESSIONE  ~r~E~w~  PARA SELECIONAR UM MODELO DE ROUPA MASCULINO", 4, 0.5, 0.93, 0.50, 255, 255, 255,180)
+                    else
+                        drawTxt("PRESSIONE  ~r~E~w~  PARA SELECIONAR UM MODELO DE ROUPA FEMININO", 4, 0.5, 0.93, 0.50, 255, 255, 255,180)
+                    end
+
                     if IsControlJustPressed(1, 38) then
                         local k = value.id
-                        if vSERVER.verificarPermissao(value.permissao) then
-                            retorno = vSERVER.listaOutfit(k)
-                            -- print(lista[1].nomeOutfit)
+                        id_card_aberto = value.id
 
-                        SetNuiFocus(true, true)
-                        SendNUIMessage({
-                            show = true,
-                            id = value.id,
-                            lista = retorno.listaOutfit,
-                            permissoes = retorno.permissoes
-                        })
+                        local sexo_e = false
 
-
-                        -- local model = GetEntityModel(ped)
-                        -- if value.masculino == true then
-                        --     if model == GetHashKey("mp_m_freemode_01") then
-                        --          vSERVER.salvarClotesOutfit(value.id)
-                        --     end
-                        -- else
-                        --     if model == GetHashKey("mp_f_freemode_01") then
-                        --        vSERVER.salvarClotesOutfit(value.id)
-                        --    end
-                        -- end
-                        --TriggerEvent("monkey:setClothingOutFit",json.encode(value.roupa))
-                        --TriggerClientEvent("updateRoupas",source,result)
-                        -- else
-                        --     vSERVER.chamarNotificar('Sem permissão')
+                        if value.masculino == true then
+                            local model = GetEntityModel(ped)
+                            if model == GetHashKey("mp_m_freemode_01") then
+                                sexo_e = true
+                            end
+                        else 
+                            local model = GetEntityModel(ped)
+                            if model == GetHashKey("mp_f_freemode_01") then
+                                sexo_e = true
+                            end
                         end
+
+                        if sexo_e then 
+                            if vSERVER.verificarPermissao(value.permissao) then
+                                retorno = vSERVER.listaOutfit(k)
+    
+                                SetNuiFocus(true, true)
+                                SendNUIMessage({
+                                    show = true,
+                                    id = value.id,
+                                    lista = retorno.listaOutfit,
+                                    permissoes = retorno.permissoes
+                                })
+                            end
+
+                        end
+                        
                     end
                 end
 
@@ -155,6 +158,10 @@ Citizen.CreateThread(function()
 end)
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NUISCallBack
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 RegisterNUICallback("sair", function(data, cb)
     show = false
     SetNuiFocus(false, false)
@@ -162,14 +169,15 @@ RegisterNUICallback("sair", function(data, cb)
 end)
 
 RegisterNUICallback("aplicarOutfit", function(data,cb)
-    local idAplicar = data.outfitCard_id
-    vSERVER.salvarClotesOutfit(idAplicar)
+    local idAplicar = data.id_roupa
+    vSERVER.aplicarClotesOutfit(idAplicar)
 end)
 
 RegisterNUICallback("delOutfitCard", function(data, cb)
     local id_Card = data.outfitCard_id
-    local deleteBlip = vSERVER.deletarOutfitCard(id_Card)
-    cb(deleteBlip)
+    vSERVER.deletarOutfitCard(id_Card)
+    local r = vSERVER.listaOutfit(id_card_aberto)
+    cb(r.listaOutfit)
 end)
 
 RegisterNUICallback("addOutfit", function(data,cb)
@@ -182,6 +190,8 @@ end)
 RegisterNUICallback("delOutfitBlip", function(data, cb)
     local id = data.outfit_id
     vSERVER.deletarOutfitBlip(id)
+    Wait(250)
+    cnVRP.CarregarBlips()
 end)
 
 

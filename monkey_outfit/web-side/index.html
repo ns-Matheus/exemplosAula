@@ -21,13 +21,14 @@
             <div class="title_css">{{titulo}}<i class="close_css fa-solid fa-x" onclick="sair()"></i></div>
             <div class="cards_css">
                 <div class="card_css" :id="roupas.id_outfit" v-for="roupas in lista_roupa">
+                    <div class="closeCard_css">
+                        <i class="fa-solid fa-x" @click="delOutfitCard(roupas.id)" v-if="permissoes.includes('Admin')"></i>
+                    </div>
                     <div class="listaCard_css">
-                        <i class="fa-sharp fa-solid fa-shirt"></i>
-                        {{roupas.nome}} {{roupas.id_outfit}}
-                        <i class="closeCard_css fechar fa-solid fa-x" @click="delOutfitCard(roupas.idOutfit)" v-if="permissoes.includes('Admin')"></i>
+                        <i class="fa-sharp fa-solid fa-shirt"></i><span class="listaCard">{{roupas.nome}}</span>
                     </div>
                     <div class="btnCard_css">
-                        <button :onclick="'aplicarOutfit('+roupas.idOutfit+')'">Aplicar Outfit</button>
+                        <button  @click="aplicarOutfit(roupas.id)">Aplicar</button>
                     </div>
                 </div>
             </div>
