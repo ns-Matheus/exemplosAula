@@ -37,7 +37,7 @@ vRP.prepare("create_monkey_craft", "CREATE TABLE IF NOT EXISTS monkey_craft (id 
 vRP.prepare("create_monkey_craft_item", "CREATE TABLE IF NOT EXISTS monkey_craft_item (id BIGINT auto_increment NOT NULL, id_craft BIGINT NOT NULL, nome_item varchar(50) NOT NULL, nomeVitrine varchar(50) NOT NULL, quantidade INT NOT NULL, CONSTRAINT NewTable_pk PRIMARY KEY (id)) ;")
 vRP.prepare("create_monkey_craft_item_insumo", "CREATE TABLE IF NOT EXISTS monkey_craft_item_insumo (id BIGINT auto_increment NOT NULL, id_item BIGINT NOT NULL, nome_insumo varchar(50) NOT NULL, nomeVitrine varchar(50) NOT NULL, quantidade INT NOT NULL, CONSTRAINT NewTable_pk PRIMARY KEY (id)) ;")
 vRP.prepare("insert_monkey_craft", "INSERT INTO monkey_craft (x, y, z, permissao, nome_craft, tipo) VALUES(@x, @y, @z, @permissao, @nome, @tipo);")
-vRP.prepare("insert_monkey_craft_item", "INSERT INTO monkey_craft_item (id_craft, nome_item, quantidade, nomeVitrine, tempo) VALUES(@id_craft, @nome, @quantidade, @nomeVitrine, @tempo);")
+vRP.prepare("insert_monkey_craft_item", "INSERT INTO monkey_craft_item (id_craft, nome_item, quantidade, nomeVitrine) VALUES(@id_craft, @nome, @quantidade, @nomeVitrine);")
 vRP.prepare("insert_monkey_craft_item_insumo", "INSERT INTO monkey_craft_item_insumo (id_item, nome_insumo, quantidade, nomeVitrine) VALUES(@id_item, @nome, @quantidade, @nomeVitrine);")
 vRP.prepare("select_monkey_craft", "SELECT * FROM monkey_craft;")
 vRP.prepare("select_monkey_craft_item", "SELECT * FROM monkey_craft_item where id_craft = @id;")
@@ -50,7 +50,7 @@ vRP.prepare("monkey_craft_alter_coords","UPDATE monkey_craft SET x=@x, y=@y, z=@
 vRP.prepare("monkey_craft_alter_permissao","UPDATE monkey_craft SET permissao=@permissao WHERE id=@id;")
 
 vRP.prepare("select_monkey_craft_ultimo_id", "select * from monkey_craft_item where id_craft = @id_craft order by id desc limit 1;")
-vRP.prepare("insert_monkey_craft_item_30dias", "INSERT INTO monkey_craft_item (id_craft, nome_item, quantidade, nomeVitrine, isMoney, data_expiracao, tempo) VALUES(@id_craft, @nome, @quantidade, @nomeVitrine,@isMoney,@data_expiracao, @tempo + INTERVAL @duracao_dias DAY);")
+vRP.prepare("insert_monkey_craft_item_30dias", "INSERT INTO monkey_craft_item (id_craft, nome_item, quantidade, nomeVitrine, isMoney, data_expiracao) VALUES(@id_craft, @nome, @quantidade, @nomeVitrine,@isMoney,@data_expiracao + INTERVAL @duracao_dias DAY);")
 vRP.prepare("select_craft_vencidos","SELECT * FROM monkey_craft_item where data_expiracao < DATE_ADD(curdate(), INTERVAL 1 DAY)")
 vRP.prepare("select_monkey_craft_verifica_existe", "select * from monkey_craft_item where id_craft = @id_craft and nome_item = @nome_item")
 
@@ -87,9 +87,8 @@ function cnVRP.createRecipe(data)
         local idCraft = data.idCraft
         local nomeItem = data.nameItem
         local quantidade = data.amount
-        local tempo = data.time
         local nomeVitrine = Config.getNomeVitrine(nomeItem)
-        vRP.execute("insert_monkey_craft_item", {id_craft = idCraft, nome = nomeItem, quantidade = quantidade, nomeVitrine = nomeVitrine, tempo = tempo})
+        vRP.execute("insert_monkey_craft_item", {id_craft = idCraft, nome = nomeItem, quantidade = quantidade, nomeVitrine = nomeVitrine})
     else
         cnVRP.chamarNotificar('Você não tem permissão')
     end
@@ -151,18 +150,8 @@ function cnVRP.chamarNotificar(msg)
     Config.notificar(msg)
 end
 
-function cnVRP.errorNotificar(msg)
-    local source = source
-    TriggerClientEvent("Notify", source, "vermelho", msg, 5000)
-end
-
-function cnVRP.successNotificar(msg)
-    local source = source
-    TriggerClientEvent("Notify", source, "verde", msg, 5000)
-end
-
 function cnVRP.criar(data)
-    if autorizado == false then   -- não retorna craft se não estiver validado
+    if autorizado == false then -- não retorna craft se não estiver validado
         cnVRP.chamarNotificar('Não autorizado')
     else
         local criar = true
@@ -180,41 +169,11 @@ function cnVRP.criar(data)
             for key, value in pairs(data.insumos) do
                 Config.removerItem(user_id, value.nome_insumo, value.quantidade * data.amount)
             end
-            cnVRP.successNotificar('Item craftado')
         else
-            cnVRP.errorNotificar('Materiais insuficientes')
+            cnVRP.chamarNotificar('Não foi possivel criar o item')
         end
     end
 end
-
-function cnVRP.darItemPed(data)
-    local user_id = vRP.getUserId(source)
-
-    Config.darItem(user_id, data.item.nome, data.item.quantidade * data.amount)
-    cnVRP.successNotificar('Item recebido')
-end
-
-
-function cnVRP.removerItemPed(data)
-    local criar = true
-    local user_id = vRP.getUserId(source)
-
-    for key, value in pairs(data.insumos) do
-        if Config.pegarQuantidade(user_id, value.nome_insumo) < value.quantidade * data.amount then
-            criar = false
-        end
-    end
-
-    if criar then
-        for key, value in pairs(data.insumos) do
-            Config.removerItem(user_id, value.nome_insumo, value.quantidade * data.amount)
-            cnVRP.successNotificar('Craft em produção')
-        end
-    else
-        cnVRP.errorNotificar('Materiais insuficientes')
-    end
-end
-
 
 function cnVRP.getItens()
     return Config.getItens()

@@ -348,7 +348,7 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
+	width: auto;
 	margin: 1.25em auto 0;
 	padding: 0;
 }
@@ -388,13 +388,11 @@
 	cursor: pointer;
 }
 .swal2-styled.swal2-confirm {
-	width: 20%;
-	height: 5vh;
 	border: 0;
 	border-radius: 0.25em;
 	background: initial;
-	background-color: #03bb85;
-	color: #000;
+	background-color: #7a297a;
+	color: #fff;
 	font-size: 1em;
 }
 .swal2-styled.swal2-confirm:focus {
@@ -412,8 +410,6 @@
 	box-shadow: 0 0 0 3px rgba(220, 55, 65, 0.5);
 }
 .swal2-styled.swal2-cancel {
-	width: 20%;
-	height: 5vh;
 	border: 0;
 	border-radius: 0.25em;
 	background: initial;

@@ -7,7 +7,7 @@ Tunnel.bindInterface("monkey_craft",cnVRP)
 vSERVER = Tunnel.getInterface("monkey_craft")
 
 local crafts
-local lista_craft = {}
+
 -- RegisterCommands
 
 RegisterCommand('createcraftmonkey', function(source, args, rawCommand)
@@ -104,76 +104,13 @@ RegisterNUICallback('getRecipes', function(data, cb)
             nome_item = value.nome_item,
             nomeVitrine = value.nomeVitrine,
             quantidade = value.quantidade,
-            insumos = insumos,
-            tempo = value.tempo
+            insumos = insumos
         })
 
     end
 
     cb(retorno)
 end)
-
-
--- RegisterNUICallback('craftRecipe', function(data, cb)
---     local time = (data.amount * Config.multiplicadorTempoCraft) + Config.tempoCraftar
---     vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
---     TriggerEvent("Progress",time,"Craftando")
---     Citizen.Wait(time)
---     vSERVER.criar(data)
---     vRP.stopAnim(false)
-
--- end)
-
-
-RegisterNUICallback('craftDarItem', function(data, cb)
-    local id = 0
-
-    vSERVER.darItemPed(data)
-    for k, v in pairs(lista_craft) do
-        if v.id == data.id then
-            id = k
-        end
-    end
-    if id ~= 0 then
-        table.remove(lista_craft, id)
-    end
-
-end)
-
-
-RegisterNUICallback('craftRecipe', function(data, cb)
-    local abrir = true
-    vSERVER.removerItemPed(data)
-
-    local item = {
-        ["id"] = data.id,
-        ["nome"] = data.item.nome,
-        ["tempo"] = data.item.tempo
-    }
-    table.insert(lista_craft, item)
-    cb(abrir)
-end)
-
-
-Citizen.CreateThread(function()
-    while true do
-        Wait(1000)
-        while #lista_craft > 0 do
-            for k, v in pairs(lista_craft) do
-                if v.tempo > 0 then
-                    v.tempo = parseInt(v.tempo) -1
-                    SendNUIMessage({
-                        tempoReal = v.tempo,
-                        v.id
-                    })
-                end
-            end
-            Wait(1000)
-        end
-    end    
-end)
-
-
 
 RegisterNUICallback('createRecipe', function(data, cb)
     vSERVER.createRecipe(data)
@@ -200,7 +137,9 @@ RegisterNUICallback('removeInsumo', function(data, cb)
     cb("")
 end)
 
-
+RegisterNUICallback('craftRecipe', function(data, cb)
+    vSERVER.criar(data)
+end)
 
 -- functions
 

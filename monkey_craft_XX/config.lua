@@ -5,11 +5,6 @@ Config.senha = "123" -- senha de acesso
 
 Config.permissaoParaCriar = 'Admin'
 
-
-Config.tempoCraftar = 5000
-
-Config.multiplicadorTempoCraft = 1000
-
 Config.notificar = function(msg)
     local source = source
     TriggerClientEvent("Notify", source, "amarelo", msg, 5000)

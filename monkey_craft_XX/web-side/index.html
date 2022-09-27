@@ -65,20 +65,17 @@
                         <div class="w-100 mb-2">
                            <img :src="urlFotosItens + receita.nome_item +'.png'" onerror="imageError(this)" class="mr-3 icon cursor-pointer" @click="recipeSelected = receita;" />
                         </div>
-                        <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
+                        <div class="w-35 mb-1 cursor-pointer" @click="recipeSelected = receita;" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
                            <i class="fas fa-hashtag font-11 mr-1"></i><small class="mr-1 d-none d-xl-inline">ID:</small> {{ receita.id }}
-                        </div> <br>
-                        <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;">
-                           <i class="fa fa-clock font-10 mr-1"></i><small class="mr-1 d-none d-xl-inline">Tempo:</small> {{ receita.tempo }}
-                        </div><br>
-                        <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;">
+                        </div>
+                        <div class="w-65 mb-1 cursor-pointer" @click="recipeSelected = receita;">
                            <i class="fas fa-boxes font-10 mr-1"></i><small class="mr-1 d-none d-xl-inline">Quantidade:</small> {{ receita.quantidade }}
                         </div>
                         <div class="w-100 cursor-pointer" @click="recipeSelected = receita;">
                            <h5 class="regulaTexto text-center mb-1">{{ receita.nomeVitrine != null ? receita.nomeVitrine.toUpperCase() : 'Desconhecido' }}</h5>
                         </div>
                         <div class="w-100" v-if="recipeSelected != null && recipeSelected.id == receita.id">
-                           <div class="btn-search mb-2 mt-3 mx-auto"  @click="craftRecipe" v-if="btn_sumir">
+                           <div class="btn-search mb-2 mt-3 mx-auto" @click="craftRecipe">
                               <i class="fas fa-plus text-white font-10 mr-2"></i>Criar
                            </div>
                         </div>
@@ -103,7 +100,7 @@
                   <div class="card weight-600 mb-2">
                      <i class="fas fa-angle-right mr-2"></i>Crafts a Venda
                   </div>
-                  <!-- loops do shops -->
+                  <!-- loops do shops-->
                   <div class="" v-for="(insumo, index) in lista_shop" :key="index" style=" margin: 4px 2px; border: 1px solid #222; padding: 2px; background-color: #050505;">
                     
                      <div style="width: 130px; float: left;">
@@ -123,7 +120,7 @@
                            <div class="nameItem_insumo">{{ insumo_do_item.nome }}</div>
                         </div>
                      </div>
-                     <div>
+                     <div class="width:100px; float: left;">
                         <button type="button" class="botao_compra_craft roxo" @click="comprar_monkey(insumo)">R$  {{ insumo.preco_money }}</button>
                         <button type="button" class="botao_compra_craft amarelo " style="margin-top: 0;" @click="comprar_coin(insumo)">{{ insumo.preco_coins }} coins</button>
                      </div>
@@ -166,13 +163,6 @@
                   <div class="card py-4">Nenhum insumo atribuído</div>
                </div>
             </div>
-
-            <div class="receitas_fila_css" v-if="show_progressbar"> Tempo:
-                  <div id="myProgress">
-                     <div id="myBar">0%</div>
-                  </div>
-               </div>
-               <button class="receber" @click="craftDarItem()" v-if="btn_receber">Receber Itens!</button>
          </div>
       </div>
 
