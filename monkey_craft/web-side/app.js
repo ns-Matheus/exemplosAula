@@ -23,9 +23,8 @@ var app = new Vue({
       carregando: false,
       isLogado: false, // true = dev
       show_progressbar: false,
-      btn_sumir:true,
+      btn_sumir: true,
       btn_receber: false,
-      dar_item: 0,
       tempoCraft: 0,
       infoUserLogado: { 'nome': 'Desconhecido', 'permissoes': [] },
       shop_ativo: false,
@@ -674,16 +673,16 @@ function criarReceita() {
       html: '<div class="w-100">' +
          '<div class="row">' +
          '<div class="w-100">' +
-         '<label class="font-12"><i class="fas fa-hashtag font-11 mr-1"></i>Nome</label><br/>' +
-         '<input class="w-50" type="text" id="criarReceita1" class="mb-2" placeholder="digite o nome do item" />' +
+         '<label class="font-12"><i class="fas fa-hashtag font-11 mr-1"></i>Nome do Item</label><br/>' +
+         '<input class="w-50" type="text" id="criarReceita1" class="mb-2" />' +
          '</div>' +
          '<div class="w-50">' +
-         '<label class="font-12"><i class="fas fa-boxes font-10 mr-1"></i>Quantidade</label><br/>' +
-         '<input class="w-25" type="text" id="criarReceita2" placeholder="selecione a quantidade" />' +
+         '<label class="font-12"><i class="fas fa-boxes font-10 mr-1"></i>Quantidade Gerada</label><br/>' +
+         '<input class="w-25" type="text" id="criarReceita2" />' +
          '</div>' +
          '<div class="w-50">' +
-         '<label class="font-12"><i class="fas fa-boxes font-10 mr-1"></i>Tempo</label><br/>' +
-         '<input class="w-25" type="text" id="criarReceita3" placeholder="tempo de craft" />' +
+         '<label class="font-12"><i class="fa fa-clock font-10 mr-1"></i>Tempo para o Craft</label><br/>' +
+         '<input class="w-25" type="text" id="criarReceita3" />' +
          '</div>' +
          '</div>' +
          '</div>',
@@ -724,6 +723,20 @@ function criarReceita() {
             Toast.fire({
                icon: 'error',
                title: 'Quantidade deve ser numérico!'
+            });
+
+            return
+         } else if (document.getElementById('criarReceita3').value.trim().length == 0) {
+            Toast.fire({
+               icon: 'error',
+               title: 'Informe o tempo!'
+            });
+
+            return
+         } else if (isNaN(document.getElementById('criarReceita3').value)) {
+            Toast.fire({
+               icon: 'error',
+               title: 'O valor deve ser numérico!'
             });
 
             return
@@ -931,9 +944,9 @@ function craftRecipe() {
             return 'Quantidade inválida!'
          }
       }
-      
+
    }).then((result) => {
-      
+
       if (result.isConfirmed) {
          app.btn_receber = false;
          fetch("http://monkey_craft/craftRecipe", {
@@ -946,6 +959,7 @@ function craftRecipe() {
                   quantidade: app.recipeSelected.quantidade,
                   tempo: app.recipeSelected.tempo
                },
+               btnReceber: app.btn_receber,
                insumos: app.recipeSelected.insumos,
                amount: parseInt(result.value)
             })
@@ -953,31 +967,66 @@ function craftRecipe() {
             return result.json()
          }).then((data) => {
             app.show_progressbar = data
-         })
-         
-         setTimeout(() => {
-            var i = 0;
-            if (i == 0) {
-               i = 1;
-               var elem = document.getElementById("myBar");
-               var width = 1;
-               var id = setInterval(frame, 50);
-               function frame() {
-                  if (width != 100) {
+
+            $(function () {
+               var progressbar = $("#progressbar"),
+                  progressLabel = $(".progress-label");
+                  // progressLine = $(".progress-line");
+
+               progressbar.progressbar({
+                  value: false,
+                  change: function () {
+                     progressLabel.text(progressbar.progressbar("value") + "%");
                      app.btn_sumir = false
-                     width++;
-                     elem.style.width = width + "%";
-                  } else {
-                     clearInterval(id);
-                     i = 0;
+                  },
+                  complete: function () {
+                     progressLabel.text("Completo!");
                      app.btn_sumir = true;
                      app.btn_receber = true;
                      app.show_progressbar = false;
                   }
+               });
+
+               function progress() {
+                  var val = progressbar.progressbar("value");
+                  progressbar.progressbar("value", val + 1);
+
+                  //   progressLine.width(val + '%');
+
+                  if (val < 100) {
+                     setTimeout(progress, 100);
+                  }
                }
-            }
-         }, 500);
-         
+
+               setTimeout(progress, 2000);
+            });
+         })
+
+            
+
+         // setTimeout(() => {
+         //    var i = 0;
+         //    if (i == 0) {
+         //       i = 1;
+         //       var elem = document.getElementById("myBar");
+         //       var width = 0;
+         //       var id = setInterval(frame, 100);
+         //       function frame() {
+         //          if (width != 100) {
+         //             app.btn_sumir = false
+         //             width++;
+         //             elem.style.width = width + "%";
+         //          } else {
+         //             clearInterval(id);
+         //             i = 0;
+         //             app.btn_sumir = true;
+         //             app.btn_receber = true;
+         //             app.show_progressbar = false;
+         //          }
+         //       }
+         //    }
+         // }, 200);
+
       }
    })
 }
@@ -987,11 +1036,8 @@ function craftDarItem() {
    fetch("http://monkey_craft/craftDarItem", {
       headers: { "Content-Type": "application/json" },
       method: "POST"
-   }).then(result => {
-      return result.json()
-   }).then((data) => {
-
    })
+   app.btn_receber = false
 }
 
 
@@ -1004,6 +1050,7 @@ function imageError(e) {
 document.addEventListener("DOMContentLoaded", function () {
    window.addEventListener("message", function (event) {
 
+      app.tempoCraft = event.data.tempoReal
 
 
       if (event.data.method == 'open') {

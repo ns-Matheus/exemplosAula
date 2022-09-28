@@ -126,32 +126,30 @@ end)
 
 
 RegisterNUICallback('craftDarItem', function(data, cb)
-    local id = 0
-
-    vSERVER.darItemPed(data)
     for k, v in pairs(lista_craft) do
-        if v.id == data.id then
-            id = k
+        if v.tempo == 0 then
+            vSERVER.darItemPed(v.nome, v.quantidade)
+            table.remove(lista_craft, k)
         end
     end
-    if id ~= 0 then
-        table.remove(lista_craft, id)
-    end
-
+    cb(criar)
 end)
 
 
 RegisterNUICallback('craftRecipe', function(data, cb)
-    local abrir = true
-    vSERVER.removerItemPed(data)
+    local show = true
+    local criar = vSERVER.removerItemPed(data)
+    if criar == 1 then
+        local item = {
+            ["id"] = data.id,
+            ["nome"] = data.item.nome,
+            ["tempo"] = data.item.tempo,
+            ["quantidade"] = data.item.quantidade
+        }
+        table.insert(lista_craft, item)
+        cb(show)
+    end
 
-    local item = {
-        ["id"] = data.id,
-        ["nome"] = data.item.nome,
-        ["tempo"] = data.item.tempo
-    }
-    table.insert(lista_craft, item)
-    cb(abrir)
 end)
 
 

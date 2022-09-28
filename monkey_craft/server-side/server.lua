@@ -161,38 +161,32 @@ function cnVRP.successNotificar(msg)
     TriggerClientEvent("Notify", source, "verde", msg, 5000)
 end
 
-function cnVRP.criar(data)
-    if autorizado == false then   -- não retorna craft se não estiver validado
-        cnVRP.chamarNotificar('Não autorizado')
-    else
-        local criar = true
-        local user_id = vRP.getUserId(source)
+-- function cnVRP.criar(data)
+--     if autorizado == false then   -- não retorna craft se não estiver validado
+--         cnVRP.chamarNotificar('Não autorizado')
+--     else
+--         local criar = true
+--         local user_id = vRP.getUserId(source)
     
-        for key, value in pairs(data.insumos) do
-            if Config.pegarQuantidade(user_id, value.nome_insumo) < value.quantidade * data.amount then
-                criar = false
-            end
-        end
+--         for key, value in pairs(data.insumos) do
+--             if Config.pegarQuantidade(user_id, value.nome_insumo) < value.quantidade * data.amount then
+--                 criar = false
+--             end
+--         end
     
-        if criar then
-            Config.darItem(user_id, data.item.nome, data.item.quantidade * data.amount)
+--         if criar then
+--             Config.darItem(user_id, data.item.nome, data.item.quantidade * data.amount)
     
-            for key, value in pairs(data.insumos) do
-                Config.removerItem(user_id, value.nome_insumo, value.quantidade * data.amount)
-            end
-            cnVRP.successNotificar('Item craftado')
-        else
-            cnVRP.errorNotificar('Materiais insuficientes')
-        end
-    end
-end
+--             for key, value in pairs(data.insumos) do
+--                 Config.removerItem(user_id, value.nome_insumo, value.quantidade * data.amount)
+--             end
+--             cnVRP.successNotificar('Item craftado')
 
-function cnVRP.darItemPed(data)
-    local user_id = vRP.getUserId(source)
-
-    Config.darItem(user_id, data.item.nome, data.item.quantidade * data.amount)
-    cnVRP.successNotificar('Item recebido')
-end
+--         else
+--             cnVRP.errorNotificar('Materiais insuficientes')
+--         end
+--     end
+-- end
 
 
 function cnVRP.removerItemPed(data)
@@ -208,11 +202,21 @@ function cnVRP.removerItemPed(data)
     if criar then
         for key, value in pairs(data.insumos) do
             Config.removerItem(user_id, value.nome_insumo, value.quantidade * data.amount)
-            cnVRP.successNotificar('Craft em produção')
         end
+        cnVRP.successNotificar('Craft em produção')
+        return 1
     else
         cnVRP.errorNotificar('Materiais insuficientes')
+        return 0
     end
+end
+
+-- ====================================================================================================
+
+function cnVRP.darItemPed(nome, quantidade)
+    local user_id = vRP.getUserId(source)
+        Config.darItem(user_id, nome, quantidade)
+        cnVRP.successNotificar('Item recebido')
 end
 
 
