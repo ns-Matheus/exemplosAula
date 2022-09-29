@@ -126,13 +126,13 @@ end)
 
 
 RegisterNUICallback('craftDarItem', function(data, cb)
+
     for k, v in pairs(lista_craft) do
         if v.tempo == 0 then
             vSERVER.darItemPed(v.nome, v.quantidade)
             table.remove(lista_craft, k)
         end
     end
-    cb(criar)
 end)
 
 
@@ -144,7 +144,9 @@ RegisterNUICallback('craftRecipe', function(data, cb)
             ["id"] = data.id,
             ["nome"] = data.item.nome,
             ["tempo"] = data.item.tempo,
+            ["tempoTotal"] = data.item.tempo,
             ["quantidade"] = data.item.quantidade
+            -- ["progresso"] =  data.item.tempo / 100
         }
         table.insert(lista_craft, item)
         cb(show)
@@ -158,10 +160,13 @@ Citizen.CreateThread(function()
         Wait(1000)
         while #lista_craft > 0 do
             for k, v in pairs(lista_craft) do
-                if v.tempo > 0 then
-                    v.tempo = parseInt(v.tempo) -1
+                if v.tempo >= 0 then
+                    local prog = (v.tempo * 100)/v.tempoTotal
+                    v.tempo = parseInt(v.tempo) - 1 
                     SendNUIMessage({
-                        tempoReal = v.tempo,
+                        method = 'attprogresso',
+                        tempoReal = v.tempo +1,
+                        prog = prog,
                         v.id
                     })
                 end

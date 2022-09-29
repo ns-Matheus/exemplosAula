@@ -167,17 +167,23 @@
                <div class="w-100 text-center" v-if="recipeSelected != null && recipeSelected.insumos.length == 0">
                   <div class="card py-4">Nenhum insumo atribuído</div>
                </div>
-               <button class="receber" @click="craftDarItem()" v-if="btn_receber">Receber Itens!</button>
+            </div>
+            <div id="myProgress">
+               <div id="myBar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
             </div>
             <!-- <div class="receitas_fila_css" v-if="show_progressbar"> Tempo:
-                  <div id="myProgress">
-                     <div id="myBar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
-                  </div>
             </div> -->
-            <div id="progressbar" v-if="show_progressbar">
-               <div class="progress-line"></div>
-                  <div class="progress-label">Loading...</div>
-               </div>
+            
+            <!-- <div id="progressbar" v-if="show_progressbar">
+               <div class="progress-label">Loading...</div>
+            </div> -->
+            
+            <div id="weight" v-if="show_progressbar" >Tempo: {{tempoCraft}}
+               <div id="weightBarLeft"></div>
+            </div>
+            <button class="receber" @click="craftDarItem()" v-if="btn_receber">Receber Itens!</button>
+            
+
             </div>
       </div>
 

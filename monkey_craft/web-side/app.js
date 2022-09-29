@@ -30,7 +30,7 @@ var app = new Vue({
       shop_ativo: false,
       lista_shop: [],
       tipo_loja: "",
-      lista_fila: {}
+      lista_fila: []
    }
 })
 
@@ -923,7 +923,7 @@ function sair(deslogar) {
    if (deslogar) {
       app.isLogado = false
    }
-
+   
    app.carregando = false
 }
 
@@ -968,64 +968,40 @@ function craftRecipe() {
          }).then((data) => {
             app.show_progressbar = data
 
-            $(function () {
-               var progressbar = $("#progressbar"),
-                  progressLabel = $(".progress-label");
-                  // progressLine = $(".progress-line");
 
-               progressbar.progressbar({
-                  value: false,
-                  change: function () {
-                     progressLabel.text(progressbar.progressbar("value") + "%");
-                     app.btn_sumir = false
-                  },
-                  complete: function () {
-                     progressLabel.text("Completo!");
-                     app.btn_sumir = true;
-                     app.btn_receber = true;
-                     app.show_progressbar = false;
-                  }
-               });
+            // progress Bar
 
-               function progress() {
-                  var val = progressbar.progressbar("value");
-                  progressbar.progressbar("value", val + 1);
+            // $(function () {
+            //    var progressbar = $("#progressbar"),
+            //       progressLabel = $(".progress-label");
+            //    // progressLine = $(".progress-line");
+            //    progressbar.progressbar({
+            //       value: false,
+            //       change: function () {
+            //          progressLabel.text(progressbar.progressbar("value") + "%");
+            //          app.btn_sumir = false
+            //       },
+            //       complete: function () {
+            //          // progressLabel.text("Completo!");
+            //          app.btn_sumir = true;
+            //          app.btn_receber = true;
+            //          app.show_progressbar = false;
+            //       }
+            //    });
+            //    function progress() {
+            //       var val = progressbar.progressbar("value");
+            //       progressbar.progressbar("value", val + 5);
 
-                  //   progressLine.width(val + '%');
+            //       // progressLine.width(val + '%');
 
-                  if (val < 100) {
-                     setTimeout(progress, 100);
-                  }
-               }
+            //       if (val < 100) {
+            //          setTimeout(progress, 100);
+            //       }
+            //    }
+            //    setTimeout(progress, 500);
+            // });
 
-               setTimeout(progress, 2000);
-            });
          })
-
-            
-
-         // setTimeout(() => {
-         //    var i = 0;
-         //    if (i == 0) {
-         //       i = 1;
-         //       var elem = document.getElementById("myBar");
-         //       var width = 0;
-         //       var id = setInterval(frame, 100);
-         //       function frame() {
-         //          if (width != 100) {
-         //             app.btn_sumir = false
-         //             width++;
-         //             elem.style.width = width + "%";
-         //          } else {
-         //             clearInterval(id);
-         //             i = 0;
-         //             app.btn_sumir = true;
-         //             app.btn_receber = true;
-         //             app.show_progressbar = false;
-         //          }
-         //       }
-         //    }
-         // }, 200);
 
       }
    })
@@ -1036,6 +1012,8 @@ function craftDarItem() {
    fetch("http://monkey_craft/craftDarItem", {
       headers: { "Content-Type": "application/json" },
       method: "POST"
+   }).then((data)=>{
+      data
    })
    app.btn_receber = false
 }
@@ -1050,10 +1028,21 @@ function imageError(e) {
 document.addEventListener("DOMContentLoaded", function () {
    window.addEventListener("message", function (event) {
 
-      app.tempoCraft = event.data.tempoReal
+      
+      if (event.data.method == 'attprogresso') {
+         app.tempoCraft = event.data.tempoReal
+         app.btn_sumir = false
+         
+         
+         $("#weightBarLeft").html(`<div id="weightContent" style="width: ${event.data.prog}%"></div>`);
 
+         if (this.document.getElementById('weightContent').style.width == "0%") {
+            app.show_progressbar = false
+            app.btn_receber = true
+            app.btn_sumir = true
+         }
 
-      if (event.data.method == 'open') {
+      } else if (event.data.method == 'open') {
          app.infoUserLogado.nome = event.data.namePlayer
          app.listaItens = event.data.itens
          app.idCraft = event.data.id
