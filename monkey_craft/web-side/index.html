@@ -177,11 +177,14 @@
             <!-- <div id="progressbar" v-if="show_progressbar">
                <div class="progress-label">Loading...</div>
             </div> -->
-            
-            <div id="weight" v-if="show_progressbar" >Tempo: {{tempoCraft}}
-               <div id="weightBarLeft"></div>
+            <div v-for="fila in lista_fila">
+               <div id="weight" >Tempo: {{tempoCraft}}
+                  <div :id="fila.nome+fila.id">
+                     <div class="weightBarLeft"></div>
+                  </div>
+               </div>
+               <button class="receber" @click="craftDarItem()" v-if="btn_receber">Receber Itens!</button>
             </div>
-            <button class="receber" @click="craftDarItem()" v-if="btn_receber">Receber Itens!</button>
             
 
             </div>

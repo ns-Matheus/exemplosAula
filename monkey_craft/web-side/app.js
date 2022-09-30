@@ -948,6 +948,7 @@ function craftRecipe() {
    }).then((result) => {
 
       if (result.isConfirmed) {
+         console.log(app.recipeSelected.id)
          app.btn_receber = false;
          fetch("http://monkey_craft/craftRecipe", {
             headers: { "Content-Type": "application/json" },
@@ -966,8 +967,11 @@ function craftRecipe() {
          }).then(result => {
             return result.json()
          }).then((data) => {
-            app.show_progressbar = data
+            console.log(JSON.stringify(data))
+            app.show_progressbar = data[0]
+            app.lista_fila.push(data[1])
 
+            criarBarra(app.lista_fila)
 
             // progress Bar
 
@@ -1002,6 +1006,7 @@ function craftRecipe() {
             // });
 
          })
+        
 
       }
    })
@@ -1012,14 +1017,20 @@ function craftDarItem() {
    fetch("http://monkey_craft/craftDarItem", {
       headers: { "Content-Type": "application/json" },
       method: "POST"
-   }).then((data)=>{
-      data
+   }).then(()=>{
+
    })
    app.btn_receber = false
 }
 
 
-
+function criarBarra(array){
+   array.forEach(e =>{
+      console.log(e.nome+e.id)
+      let elementId = document.getElementById(e.nome+e.id)
+      elementId.firstChild.innerHTML = `<div id="weightContent" style="width: 100%"></div>`
+   })
+}
 
 function imageError(e) {
    e.src = app.erroImg
@@ -1029,18 +1040,25 @@ document.addEventListener("DOMContentLoaded", function () {
    window.addEventListener("message", function (event) {
 
       
+      
       if (event.data.method == 'attprogresso') {
-         app.tempoCraft = event.data.tempoReal
-         app.btn_sumir = false
          
+         console.log(app.lista_fila)
+         // console.log(JSON.stringify(event.data))
          
-         $("#weightBarLeft").html(`<div id="weightContent" style="width: ${event.data.prog}%"></div>`);
 
-         if (this.document.getElementById('weightContent').style.width == "0%") {
-            app.show_progressbar = false
-            app.btn_receber = true
-            app.btn_sumir = true
-         }
+         app.tempoCraft = event.data.tempoReal
+         // app.btn_sumir = false
+
+         // if (this.document.getElementById(event.data.id).style.width == "0%") {
+         //    app.show_progressbar = false
+         //    app.btn_receber = true
+         //    app.btn_sumir = true
+
+         //    let pos = app.lista_fila.indexOf(event.data.id)
+         //    app.lista_fila.splice(pos, 1)
+            
+         // }
 
       } else if (event.data.method == 'open') {
          app.infoUserLogado.nome = event.data.namePlayer
