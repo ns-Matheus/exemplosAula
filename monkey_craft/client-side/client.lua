@@ -136,50 +136,75 @@ RegisterNUICallback('craftDarItem', function(data, cb)
 
 end)
 
+local trava_time_craft_fila = false
+local time_espera = 0
+
+Citizen.CreateThread(function()
+    while true do
+        Wait(1000)
+        if time_espera > 0 then 
+            time_espera = time_espera - 1
+        else 
+            trava_time_craft_fila = false
+        end
+    end 
+end)
+
+
 
 RegisterNUICallback('craftRecipe', function(data, cb)
     local show = true
-    local criar = vSERVER.removerItemPed(data)
-    print(data.item.id)
-    if criar == 1 then
-        
-        local item = {
-            ["id"] = data.item.id,
-            ["nome"] = data.item.nome,
-            ["tempo"] = data.item.tempo,
-            ["tempoTotal"] = data.item.tempo,
-            ["quantidade"] = data.item.quantidade
-            -- ["progresso"] =  data.item.tempo / 100
-        }
-        table.insert(lista_craft, item)
+    local show_btn =true
 
-        
+    if data.qtd <= 5 then
 
+        if trava_time_craft_fila == false  then 
 
-        cb({show, item})
+            if vSERVER.removerItemPed(data.item, data.qtd) then 
+
+                local item = {
+                    ["id"] = data.item.id,
+                    ["nome"] = data.item.nome,
+                    ["tempo"] = data.item.tempo,
+                    ["tempoTotal"] = data.item.tempo,
+                    ["quantidade"] = data.item.quantidade,
+                    ["craft"] = false,
+                    ["data"] = data.item
+                }
+                table.insert(lista_craft, item)
+                time_espera = 300
+                trava_time_craft_fila = true
+                cb(show)
+            end
+
+        else 
+            vSERVER.chamarNotificar('Craft ainda em andamento, aguarde!')
+            -- lancar mesagem que tem de esperar x tempo para colocar outro
+        end
+
+    else 
+        vSERVER.chamarNotificar('limite de crafts de: '..data.qtd)
+        -- lançar mesagem de que só aceita valor menor ou igual a 5
     end
-
+  
 end)
 
 
 Citizen.CreateThread(function()
     while true do
         Wait(1000)
-        while #lista_craft > 0 do
-            for k, v in pairs(lista_craft) do
-                if v.tempo >= 0 then
-                    local prog = (v.tempo * 100)/v.tempoTotal
-                    v.tempo = parseInt(v.tempo) - 1 
-                    SendNUIMessage({
-                        method = 'attprogresso',
-                        tempoReal = v.tempo +1,
-                        prog = prog,
-                        id = v.id
-                    })
-                end
+    
+        for k, v in pairs(lista_craft) do
+            if v.tempo > 0 then
+                v.tempo = parseInt(v.tempo) - 1 
             end
-            Wait(1000)
         end
+
+        SendNUIMessage({
+            method = 'attprogresso',
+            lista = lista_craft
+        })
+
     end    
 end)
 

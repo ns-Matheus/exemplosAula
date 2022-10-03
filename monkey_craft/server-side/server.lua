@@ -50,7 +50,7 @@ vRP.prepare("monkey_craft_alter_coords","UPDATE monkey_craft SET x=@x, y=@y, z=@
 vRP.prepare("monkey_craft_alter_permissao","UPDATE monkey_craft SET permissao=@permissao WHERE id=@id;")
 
 vRP.prepare("select_monkey_craft_ultimo_id", "select * from monkey_craft_item where id_craft = @id_craft order by id desc limit 1;")
-vRP.prepare("insert_monkey_craft_item_30dias", "INSERT INTO monkey_craft_item (id_craft, nome_item, quantidade, nomeVitrine, isMoney, data_expiracao, tempo) VALUES(@id_craft, @nome, @quantidade, @nomeVitrine,@isMoney,@data_expiracao, @tempo + INTERVAL @duracao_dias DAY);")
+vRP.prepare("insert_monkey_craft_item_30dias", "INSERT INTO monkey_craft_item (id_craft, nome_item, quantidade, nomeVitrine, isMoney, data_expiracao, tempo) VALUES(@id_craft, @nome, @quantidade, @nomeVitrine,@isMoney,@data_expiracao + INTERVAL @duracao_dias DAY, @tempo);")
 vRP.prepare("select_craft_vencidos","SELECT * FROM monkey_craft_item where data_expiracao < DATE_ADD(curdate(), INTERVAL 1 DAY)")
 vRP.prepare("select_monkey_craft_verifica_existe", "select * from monkey_craft_item where id_craft = @id_craft and nome_item = @nome_item")
 
@@ -189,25 +189,25 @@ end
 -- end
 
 
-function cnVRP.removerItemPed(data)
+function cnVRP.removerItemPed(data,qtd)
     local criar = true
     local user_id = vRP.getUserId(source)
 
     for key, value in pairs(data.insumos) do
-        if Config.pegarQuantidade(user_id, value.nome_insumo) < value.quantidade * data.amount then
+        if Config.pegarQuantidade(user_id, value.nome_insumo) < value.quantidade * qtd then
             criar = false
         end
     end
 
     if criar then
         for key, value in pairs(data.insumos) do
-            Config.removerItem(user_id, value.nome_insumo, value.quantidade * data.amount)
+            Config.removerItem(user_id, value.nome_insumo, value.quantidade * qtd)
         end
         cnVRP.successNotificar('Craft em produção')
-        return 1
+        return true
     else
         cnVRP.errorNotificar('Itens insuficientes')
-        return 0
+        return false
     end
 end
 
@@ -267,7 +267,7 @@ function cnVRP.comprar_por_coin(data)
     if vRP.remGmsId(user_id,parseInt(insumo_temp.preco_coins)) then
 
         local nomeVitrine = Config.getNomeVitrine(insumo_temp.item)
-        vRP.execute("insert_monkey_craft_item_30dias", {id_craft = idCraft, nome = insumo_temp.item, quantidade = insumo_temp.qtd_fab, nomeVitrine = nomeVitrine, isMoney = false, data_expiracao = os.date("%Y-%m-%d"), duracao_dias = insumo_temp.duracao })
+        vRP.execute("insert_monkey_craft_item_30dias", {id_craft = idCraft, nome = insumo_temp.item, quantidade = insumo_temp.qtd_fab, nomeVitrine = nomeVitrine, isMoney = false, data_expiracao = os.date("%Y-%m-%d"), duracao_dias = insumo_temp.duracao, tempo = insumo_temp.tempo })
         Wait(100)
         
         local ultimos_id = vRP.query("select_monkey_craft_ultimo_id", { id_craft = idCraft })
@@ -302,7 +302,7 @@ function cnVRP.comprar_por_money(data)
     if vRP.paymentBank(user_id,parseInt(insumo_temp.preco_money)) then
 
         local nomeVitrine = Config.getNomeVitrine(insumo_temp.item)
-        vRP.execute("insert_monkey_craft_item_30dias", {id_craft = idCraft, nome = insumo_temp.item, quantidade = insumo_temp.qtd_fab, nomeVitrine = nomeVitrine, isMoney = true, data_expiracao = os.date("%Y-%m-%d"), duracao_dias = insumo_temp.duracao })
+        vRP.execute("insert_monkey_craft_item_30dias", {id_craft = idCraft, nome = insumo_temp.item, quantidade = insumo_temp.qtd_fab, nomeVitrine = nomeVitrine, isMoney = true, data_expiracao = os.date("%Y-%m-%d"), duracao_dias = insumo_temp.duracao, tempo = insumo_temp.tempo })
         Wait(100)
         
         local ultimos_id = vRP.query("select_monkey_craft_ultimo_id", { id_craft = idCraft })
