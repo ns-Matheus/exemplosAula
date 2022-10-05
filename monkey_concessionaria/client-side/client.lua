@@ -78,7 +78,7 @@ end)
 -- ====================================================================================================
 -- Funcoes de Retorno - START
 -- ====================================================================================================
-RegisterNUICallback("sair", function(data)
+RegisterNUICallback("sair", function(data,cb)
     TriggerEvent("hudActived", true)
     concessionaria_aberta = false
     DoScreenFadeOut(500)
@@ -92,6 +92,7 @@ RegisterNUICallback("sair", function(data)
     Wait(500)
     DoScreenFadeIn(500)
     vSERVER.resetSession()
+    cb({fechar = true})
 end)
 
 

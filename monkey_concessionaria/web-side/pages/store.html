@@ -1,0 +1,64 @@
+<div id="store">
+  <div class="p-2 d-flex flex-row">
+    <!-- <ul class="nav-bar-serach">
+      <li class="navbar-item-serach" @click="filtrar('todas')">
+        <a
+          ><span>TODAS</span></a
+        >
+      </li>
+      <li class="navbar-item-serach" @click="filtrar('ak')">
+        <a 
+          ><span>AK</span></a
+        >
+      </li>
+      <li class="navbar-item-serach" @click="filtrar('m4')">
+        <a 
+          ><span>M4</span></a
+        >
+      </li>
+      <li class="navbar-item-serach" @click="filtrar('glock')">
+        <a 
+          ><span>GLOCK</span></a
+        >
+      </li>
+      <li class="navbar-item-serach" @click="filtrar('fivem')">
+        <a 
+          ><span>FIVEM</span></a
+        >
+      </li>
+    </ul> -->
+    <div class="cards" >
+        <div class="card-carro " :class="[{'bg-red-carro': carro.raridade == 1},{'bg-blue-carro': carro.raridade == 2}, {'bg-yellow-carro': carro.raridade == 3}, {'bg-purple-carro': carro.raridade == 4}, {'': carro.raridade == 0}]" v-for="(carro,index) in carros">
+            <div class="item-img">
+							<img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'" onerror="imageError(this)"/>
+            </div>
+            <div class="item-title">{{carro.nome_Vitrine.toUpperCase()}}</div>
+            <div class="item-price"><span>{{moeda.format(carro.preco)}}</span></div>
+            <div class="item-qtd"><i class="fa fa-box"></i> <span>{{peso.format(carro.kg)}}</span></div>
+            <div class="item-btn-group">
+                <button class="btn btn-primary btn-comprar" @click="comprar(arma)"><i class="fa fa-cart-plus mx-2"></i><span>Comprar</span></button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+  var store = new Vue({
+    el: "#store",
+    data: {
+      carros: core.carros,
+      moeda: core.moeda,
+      peso: core.peso
+    },
+  });
+  function comprar(arma){
+    comprarArma(arma).then((data) => {
+      console.log(JSON.stringify(data))
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
+  function filtrar(filtro){
+    console.log(filtro)
+  }
+</script>

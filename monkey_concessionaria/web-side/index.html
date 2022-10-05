@@ -1,153 +1,197 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-	<meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Monkey Concessionaria</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icons_ms728/icons.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
-</head>
-<body style="background-color: transparent !important;">
-<!-- <body style="background: url('https://www.maistecnologia.com/wp-content/uploads/2020/06/fivem-uma-alternativa-ao-gta-online-www.maistecnologia.com.jpg') !important;"> -->
-	<div id="app">
-		<div class="row" v-if="show_vue">
-			<!-- Lateral -->
-			<div v-if="!show_icone" class="menucarros">
-				<div v-for="(carro, index) in lista_vue" :key="index" class="card_image" @click="mostrarCarro(carro)">
-					<div class="row">
-						<div class="col-6 p-0 delimitarTexto">{{ carro.nome_Vitrine }}</div>
-						<div class="col-6 p-0 delimitarTexto text-end">
-							<i class="far fa-weight-hanging text-danger font-12 translateY-1 me-1"></i>{{ carro.kg }} <small class="font-11 text-secondary">Kg</small>
-						</div>
-						<div class="col-12 px-0 py-1">
-							<img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'" />
-						</div>
-						<div class="col-12 p-0 delimitarTexto text-end"><small class="text-danger translateY1">$</small> {{ parseInt(carro.preco).toLocaleString('pt-br', {minimumFractionDigits: 0, maximumFractionDigits: 0 }) }}</div>
-					</div>
-				</div>
-			</div>
+﻿<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monkey Empregos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/icons_ms728/icons.css"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/color_skins.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap-select.css" />
+  </head>
+  <body class="theme-black" style="background-color: transparent !important">
+    <div id="app" style="display: none">
+      <div class="corpo">
+        <!-- Page Loader -->
+        <div class="overlay"></div>
+        <!-- Overlay For Sidebars -->
 
-			<!-- Rodape -->
-			<div class="footer" v-if="!show_icone">
-				<div class="row">
-					<div class="col-12 p-0 overflow-x mx-auto">
-						<div class="cores" v-for="(cor, index) in cores_vue" :key="index" @click="mudarCor(cor)">
-							<div class="cor" :style="'background-color: rgba('+cor.r+','+cor.g+','+cor.b+');'"></div>
-						</div>
-					</div>
+        <!-- Left Sidebar -->
+        <aside id="minileftbar" class="minileftbar">
+          <ul class="menu_list">
+            <li><a href="javascript:void(0);" class="bars"></a></li>
+            <li>
+              <a class="navbar-brand" href="javascript:;"
+                ><img src="images/logo-icon.png" alt="Monkey"
+              /></a>
+            </li>
+            <!-- <li>
+              <a href="javascript:void(0);" class="menu-sm"
+                ><i class="fas fa-exchange normal"></i
+              ></a>
+            </li> -->
+            <li class="notifications">
+              <a href="javascript:void(0);"
+                ><i class="fal fa-info-circle normal font-16"></i
+              ></a>
+            </li>
+            <li class="power">
+              <a href="javascript:void(0);" class="js-right-sidebar"
+                ><i class="fas fa-cog zmdi-hc-spin"></i
+              ></a>
+              <a href="javascript:;" @click="close" class="mega-menu"
+                ><i class="fas fa-power-off"></i
+              ></a>
+            </li>
+          </ul>
+        </aside>
+        <aside class="right_menu">
+          <!-- Painl sobre Desenvolvedores -->
+          <div class="notif-menu overflow-auto">
+            <div class="card">
+              <div class="header">
+                <h2><strong>Sobre os desenvolvedores</strong></h2>
+              </div>
+              <div class="body">
+                <img
+                  src="https://cdn.discordapp.com/attachments/928755706235064350/935182233780768838/perfil.png"
+                  class="w-100 mb-2"
+                />
+                <div class="font-13 text-center text-secondary">
+                  <strong class="font-18">Monkey Concessionária</strong><br />
+                  <small class="mt-1">by Creative Monkey</small><br />
+                  <br />
+                  <i class="fab fa-discord normal font-18"></i><br />
+                  <small>Nosso discord</small><br />
+                  <strong>discord.gg/5NR4k3WdnV</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Aplicar tema -->
+          <div id="rightsidebar" class="right-sidebar">
+            <div class="p-4">
+              <div class="card">
+                <div class="header pt-1">
+                  <h2><strong>Cor da</strong> Skin</h2>
+                </div>
+                <div class="body">
+                  <ul class="choose-skin list-unstyled m-b-0">
+                    <li data-theme="black" class="active">
+                      <div class="black"></div>
+                    </li>
+                    <li data-theme="purple"><div class="purple"></div></li>
+                    <li data-theme="blue"><div class="blue"></div></li>
+                    <li data-theme="cyan"><div class="cyan"></div></li>
+                    <li data-theme="green"><div class="green"></div></li>
+                    <li data-theme="orange"><div class="orange"></div></li>
+                    <li data-theme="blush"><div class="blush"></div></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card">
+                <div class="header">
+                  <h2><strong>Tema</strong> Lateral</h2>
+                </div>
+                <div class="body theme-light-dark">
+                  <button class="t-dark btn btn-primary btn-round btn-block">
+                    Dark
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Conteudo -->
+          <!-- <div id="leftsidebar" class="sidebar">
+            <div class="menu">
+              <ul class="list">
+                <li>
+                  <div class="user-info m-b-20">
+                    <div
+                      class="image mb-3"
+                      @click="changePage('Inicio','Principal','pages/home.html')"
+                    >
+                      <img
+                        src="https://cdn.discordapp.com/attachments/928755706235064350/935182233780768838/perfil.png"
+                        class="w-100 mb-2"
+                      />
+                    </div>
+                    <div class="detail mb-1">
+                      <h6>Skin Arma</h6>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a @click="changePage('Loja','Painel','pages/store.html')"
+                    ><i class="fa fa-coins"></i><span>Loja</span></a
+                  >
+                </li>
+                <li>
+                  <a
+                    @click="changePage('Minhas Skins','Painel','pages/skins.html')"
+                    ><i class="fa fa-user"></i><span>MInhas Skins</span></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div> -->
+        </aside>
 
-					<div class="col-12 p-0 mb-3 text-shadow-white weight-900 font-18">Pressione F para o modo de visualização</div>
+        <!-- Carregando -->
+        <div class="loadingContent d-block">
+          <div class="loading">
+            <p>Carregando</p>
+            <span></span>
+          </div>
+        </div>
 
-					<div class="col-12 p-0 mb-2">
-						<div class="row align-items-center">
-							<div class="col d-inline-flex p-0">
-								<div class="caixa_search mb-2">
-									<input class="caixa_texto" placeholder="Pesquisar..." v-model="pesquisa">
-									<a class="botao_search" href="javascript:;"><i class="far fa-search"></i></a>
-								</div>
-								
-								<button class="btn btn-success text-white d-inline-flex align-items-center ms-2 mb-2" @click="testeDrive">
-									<i class="fal fa-key font-18 my-1 me-xl-2"></i><span class="d-none d-xl-inline">&nbsp;&nbsp;Test drive</span>
-								</button>
-							</div>
-							
-							<div class="col text-center p-0">
-								<button class="btn btn-danger text-white py-2 mb-2" @click="abrirPortas">
-									<i class="fal fa-door-closed font-13 my-1" style="transform: translateY(3px);"></i>
-									<i class="fal fa-lock-open font-13 my-1 me-xl-2" style="transform: translate(-1.75px, -3px);"></i> <span class="d-none d-xl-inline">Abrir portas</span>
-								</button>
-								<button class="btn btn-danger text-white py-2 mb-2" @click="fecharPortas">
-									<i class="fal fa-door-closed font-13 my-1" style="transform: translateY(3px);"></i>
-									<i class="fal fa-lock font-13 my-1 me-xl-2" style="transform: translate(-1.75px, -3px);"></i> <span class="d-none d-xl-inline">Fechar portas</span>
-								</button>
-							</div>
-								
-							<div class="col text-end ps-0 pe-xl-3">
-								<button class="btn btn-success text-white d-inline-flex align-items-center mb-2" @click="comprarCarro">
-									<i class="fal fa-money-bill-wave-alt font-18 my-1 me-xl-2"></i><span class="d-none d-xl-inline">&nbsp;&nbsp;Comprar</span>
-								</button>
-								<button class="btn btn-danger text-white d-inline-flex align-items-center mb-2" @click="getCarrosPlayer">
-									<i class="fal fa-user font-18 my-1 me-xl-2"></i><span class="d-none d-xl-inline">&nbsp;&nbsp;Meus veículos</span>
-								</button>
-								<button class="btn btn-secondary text-white d-inline-flex align-items-center mb-2" @click="sair">
-									<i class="fal fa-sign-out font-18 my-1 me-xl-2"></i><span class="d-none d-xl-inline">&nbsp;&nbsp;Sair</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer" v-else>
-				<div class="row">
-					<div class="col-12 p-0 mb-3 text-shadow-white weight-900 font-18">
-						Pressione A e D para rotacionar o carro ou W e S para dar Zoom no carro.
-						<br>
-						Pressione F para voltar.
-					</div>
-				</div>
-			</div>
+        <!-- Main Content -->
+        <section class="content p-0 overflow-hidden">
+          <!-- <div class="block-header mb-0 mt-2 mx-1 px-4 py-3">
+            <h2><i class="fa fa-coins mx-2"></i>{{ page.titulo }}</h2>
+          </div> -->
+          <ul class="nav-bar">
+            <li class="navbar-item">
+              <a @click="changePage('Loja','Painel','pages/store.html')"
+                ><i class="fa fa-coins"></i><span>Loja de Carros</span></a
+              >
+            </li>
+            <li class="navbar-item">
+              <a @click="changePage('Meus Carros','Painel','pages/cars.html')"
+                ><i class="fa fa-user"></i><span>Meus carros</span></a>
+            </li>
+          </ul>
+          <div id="content-body">
+            <!-- Corpo -->
+          </div>
+        </section>
+      </div>
+    </div>
 
-			<!-- Meus veiculos -->
-			<div class="modal" id="modalMeusCarros" role="dialog">
-				<div class="modal-dialog modal-xl" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="title text-dark m-0 font-18" id="modalMeusCarrosLabel">Meus veículos</h5>
-						</div>
-						<div class="modal-body py-3">
-							<div class="cards">
-								<div class="product__item product__electronic-item pb-3" v-for="(carro, index) in player_carros" :key="index">
-									<div class="product__thumb position-relative">
-										<a href="javascript:;" class="w-img">
-											<img :src="'https://j4v4.site/MC/carros/'+ carro.nomeCarro +'.png'" alt="product" @error="imageError">
-										</a>
-									</div>
-									<div class="product__content">
-										<h6 class="product-name">{{ carro.nomeVitrine }}</h6>
-										<span class="price text-secondary">
-											<i class="far fa-id-card-alt text-danger font-12 translateY-1 me-1"></i> {{ carro.placaCarro }}
-										</span><br>
-										<span class="price text-secondary">
-											<i class="far fa-dollar-sign text-danger font-12 me-1"></i> {{ parseInt(carro.valor).toLocaleString('pt-br', {minimumFractionDigits: 0, maximumFractionDigits: 0 }) }}
-										</span>
-									</div>
-									<div class="product__add-btn">
-										<div class="row w-100">
-											<div class="col-7">
-												<button type="button" class="w-100" @click="btnTransferir(carro, index)"><i class="far fa-exchange"></i><br>Transferir</button>
-											</div>
-											<div class="col-5">
-												<button type="button" class="w-100" @click="btnVender(carro, index)"><i class="far fa-trash"></i><br>Vender</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div v-if="player_carros == null || player_carros.length == 0">Nenhum veículo encontrado.</div>
-							</div>
-
-							<!-- Carregando -->
-							<div class="loadingContent">
-								<div class="loading">
-									<p>Carregando</p><span></span>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-simple waves-effect" data-bs-dismiss="modal">Fechar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.29/dist/sweetalert2.all.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-	<script src="js/script.js"></script>
-</body>
+    <script src="script/libscripts.bundle.js"></script>
+    <script src="script/vendorscripts.bundle.js"></script>
+    <script src="script/mainscripts.bundle.js"></script>
+    <script src="script/bootstrap-select.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script/core.js"></script>
+  </body>
 </html>
