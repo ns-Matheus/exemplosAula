@@ -21,189 +21,190 @@
 <body>
    <div id="app">
       <div id="body">
-         <div v-if="isLogado" id="header">
-            <img :src="logoImg == null ? '' : logoImg" onerror="imageError(this)" class="iconLogo" />
-         </div>
+            <div v-if="isLogado" id="header">
+               <img :src="logoImg == null ? '' : logoImg" onerror="imageError(this)" class="iconLogo" />
+            </div>
 
-         <div v-if="isLogado" id="content">
-            <div id="menuLateral">
-               <div class="row">
-                  <div id="infoUserLogado">
-                     <div class="card mb-0 w-100">
-                        <div class="row">
-                           <div class="w-max-content align-self-center">
-                              <img src="images/man.png" />
-                           </div>
-                           <div class="flex align-self-center">
-                              <h4 class="regulaTexto">{{ infoUserLogado.nome }}</h4>
-                           </div>
-                           <div class="w-max-content align-self-center">
-                              <i class="fas fa-sign-out-alt text-danger" @click="sair(true)"></i>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-                  <a class="w-100 mx-3 mt-3" @click="shop_ativo=true" v-if="tipo_loja != 'Normal'">
-                     <div class="card weight-600 mb-2 botao_menu">
-                        <i class="fas fa-angle-right mr-2"></i>Shop Crafts
-                     </div>
-                  </a>
-                  
-                  <a class="w-100 mx-3 mt-1" @click="shop_ativo=false">
-                     <div class="card weight-600 mb-2 botao_menu">
-                        <i class="fas fa-angle-right mr-2"></i>Receitas
-                        <i class="fas fa-plus cursor-pointer float-right" @click="criarReceita" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')"></i>
-                     </div>
-                  </a>
-
-                  <div class="w-100 mx-3 receitas" v-if="shop_ativo==false">
-                     <div class="card text-center" v-for="(receita, index) in listaReceitas" :key="index" :class="recipeSelected != null && recipeSelected.id == receita.id ? 'active' : ''">
-
-                        <div class="removeIcon" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
-                           <i class="fas fa-trash text-danger cursor-pointer" @click="removerReceita(receita.id)"></i>
-                        </div>
-
-                        <div class="row font-12">
-                           <div class="w-100 mb-2">
-                              <img :src="urlFotosItens + receita.nome_item +'.png'" onerror="imageError(this)" class="mr-3 icon cursor-pointer" @click="recipeSelected = receita;" />
-                           </div>
-                           <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
-                              <i class="fas fa-hashtag font-11 mr-1"></i><small class="mr-1 d-none d-xl-inline">ID:</small> {{ receita.id }}
-                           </div> <br>
-                           <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;">
-                              <i class="fa fa-clock font-10 mr-1"></i><small class="mr-1 d-none d-xl-inline">Tempo:</small> {{ receita.tempo }}
-                           </div><br>
-                           <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;">
-                              <i class="fas fa-boxes font-10 mr-1"></i><small class="mr-1 d-none d-xl-inline">Quantidade:</small> {{ receita.quantidade }}
-                           </div>
-                           <div class="w-100 cursor-pointer" @click="recipeSelected = receita;">
-                              <h5 class="regulaTexto text-center mb-1">{{ receita.nomeVitrine != null ? receita.nomeVitrine.toUpperCase() : 'Desconhecido' }}</h5>
-                           </div>
-                           <div class="w-100" v-if="recipeSelected != null && recipeSelected.id == receita.id">
-                              <div class="btn-search mb-2 mt-3 mx-auto"  @click="craftRecipe">
-                                 <i class="fas fa-plus text-white font-10 mr-2"></i>Criar
+            <div v-if="isLogado" id="content">
+               <div id="menuLateral">
+                  <div class="row">
+                     <div id="infoUserLogado">
+                        <div class="card mb-0 w-100">
+                           <div class="row">
+                              <div class="w-max-content align-self-center">
+                                 <img src="images/man.png" />
+                              </div>
+                              <div class="flex align-self-center">
+                                 <h4 class="regulaTexto">{{ infoUserLogado.nome }}</h4>
+                              </div>
+                              <div class="w-max-content align-self-center">
+                                 <i class="fas fa-sign-out-alt text-danger" @click="sair(true)"></i>
                               </div>
                            </div>
                         </div>
                      </div>
 
-                     <div class="card py-4 text-center" v-if="listaReceitas.length == 0 && shop_ativo==false">Nenhuma receita <br/> atribuída</div>
-                  </div>
+                     <a class="w-100 mx-3 mt-3" @click="shop_ativo=true" v-if="tipo_loja != 'Normal'">
+                        <div class="card weight-600 mb-2 botao_menu">
+                           <i class="fas fa-angle-right mr-2"></i>Shop Crafts
+                        </div>
+                     </a>
+                     
+                     <a class="w-100 mx-3 mt-1" @click="shop_ativo=false">
+                        <div class="card weight-600 mb-2 botao_menu">
+                           <i class="fas fa-angle-right mr-2"></i>Receitas
+                           <i class="fas fa-plus cursor-pointer float-right" @click="criarReceita" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')"></i>
+                        </div>
+                     </a>
 
-                  <div class="w-100 mx-3" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
-                     <div class="card cursor-pointer weight-400 text-center" @click="removerCraft">
-                        <i class="fas fa-trash text-danger font-14 mr-2"></i>Remover craft
+                     <div class="w-100 mx-3 receitas" v-if="shop_ativo==false">
+                        <div class="card text-center" v-for="(receita, index) in listaReceitas" :key="index" :class="recipeSelected != null && recipeSelected.id == receita.id ? 'active' : ''">
+
+                           <div class="removeIcon" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
+                              <i class="fas fa-trash text-danger cursor-pointer" @click="removerReceita(receita.id)"></i>
+                           </div>
+
+                           <div class="row font-12">
+                              <div class="w-100 mb-2">
+                                 <img :src="urlFotosItens + receita.nome_item +'.png'" onerror="imageError(this)" class="mr-3 icon cursor-pointer" @click="recipeSelected = receita;" />
+                              </div>
+                              <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
+                                 <i class="fas fa-hashtag font-11 mr-1"></i><small class="mr-1 d-none d-xl-inline">ID:</small> {{ receita.id }}
+                              </div> <br>
+                              <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;">
+                                 <i class="fa fa-clock font-10 mr-1"></i><small class="mr-1 d-none d-xl-inline">Tempo:</small> {{ receita.tempo }}
+                              </div><br>
+                              <div class="w-100 mb-1 cursor-pointer" @click="recipeSelected = receita;">
+                                 <i class="fas fa-boxes font-10 mr-1"></i><small class="mr-1 d-none d-xl-inline">Quantidade:</small> {{ receita.quantidade }}
+                              </div>
+                              <div class="w-100 cursor-pointer" @click="recipeSelected = receita;">
+                                 <h5 class="regulaTexto text-center mb-1">{{ receita.nomeVitrine != null ? receita.nomeVitrine.toUpperCase() : 'Desconhecido' }}</h5>
+                              </div>
+                              <div class="w-100" :class="{sumir: lista_fila.length <= 9 ? false : true}"  v-if="recipeSelected != null && recipeSelected.id == receita.id">
+                                 <div class="btn-search mb-2 mt-3 mx-auto"  @click="craftRecipe">
+                                    <i class="fas fa-plus text-white font-10 mr-2"></i>Criar
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="card py-4 text-center" v-if="listaReceitas.length == 0 && shop_ativo==false">Nenhuma receita <br/> atribuída</div>
+                     </div>
+
+                     <div class="w-100 mx-3" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
+                        <div class="card cursor-pointer weight-400 text-center" @click="removerCraft">
+                           <i class="fas fa-trash text-danger font-14 mr-2"></i>Remover craft
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
 
-            <!-- Corpo pagina shop -->
-            <div id="corpo" v-if="shop_ativo">
-               <div class="row">
-                  <div class="w-100">
-                     <div class="card weight-600 mb-2">
-                        <i class="fas fa-angle-right mr-2"></i>Crafts a Venda
-                     </div>
-                     <!-- loops do shops -->
-                     <div class="" v-for="(insumo, index) in lista_shop" :key="index" style=" margin: 4px 2px; border: 1px solid #222; padding: 2px; background-color: #050505;">
-                     
-                        <div style="width: 130px; float: left;">
-                           <div class="item" :style="'background-image: url('+ urlFotosItens + insumo.item +'.png)'">
-                              <div class="info"> </div>
-                              <div class="nameItem">{{ insumo.nome_vitrine }}</div>
-                           </div>
-                           
-
+               <!-- Corpo pagina shop -->
+               <div id="corpo" v-if="shop_ativo">
+                  <div class="row">
+                     <div class="w-100">
+                        <div class="card weight-600 mb-2">
+                           <i class="fas fa-angle-right mr-2"></i>Crafts a Venda
                         </div>
-                        <div style="width: -webkit-calc(100% - 235px); width: -moz-calc(100% - 235px);width: calc(100% - 235px); float: left;">
-                           <div v-for="(insumo_do_item, index) in insumo.insumos" :key="index" class="item item_insumo" >
-                              <img :src="urlFotosItens + insumo_do_item.nome +'.png'" style="position: absolute; width: 50px;margin-top: 6px;">
+                        <!-- loops do shops -->
+                        <div class="" v-for="(insumo, index) in lista_shop" :key="index" style=" margin: 4px 2px; border: 1px solid #222; padding: 2px; background-color: #050505;">
+                        
+                           <div style="width: 130px; float: left;">
+                              <div class="item" :style="'background-image: url('+ urlFotosItens + insumo.item +'.png)'">
+                                 <div class="info"> </div>
+                                 <div class="nameItem">{{ insumo.nome_vitrine }}</div>
+                              </div>
+                              
+
+                           </div>
+                           <div style="width: -webkit-calc(100% - 235px); width: -moz-calc(100% - 235px);width: calc(100% - 235px); float: left;">
+                              <div v-for="(insumo_do_item, index) in insumo.insumos" :key="index" class="item item_insumo" >
+                                 <img :src="urlFotosItens + insumo_do_item.nome +'.png'" style="position: absolute; width: 50px;margin-top: 6px;">
+                                 <div class="info">
+                                    <div class="itemAmount2"><i class="fas fa-boxes font-10 mr-2"></i>{{ insumo_do_item.qtd }}</div>
+                                 </div>
+                                 <div class="nameItem_insumo">{{ insumo_do_item.nome }}</div>
+                              </div>
+                           </div>
+                           <div>
+                              <button type="button" class="botao_compra_craft roxo" @click="comprar_monkey(insumo)">R$  {{ insumo.preco_money }}</button>
+                              <button type="button" class="botao_compra_craft amarelo " style="margin-top: 0;" @click="comprar_coin(insumo)">{{ insumo.preco_coins }} coins</button>
+                           </div>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Corpo pagina crafts -->
+               <div id="corpo" v-if="shop_ativo==false">
+                  <div class="row">
+                     <div class="w-100">
+                        <div class="card weight-600 mb-2">
+                           <i class="fas fa-angle-right mr-2"></i>Itens requeridos
+                           <i class="fas fa-plus cursor-pointer float-right" @click="criarInsumo" v-if="recipeSelected != null && (infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner'))"></i>
+                        </div>
+
+                        <div class="cards" v-if="recipeSelected != null && recipeSelected.insumos.length > 0">
+                           <div v-for="(insumo, index) in recipeSelected.insumos" :key="index" class="item" :style="'background-image: url('+ urlFotosItens + insumo.nome_insumo +'.png)'">
+                              <div class="itemIcon" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
+                                 <i class="fas fa-trash text-danger cursor-pointer" @click="removerInsumo(insumo.id)"></i>
+                              </div>
                               <div class="info">
-                                 <div class="itemAmount2"><i class="fas fa-boxes font-10 mr-2"></i>{{ insumo_do_item.qtd }}</div>
+                                 <div class="itemAmount" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
+                                    <i class="fas fa-hashtag font-11 mr-1"></i> {{ insumo.id }}
+                                 </div>
+                                 <div class="itemAmount2"><i class="fas fa-boxes font-10 mr-2"></i>{{ insumo.quantidade }}</div>
                               </div>
-                              <div class="nameItem_insumo">{{ insumo_do_item.nome }}</div>
+                              <div class="nameItem">{{ insumo.nomeVitrine != null ? insumo.nomeVitrine.toUpperCase() : 'Desconhecido' }}</div>
                            </div>
-                        </div>
-                        <div>
-                           <button type="button" class="botao_compra_craft roxo" @click="comprar_monkey(insumo)">R$  {{ insumo.preco_money }}</button>
-                           <button type="button" class="botao_compra_craft amarelo " style="margin-top: 0;" @click="comprar_coin(insumo)">{{ insumo.preco_coins }} coins</button>
                         </div>
                      </div>
                      
+                     <div class="w-100 text-center" v-if="recipeSelected == null">
+                        <div class="card py-4">Nenhuma receita selecionada</div>
+                     </div>
+                     
+                     <div class="w-100 text-center" v-if="recipeSelected != null && recipeSelected.insumos.length == 0">
+                        <div class="card py-4">Nenhum insumo atribuído</div>
+                     </div>
                   </div>
+               </div>
+
+            </div>
+
+            <div v-else class="loginContent">
+               <div class="w-100 align-self-center">
+                  <img class="mb-3" :src="logoImg == null ? '' : logoImg" onerror="imageError(this)" /><br/>
+                  <div class="mb-4">Bem-vindo(a) {{ infoUserLogado.nome }}!</div>
+                  <div class="btn-login" @click="isLogado = true">Entrar</div>
                </div>
             </div>
 
-            <!-- Corpo pagina crafts -->
-            <div id="corpo" v-if="shop_ativo==false">
-               <div class="row">
-                  <div class="w-100">
-                     <div class="card weight-600 mb-2">
-                        <i class="fas fa-angle-right mr-2"></i>Itens requeridos
-                        <i class="fas fa-plus cursor-pointer float-right" @click="criarInsumo" v-if="recipeSelected != null && (infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner'))"></i>
-                     </div>
-
-                     <div class="cards" v-if="recipeSelected != null && recipeSelected.insumos.length > 0">
-                        <div v-for="(insumo, index) in recipeSelected.insumos" :key="index" class="item" :style="'background-image: url('+ urlFotosItens + insumo.nome_insumo +'.png)'">
-                           <div class="itemIcon" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
-                              <i class="fas fa-trash text-danger cursor-pointer" @click="removerInsumo(insumo.id)"></i>
-                           </div>
-                           <div class="info">
-                              <div class="itemAmount" v-if="infoUserLogado.permissoes.includes('Admin') || infoUserLogado.permissoes.includes('Owner')">
-                                 <i class="fas fa-hashtag font-11 mr-1"></i> {{ insumo.id }}
-                              </div>
-                              <div class="itemAmount2"><i class="fas fa-boxes font-10 mr-2"></i>{{ insumo.quantidade }}</div>
-                           </div>
-                           <div class="nameItem">{{ insumo.nomeVitrine != null ? insumo.nomeVitrine.toUpperCase() : 'Desconhecido' }}</div>
-                        </div>
-                     </div>
-                  </div>
-                  
-                  <div class="w-100 text-center" v-if="recipeSelected == null">
-                     <div class="card py-4">Nenhuma receita selecionada</div>
-                  </div>
-                  
-                  <div class="w-100 text-center" v-if="recipeSelected != null && recipeSelected.insumos.length == 0">
-                     <div class="card py-4">Nenhum insumo atribuído</div>
-                  </div>
+            <!-- Carregando -->
+            <div v-if="carregando == true" class="loadingContent">
+               <div class="loading">
+                  <p>Carregando</p>
+                  <span></span>
                </div>
             </div>
+      </div>
 
-         </div>
-
-         <div v-else class="loginContent">
-            <div class="w-100 align-self-center">
-               <img class="mb-3" :src="logoImg == null ? '' : logoImg" onerror="imageError(this)" /><br/>
-               <div class="mb-4">Bem-vindo(a) {{ infoUserLogado.nome }}!</div>
-               <div class="btn-login" @click="isLogado = true">Entrar</div>
+      <div id="filas_css" v-if="lista_fila.length > 0 && isLogado == true">
+         <div v-for="(fila, index) in lista_fila" :key="index"  class="fila_receitas_css">
+            <div class="d-flex">
+               <div class="img_craft">
+                  <img :src="urlFotosItens + fila.nomeReal +'.png'" onerror="imageError(this)" class="mr-3"/>
+               </div>
+               <div class="d-flex" style="flex-direction: column;justify-content: center;align-items: center;">{{fila.nome}} 
+                  <i style="padding-bottom: 10px;" class="fa fa-clock font-11 mr-1"> {{ fila.tempo }}s / {{ fila.tempoTotal }}s</i><progress style="color:#7a297a" :value="fila.tempo" :max="fila.tempoTotal" v-if="fila.tempo != 0"></progress>
+                  <button class="receber" @click="craftDarItem(index)" v-if="fila.tempo == 0">Receber Item</button>
+               </div>
             </div>
          </div>
-
-         <!-- Carregando -->
-         <div v-if="carregando == true" class="loadingContent">
-            <div class="loading">
-               <p>Carregando</p>
-               <span></span>
-            </div>
-         </div>
-
-
+      </div>
       
    </div>
-
-   <div class="filas_css">
-      <div v-for="fila in lista_fila" class="fila_receitas_css" v-if="show_progressbar">
-            <progress id="file" :value="fila.tempo" :max="fila.tempoTotal"></progress>
-            {{ fila.nome_item }}
-            {{ fila.quantidade }}
-            {{ fila.tempo }} /  {{ fila.tempoTotal }} 
-      </div>
-      <button class="receber" @click="craftDarItem()" v-if="btn_receber">Receber Itens!</button>
-   </div>
-   
-</div>
    
 
    <!-- Jquery js -->

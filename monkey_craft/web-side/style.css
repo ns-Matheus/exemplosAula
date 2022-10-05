@@ -82,13 +82,6 @@ body {
 	max-width: 1920px;
 }
 
-
-#app{
-	justify-content: center;
-	align-items: center;
-}
-
-
 #header {
 	width: 100%;
 	height: 150px;
@@ -753,114 +746,73 @@ a.ui-button:active,
 }
 
 .receber {
-	width: 50%;
-	height: 7%;
-	padding: 3%;
-	margin-left: 25%;
+	width: auto;
+	height: auto;
 	letter-spacing: 1px;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	font-weight: 500;
-	background-color: #7a297a;
+	background-color: transparent;
+	border: none;
 	color: #fff;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
 	cursor: pointer;
 }
 
 .receber:hover {
-	border: 1px solid #f1f1f1;
-	border-radius: 3px;
-	background-color: #942294;
-}
-
-/* 
-.receitas_fila_css {
-	width: 100%;
-	height: 12%;
-	padding: 5%;
-	background-color: transparent;
-	color: #fff;
-	text-align: center;
-	margin-top: 10%;
-	border: 1px solid rgb(255, 255, 255, 0.8);
-}
-
-#myProgress {
-	width: 100%;
-	background-color: transparent;
-}
-
-#myBar {
-	width: 0.1%;
-	height: 30px;
+	width: auto;
+	height: auto;
+	border: none;
 	background-color: #7a297a;
-} */
+}
 
 
-.progressbar {
-	position: relative;
+#filas_css {
+	position: absolute;
+	width: 17%;
+	height: auto;
+	top: 5%;
+	left: 40.1%;
+}
+
+.fila_receitas_css {
+	margin: 1%;
+	width: auto;
 	display: flex;
-	width: 100%;
-	height: 12%;
-	padding: 5%;
-	color: #fff;
-	text-align: center;
-	background-color: #000;
+	flex-direction: row;
+	flex-wrap: wrap;
+	color: #f1f1f1;
+	background-color: rgb(0.0, 0.0, 0.0, 0.8);
+	justify-content: center;
+	align-items: center;
+	border: solid rgb(0.0, 0.0, 0.0);
+	
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 
-.progress-label {
-	position: absolute;
-	text-align: center;
-	font-weight: bold;
-	color: #942294;
-} 
-
- .progress-line {
-	position: absolute;
-	top: 1px;
-	left: 0;
-	height: 20%;
-	background-color: #f00;
+.fila_receitas_css i {
+	color: #f1f1f1;
 }
 
-
-
-#weight {
-	width: 100%;
+.d-flex{
 	display: flex;
 	flex-wrap: wrap;
-	position: relative;
 }
 
-.weightBarLeft {
-	float: left;
+.img_craft{
+	width: 30%;
+	padding: 5%;
+	align-items: center;
+	justify-content: center;
+}
+.img_craft img {
+	width: 90%;
 }
 
-.weightBarLeft {
-	margin-bottom: 8px;
-	background: #333;
-	border-radius: 5px;
-	width: 100%;
-}
-
-#weightContent {
-	float: left;
-	height: 20px;
-	background: #cf3535;
-}
-
-.fila_receitas_css{
-	transform: translateX(500px);
-	background-color: #cf3535;
-	z-index: 999;
-}
-
-.filas_css{
-	position: absolute;
-	width: 20%;
-	height: 5%;
-	top: 50%;
-	left: 20.5%;
+.sumir{
+	display: none;
 }

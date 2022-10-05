@@ -203,7 +203,7 @@ function cnVRP.removerItemPed(data,qtd)
         for key, value in pairs(data.insumos) do
             Config.removerItem(user_id, value.nome_insumo, value.quantidade * qtd)
         end
-        cnVRP.successNotificar('Craft em produção')
+        -- cnVRP.successNotificar('Craft em produção')
         return true
     else
         cnVRP.errorNotificar('Itens insuficientes')
@@ -214,7 +214,7 @@ end
 -- ====================================================================================================
 
 function cnVRP.darItemPed(nome, quantidade)
-    print("server chegouuu")
+    local source = source
     local user_id = vRP.getUserId(source)
     Config.darItem(user_id, nome, quantidade)
     cnVRP.successNotificar('Item recebido')

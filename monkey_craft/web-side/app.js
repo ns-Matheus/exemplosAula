@@ -24,8 +24,6 @@ var app = new Vue({
       isLogado: false, // true = dev
       infoUserLogado: { 'nome': 'Desconhecido', 'permissoes': [  ]},
       shop_ativo: false,
-      show_progressbar: false,
-      btn_sumir: true,
       btn_receber: false,
       lista_shop: [ ],
       tipo_loja: "",
@@ -710,11 +708,11 @@ function criarReceita () {
             '</div>' +
             '<div class="w-50">' +
                '<label class="font-12"><i class="fas fa-boxes font-10 mr-1"></i>Quantidade gerada</label><br/>' +
-               '<input class="w-25" type="text" id="criarReceita2" />' +
+               '<input class="w-25" type="text" id="criarReceita2" maxlength="2" />' +
             '</div>' +
             '<div class="w-50">' +
-               '<label class="font-12"><i class="fas fa-boxes font-10 mr-1"></i>Tempo Craft</label><br/>' +
-               '<input class="w-25" type="text" id="criarReceita3" />' +
+               '<label class="font-12"><i class="fa fa-clock font-10 mr-1"></i>Tempo Craft</label><br/>' +
+               '<input class="w-25" type="text" id="criarReceita3" maxlength="5" />' +
             '</div>' +
          '</div>' +
       '</div>',
@@ -731,7 +729,7 @@ function criarReceita () {
 
             $('#criarReceita1').autocomplete({
                source: app.listaItens,
-               minLength: 2
+               minLength: 2,
             });
          }, 100);
       }
@@ -755,6 +753,20 @@ function criarReceita () {
             Toast.fire({
                icon: 'error',
                title: 'Quantidade deve ser numérico!'
+            });
+
+            return
+         } else if (document.getElementById('criarReceita3').value.trim().length == 0) {
+            Toast.fire({
+               icon: 'error',
+               title: 'Informe o tempo correto!'
+            });
+
+            return
+         } else if (isNaN(document.getElementById('criarReceita3').value)) {
+            Toast.fire({
+               icon: 'error',
+               title: 'O valor deve ser númerico!'
             });
 
             return
@@ -831,7 +843,7 @@ function criarInsumo () {
             '</div>' +
             '<div class="w-50">' +
                '<label class="font-12"><i class="fas fa-boxes font-10 mr-1"></i>Quantidade requerida</label><br/>' +
-               '<input type="text" id="criarInsumo2" />' +
+               '<input type="text" id="criarInsumo2" maxlength="2" />' +
             '</div>' +
          '</div>' +
       '</div>',
@@ -935,7 +947,8 @@ function removerInsumo (idInsumo) {
 }
 
 function sair (deslogar) {
-   document.getElementById('app').style.display = 'none'
+   // document.getElementById('body').style.display = 'none'
+   // document.getElementById('filas_css').style.display = 'none'
    fetch("http://monkey_craft/close", { method: "POST" })
    
    if (deslogar) {
@@ -951,7 +964,10 @@ function craftRecipe () {
       title: 'Craft de item',
       text: 'Informe a quantidade',
       input: 'text',
-      inputValue: '1',
+      inputPlaceholder: 'Limite de 5 por vez',
+      inputAttributes:{
+         maxlength: "2"
+      },
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Confirmar',
@@ -969,10 +985,6 @@ function craftRecipe () {
                item: app.recipeSelected,
                qtd: parseInt(result.value)
             })
-         }).then({
-
-         }).then((data)=>{
-            app.show_progressbar = data
          })
       }
    })
@@ -981,21 +993,14 @@ function craftRecipe () {
 
 
 
-function craftDarItem() {
+function craftDarItem(index) {
    fetch("http://monkey_craft/craftDarItem", {
       headers: { "Content-Type": "application/json" },
-      method: "POST"
-   }).then(()=>{
-
+      method: "POST",
+      body:JSON.stringify({id: index})
    })
    app.btn_receber = false
 }
-
-
-
-
-
-
 
 
 function imageError (e) {
@@ -1011,15 +1016,10 @@ document.addEventListener("DOMContentLoaded", function() {
       if (event.data.method == 'attprogresso') {
          app.lista_fila = event.data.lista
 
-            // app.show_progressbar = false
-            // app.btn_receber = true
-            // app.btn_sumir = true
-
       } else if (event.data.method == 'open') {
          app.infoUserLogado.nome = event.data.namePlayer
          app.listaItens = event.data.itens
          app.idCraft = event.data.id
-
          app.shop_ativo=false
 
          event.data.permissions.forEach(p => {
@@ -1031,6 +1031,7 @@ document.addEventListener("DOMContentLoaded", function() {
          getRecipes(true)
 
          document.getElementById('body').style.display = 'flex'
+         // document.getElementById('filas_css').style.display = 'block'
 
          // carrega shops
          app.tipo_loja = event.data.tipo
@@ -1041,7 +1042,7 @@ document.addEventListener("DOMContentLoaded", function() {
          app.isLogado = false
 
          document.getElementById('body').style.display = 'none'
-
+         
       } else if (event.data.method == 'openCreateCraft') {
          Swal.fire({
             icon: 'question',

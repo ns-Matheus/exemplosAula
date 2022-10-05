@@ -70,6 +70,7 @@ end)
 
 RegisterNUICallback('close', function(data, cb)
 	SetNuiFocus(false, false)
+    SendNUIMessage({method="close"})
 end)
 
 RegisterNUICallback('createCraft', function(data, cb)
@@ -113,7 +114,7 @@ RegisterNUICallback('getRecipes', function(data, cb)
     cb(retorno)
 end)
 
-
+-- CALL BACK COM ANIMAÇÃO 
 -- RegisterNUICallback('craftRecipe', function(data, cb)
 --     local time = (data.amount * Config.multiplicadorTempoCraft) + Config.tempoCraftar
 --     vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
@@ -121,20 +122,19 @@ end)
 --     Citizen.Wait(time)
 --     vSERVER.criar(data)
 --     vRP.stopAnim(false)
-
 -- end)
 
 
 RegisterNUICallback('craftDarItem', function(data, cb)
-    
-    for k, v in pairs(lista_craft) do
-        if v.tempo <= 0 then
-            vSERVER.darItemPed(v.nome, v.quantidade)
-            table.remove(lista_craft, k)
-        end
+    local id = parseInt(data.id) + 1
+
+    if lista_craft[id].tempo <= 0 then
+        vSERVER.darItemPed(lista_craft[id].nomeReal,lista_craft[id].quantidade)
+        table.remove(lista_craft, id)
     end
 
 end)
+
 
 local trava_time_craft_fila = false
 local time_espera = 0
@@ -153,9 +153,6 @@ end)
 
 
 RegisterNUICallback('craftRecipe', function(data, cb)
-    local show = true
-    local show_btn =true
-
     if data.qtd <= 5 then
 
         if trava_time_craft_fila == false  then 
@@ -164,26 +161,25 @@ RegisterNUICallback('craftRecipe', function(data, cb)
 
                 local item = {
                     ["id"] = data.item.id,
-                    ["nome"] = data.item.nome,
+                    ["nomeReal"] = data.item.nome_item,
+                    ["nome"] = data.item.nomeVitrine,
                     ["tempo"] = data.item.tempo,
                     ["tempoTotal"] = data.item.tempo,
-                    ["quantidade"] = data.item.quantidade,
-                    ["craft"] = false,
+                    ["quantidade"] = data.item.quantidade * data.qtd,
                     ["data"] = data.item
                 }
                 table.insert(lista_craft, item)
-                time_espera = 300
+                time_espera = 10
                 trava_time_craft_fila = true
-                cb(show)
             end
 
         else 
-            vSERVER.chamarNotificar('Craft ainda em andamento, aguarde!')
+            vSERVER.chamarNotificar('Espere 10 segundos para craftar novamente!')
             -- lancar mesagem que tem de esperar x tempo para colocar outro
         end
 
     else 
-        vSERVER.chamarNotificar('limite de crafts de: '..data.qtd)
+        vSERVER.chamarNotificar('Quantidade de crafts de item excede o limite!')
         -- lançar mesagem de que só aceita valor menor ou igual a 5
     end
   
@@ -196,7 +192,7 @@ Citizen.CreateThread(function()
     
         for k, v in pairs(lista_craft) do
             if v.tempo > 0 then
-                v.tempo = parseInt(v.tempo) - 1 
+                v.tempo = v.tempo - 1 
             end
         end
 

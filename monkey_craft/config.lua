@@ -16,7 +16,7 @@ Config.notificar = function(msg)
 end
 
 Config.darItem = function(user_id, nome, quantidade)
-    vRP.giveInventoryItem(user_id, nome, quantidade, true)
+    vRP.giveInventoryItem(user_id, nome, parseInt(quantidade), true)
 end
 
 Config.removerItem = function(user_id, nome, quantidade)
