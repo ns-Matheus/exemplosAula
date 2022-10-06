@@ -84,7 +84,7 @@ function mostrarCarro(carro) {
    app.valor_vue = carro.preco
    app.kg_vue = carro.kg
 
-   fetch("http://monkey_concessionaria/mostrarCarro", {
+   fetch("http://monkey_concessionaria_XX/mostrarCarro", {
       method: 'POST',
       body: JSON.stringify({ 
          nome: carro.nome 
@@ -93,20 +93,20 @@ function mostrarCarro(carro) {
 }
 
 function mudarCor(cor) {
-   fetch("http://monkey_concessionaria/mudarCor", {
+   fetch("http://monkey_concessionaria_XX/mudarCor", {
       method: 'POST',
       body: JSON.stringify(cor)
    })
 }
 
 function abrirPortas() {
-   fetch("http://monkey_concessionaria/abrirPortas", {
+   fetch("http://monkey_concessionaria_XX/abrirPortas", {
       method: 'POST'
    })
 }
 
 function fecharPortas() {
-   fetch("http://monkey_concessionaria/fecharPortas", {
+   fetch("http://monkey_concessionaria_XX/fecharPortas", {
       method: 'POST'
    })
 }
@@ -114,7 +114,7 @@ function fecharPortas() {
 function testeDrive() {
    app.show_vue = false
 
-   fetch("http://monkey_concessionaria/testeDrive", {
+   fetch("http://monkey_concessionaria_XX/testeDrive", {
       method: 'POST',
       body: JSON.stringify({ 
          nome: app.nome_carro_vue
@@ -123,7 +123,7 @@ function testeDrive() {
 }
 
 function comprarCarro() {
-   fetch("http://monkey_concessionaria/comprarCarro", {
+   fetch("http://monkey_concessionaria_XX/comprarCarro", {
       method: 'POST',
       body: JSON.stringify({
          nome: app.nome_carro_vue,
@@ -138,13 +138,13 @@ function comprarCarro() {
 }
 
 function tecladoOn() {
-   fetch("http://monkey_concessionaria/tecladoOn", {
+   fetch("http://monkey_concessionaria_XX/tecladoOn", {
       method: 'POST'
    })
 }
 
 function tecladoOff() {
-   fetch("http://monkey_concessionaria/tecladoOff", {
+   fetch("http://monkey_concessionaria_XX/tecladoOff", {
       method: 'POST'
    })
 }
@@ -153,7 +153,7 @@ function getCarrosPlayer() {
    $('#modalMeusCarros').modal('show')
    toggleLoading(true)
 
-   fetch("http://monkey_concessionaria/getCarrosPlayer", {
+   fetch("http://monkey_concessionaria_XX/getCarrosPlayer", {
       method: 'POST'
 
    }).then(function (response) {
@@ -176,7 +176,7 @@ function sair() {
   app.show_vue = false
   fecharModal()
 
-   fetch("http://monkey_concessionaria/sair", {
+   fetch("http://monkey_concessionaria_XX/sair", {
       method: 'POST'
    })
 }
@@ -204,7 +204,7 @@ function btnTransferir(carro, index) {
       let id = res.value
 
       if (res.isConfirmed) {
-         fetch("http://monkey_concessionaria/carroTransfer", {
+         fetch("http://monkey_concessionaria_XX/carroTransfer", {
             method: 'POST',
             body: JSON.stringify({
                vehicle: veiculo,
@@ -238,7 +238,7 @@ function btnVender(carro, index) {
 
    }).then(res => {
       if (res.isConfirmed) {
-         fetch("http://monkey_concessionaria/carrosVenda", {
+         fetch("http://monkey_concessionaria_XX/carrosVenda", {
             method: 'POST',
             body: JSON.stringify({
                vehicle: veiculo,

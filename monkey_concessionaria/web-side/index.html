@@ -25,7 +25,9 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/bootstrap-select.css" />
   </head>
+
   <body class="theme-black" style="background-color: transparent !important">
+    
     <div id="app" style="display: none">
       <div class="corpo">
         <!-- Page Loader -->
@@ -75,7 +77,7 @@
                 />
                 <div class="font-13 text-center text-secondary">
                   <strong class="font-18">Monkey Concessionária</strong><br />
-                  <small class="mt-1">by Creative Monkey</small><br />
+                  <small class="mt-1">by Monkey</small><br />
                   <br />
                   <i class="fab fa-discord normal font-18"></i><br />
                   <small>Nosso discord</small><br />
@@ -89,7 +91,7 @@
             <div class="p-4">
               <div class="card">
                 <div class="header pt-1">
-                  <h2><strong>Cor da</strong> Skin</h2>
+                  <h2><strong>Cor</strong> Lateral</h2>
                 </div>
                 <div class="body">
                   <ul class="choose-skin list-unstyled m-b-0">
@@ -105,7 +107,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="card">
+              <!-- <div class="card">
                 <div class="header">
                   <h2><strong>Tema</strong> Lateral</h2>
                 </div>
@@ -114,7 +116,7 @@
                     Dark
                   </button>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- Conteudo -->
@@ -176,10 +178,19 @@
               <a @click="changePage('Meus Carros','Painel','pages/cars.html')"
                 ><i class="fa fa-user"></i><span>Meus carros</span></a>
             </li>
+            
+            <div class="caixa_search mb-2">
+              <input class="caixa_texto" placeholder="Pesquisar..." v-model="pesquisa">
+              <a class="botao_search" href="javascript:;"><i class="far fa-search"></i></a>
+            </div>
           </ul>
+
+
           <div id="content-body">
             <!-- Corpo -->
           </div>
+
+          
         </section>
       </div>
     </div>

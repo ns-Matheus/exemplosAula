@@ -36,18 +36,19 @@ Citizen.CreateThread(function()
                 if distance < 1.2 then
                     if IsControlJustPressed(0, 38) then
                         if vSERVER.isValido() then
-                            TriggerEvent("hudActived", false, 200)
+                            TriggerEvent("hudActived", false)
 
                             coords_ped_conc = GetEntityCoords(ped)
                             coords_ped = coords_ped_conc
-                            -- concessionaria_aberta = true
+                            concessionaria_aberta = true
 
-                            -- DoScreenFadeOut(500)
-                            -- Wait(500)
-                            -- SetEntityCoords(ped, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z, 1, 0, 0, 1)
-                            -- cnVRP.noClip()
-                            -- Wait(500)
-                            -- DoScreenFadeIn(500)
+                            DoScreenFadeOut(500)
+                            Wait(500)
+                            SetEntityCoords(ped, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z, 1, 0,
+                                0, 1)
+                            cnVRP.noClip()
+                            Wait(500)
+                            DoScreenFadeIn(500)
 
                             SetNuiFocus(true, true)
                             SendNUIMessage({
@@ -57,10 +58,10 @@ Citizen.CreateThread(function()
                             })
 
 
-                            -- vSERVER.changeSession()
+                            vSERVER.changeSession()
 
-                            -- enableCam()
-                            -- SpawnVehicleLocal("chino", Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z)
+                            enableCam()
+                            SpawnVehicleLocal("chino", Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z)
 
                         end
                     end
@@ -77,27 +78,27 @@ end)
 -- ====================================================================================================
 -- Funcoes de Retorno - START
 -- ====================================================================================================
-RegisterNUICallback("sair", function(data,cb)
+RegisterNUICallback("sair", function(data)
     TriggerEvent("hudActived", true)
     concessionaria_aberta = false
-    -- DoScreenFadeOut(500)
-    -- Wait(500)
+    DoScreenFadeOut(500)
+    Wait(500)
 
-    -- local ped = PlayerPedId()
-    -- SetEntityCoords(ped, coords_ped_conc.x, coords_ped_conc.y, coords_ped_conc.z, 1, 0, 0, 1)
-    -- disableCam()
+    local ped = PlayerPedId()
+    SetEntityCoords(ped, coords_ped_conc.x, coords_ped_conc.y, coords_ped_conc.z, 1, 0, 0, 1)
+    disableCam()
     SetNuiFocus(false, false)
-    -- cnVRP.noClip()
-    -- Wait(500)
-    -- DoScreenFadeIn(500)
-    -- vSERVER.resetSession()
-    cb({fechar = true})
+    cnVRP.noClip()
+    Wait(500)
+    DoScreenFadeIn(500)
+    vSERVER.resetSession()
 end)
 
 
 RegisterNUICallback("mostrarCarro", function(data)
     local nome_carro = data.nome
-    SpawnVehicleLocal(nome_carro, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z, Config.vitrine_car.grau)
+    SpawnVehicleLocal(nome_carro, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z,
+        Config.vitrine_car.grau)
 end)
 
 
@@ -150,16 +151,16 @@ RegisterNUICallback('fecharPortas', function(data)
 end)
 
 RegisterNUICallback("testeDrive", function(data)
-    -- concessionaria_aberta = false
+    concessionaria_aberta = false
 
-    -- disableCam()
+    disableCam()
     SetNuiFocus(false, false)
     cnVRP.noClip()
 
     local ped = PlayerPedId()
     
     vSERVER.changeSession()
-    coords_ped = GetEntityCoords(ped)
+    -- coords_ped = GetEntityCoords(ped)
     test_drive(data.nome)
 end)
 
@@ -204,11 +205,11 @@ RegisterCommand('testeConcessionaria', function(source, args, rawCommand)
     SpawnVehicleLocal(args[1], Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z)
 end)
 
--- RegisterCommand('testeDrive', function(source, args, rawCommand)
---     local ped = PlayerPedId()
---     coords_ped = GetEntityCoords(ped)
---     test_drive(args[1])
--- end)
+RegisterCommand('testeDrive', function(source, args, rawCommand)
+    local ped = PlayerPedId()
+    coords_ped = GetEntityCoords(ped)
+    test_drive(args[1])
+end)
 
 RegisterCommand('testeConcessionariaSair', function(source, args, rawCommand)
     concessionaria_aberta = false

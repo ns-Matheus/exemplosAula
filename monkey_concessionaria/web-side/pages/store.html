@@ -33,32 +33,54 @@
 							<img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'" onerror="imageError(this)"/>
             </div>
             <div class="item-title">{{carro.nome_Vitrine.toUpperCase()}}</div>
-            <div class="item-price"><span>{{moeda.format(carro.preco)}}</span></div>
-            <div class="item-qtd"><i class="fa fa-box"></i> <span>{{peso.format(carro.kg)}}</span></div>
+            <div class="item-price"><span><small class="text-danger translateY1">$</small> {{ parseInt(carro.preco).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span></div>
+            <div class="item-qtd"><i class="far fa-weight-hanging text-danger"></i> <span>{{ parseInt(carro.kg).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span></div>
             <div class="item-btn-group">
-                <button class="btn btn-primary btn-comprar" @click="comprar(arma)"><i class="fa fa-cart-plus mx-2"></i><span>Comprar</span></button>
+              <button class="btn btn-danger btn-comprar" @click="testeDrive()"><i class="fal fa-key mx-2"></i><span>Testar</span></button>
+              <button class="btn btn-success btn-comprar" @click="comprarCarro"><i class="fa fa-cart-plus mx-2"></i><span>Comprar</span></button>
             </div>
         </div>
     </div>
   </div>
 </div>
+
+
+
 <script>
   var store = new Vue({
     el: "#store",
     data: {
-      carros: core.carros,
-      moeda: core.moeda,
-      peso: core.peso
+      nome_carro: core.nome_carro,
+      valor_carro: core.valor_carro,
+      carros: core.carros
     },
   });
-  function comprar(arma){
-    comprarArma(arma).then((data) => {
-      console.log(JSON.stringify(data))
-    }).catch((err) => {
-      console.log(err)
-    });
-  }
-  function filtrar(filtro){
-    console.log(filtro)
-  }
+  // function comprar(arma){
+  //   comprarArma(arma).then((data) => {
+  //     console.log(JSON.stringify(data))
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   });
+  // }
+  // function filtrar(filtro){
+  //   console.log(filtro)
+  // }
+
+
+
+
+//   function comprarCarro() {
+//   fetch("http://monkey_concessionaria/comprarCarro", {
+//      method: 'POST',
+//      body: JSON.stringify({
+//         nome: app.nome_carro,
+//         preco: app.valor_carro
+//      })
+//   }).then(function (response) {
+//      return response.json()
+//   }).then(function (data) {
+//      app.nome_carro = data.nome
+//      app.valor_carro = data.preco
+//   })
+// }
 </script>

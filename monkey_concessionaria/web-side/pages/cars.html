@@ -34,17 +34,17 @@
         v-for="(carro,index) in carros"
       >
         <div class="item-img">
-          <img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'" />
+          <img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'"  onerror="imageError(this)" />
         </div>
         <div class="item-title">{{carro.nome_Vitrine.toUpperCase()}}</div>
-        <div class="item-subtitle">
-        </div>
+            <div class="item-price"><span><small class="text-danger translateY1">$</small> <i class="far fa-id-card-alt text-danger font-12 translateY-1 me-1"></i> {{ carro.placaCarro }}</span></div>
+            <div class="item-qtd"><i class="far fa-weight-hanging text-danger"></i> <span>{{ parseInt(carro.kg).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 0 }) }}</span> kg</div>
         <div class="item-btn-group">
-          <button class="btn btn-primary btn-aplicar" @click="aplicar(arma)">
-            <i class="fa fa-check mx-2"></i><span>transferir</span>
+          <button class="btn btn-aplicar" @click="transferir(carro, index)">
+            <i class="far fa-exchange mx-2"></i><span>Transferir</span>
           </button>
-          <button class="btn btn-primary btn-aplicar" @click="aplicar(arma)">
-            <i class="fa fa-check mx-2"></i><span>vender</span>
+          <button class="btn btn-aplicar" @click="btnVender(carro, index)">
+            <i class="far fa-trash mx-2"></i><span>Vender</span>
           </button>
         </div>
       </div>
@@ -60,23 +60,40 @@
     </div>
   </div>
 </div>
+
+
 <script>
   var store = new Vue({
     el: "#store",
     data: {
-      carros: core.lista_player_carros,
-    },
-  });
-  function aplicar(arma) {
-    aplicarArma(arma)
-      .then((data) => {
-        console.log(JSON.stringify(data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      carros: core.carros,
+      lista_player_carros: core.lista_player_carros
+    }
+  })
+
+  function transferir(carro, index){
+    btnTransferir(carro, index).then(data => cars.lista_player_carros = data).catch(err => console.log(err))
   }
-  function filtrar(filtro){
-    console.log(filtro)
+
+  function playerCars(){
+    getCarrosPlayer().then(data => cars.lista_player_carros = data).catch(err => console.log(err))
   }
+
+  
+ 
+
+
+  // function aplicar(arma) {
+  //   aplicarArma(arma)
+  //     .then((data) => {
+  //       console.log(JSON.stringify(data));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+  // function filtrar(filtro){
+  //   console.log(filtro)
+  // }
+  
 </script>

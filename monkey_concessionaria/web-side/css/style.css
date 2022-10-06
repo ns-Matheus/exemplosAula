@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
+:root{
+  --corDark: rgb(0.0, 0.0, 0.0, 0.8)
+}
+
 .corpo {
   position: fixed;
   top: 50%;
@@ -1097,11 +1101,25 @@ li .active {
   justify-content: center;
 }
 .card-carro:hover .item-btn-group {
-  bottom: 0.7vw;
+  bottom: 1.8vw;
   visibility: visible;
 }
 .btn-comprar {
-  width: 8vw;
+  font-size: 13px !important;
+	font-weight: 600;
+	/* background-color: #fff; */
+	padding: 4px 8px;
+	border: 1px solid #ddd;
+	/* color: #dd0f20; */
+	border-radius: 8px;
+	z-index: 1;
+	text-transform: uppercase;
+	margin: 0 auto;
+  width: 100%;
+}
+.btn-comprar:hover{
+  transition: all 0.3s ease-out 0s;
+  background-color: var(--corDark) !important;
 }
 .btn-comprar i,
 span {
@@ -1147,9 +1165,27 @@ span {
 .bg-purple-carro img {
   filter: invert(0);
 }
+.btn-aplicar{
+  font-size: 13px !important;
+	font-weight: 600;
+	background-color: #fff;
+	padding: 4px 8px;
+	border: 1px solid #ddd;
+	color: #dd0f20;
+	border-radius: 8px;
+	z-index: 1;
+	text-transform: uppercase;
+	width: 100%;
+	margin: 0 auto;
+}
 .btn-aplicar:hover {
   transition: all 0.3s ease-out 0s;
-  background-color: #81c73b !important;
+  background-color: var(--corDark) !important;
+}
+
+.btn-aplicar i,
+span {
+  font-size: 0.8vw !important;
 }
 .msg-vazio {
   width: 100%;
@@ -1211,4 +1247,37 @@ span {
 }
 .bg-comum .item-title{
   border-bottom: 1px rgb(0, 0, 0) solid;
+}
+
+
+.caixa_search {
+  display: contents;
+  height: 4px;
+  width: 180px;
+}
+
+.caixa_search:hover {
+  border-color: #dc3545;
+}
+
+.caixa_search:hover i {
+  color: #dc3545;
+}
+
+.caixa_texto {
+  border: none;
+  outline: none;
+  padding: 0;
+  color: #000;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 41px;
+  width: 150px;
+  padding: 0 10px;
+  background-color: transparent;
+  font-family: 'Rubik', sans-serif;
+}
+
+.translateY1 {
+	transform: translateY(1px);
 }

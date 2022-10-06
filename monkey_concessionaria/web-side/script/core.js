@@ -4,46 +4,37 @@ var core = new Vue({
     page: { url: "/pages/teste.html", titulo: "Teste", menu: "Principal" },
     erroImg: 'https://cdn.discordapp.com/attachments/795099022439481390/814929467863859221/sem_foto.png',
     active: false,
-    moeda: Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    }),
-    peso: Intl.NumberFormat("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }),
-    carros: [
-
-    ],
-    lista_player_carros: [
-
-    ],
+    carros: [],
+    lista_player_carros: [],
     urlIcon: "images/coins.png",
+    nome_carro: 0,
+    valor_carro: 0,
+    kg_vue: 0,
     pesquisa: null
-  },watch: {
+  }, watch: {
     pesquisa: function (event) {
-       let valorPesquisa = event.toLowerCase()
-       $(".menucarros .card_image").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > - 1)
-       })
+      let valorPesquisa = event.toLowerCase()
+      $(".card-carro").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > - 1)
+      })
     }
- }
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("message", (event) => {
-    
+
     let data = event.data;
     console.log(JSON.stringify(data));
     if (data.acao == true) {
       changePage("Loja", "Painel", "pages/store.html");
       document.getElementById("app").style.display = "block";
       core.carros = data.carros
-   }else{
-    document.getElementById("app").style.display = "none";
-   }
+    } else {
+      document.getElementById("app").style.display = "none";
+    }
 
- 
+
   });
   window.onkeyup = function (data) {
     if (data.which == 27) {
@@ -94,78 +85,73 @@ function toggleLoading(show) {
   }
 }
 
-function comprarCarro(carro) {
-  return new Promise((resolve, reject) => {
-    Swal.fire({
-      title: "Deseja comprar ?",
-      text: "Deseja comprar essa skin por "+arma.price_coin+" coins",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim",
-      cancelButtonText:"Cancelar"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch("http://monkey_skin_arma/comprar_print_coin", {
-          method: "POST",
-          body: JSON.stringify({
-            arma,
-          }),
-        })
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
-            console.log(JSON.stringify(data));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    });
-  });
-}
+// function comprarCarro() {
+//   Swal.fire({
+//     title: "Deseja comprar ?",
+//     text: "Deseja comprar este automóvel pelo valor de "+preco+"?",
+//     icon: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#3085d6",
+//     cancelButtonColor: "#d33",
+//     confirmButtonText: "Sim",
+//     cancelButtonText:"Cancelar"
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       fetch("http://monkey_concessionaria/comprar_print_coin", {
+//         method: "POST",
+//         body: JSON.stringify({ nome: app.nome_carro, preco: app.valor_carro})
+//       }).then((result) => {
+//           return result.json();
+//         }).then((data) => {
+//           app.nome_carro = data.nome
+//           app.valor_carro = data.preco
+//         })
+// .catch((err) => {
+//   console.log(err);
+// });
+//     }
+//   });
+// }
 
 
-function filtrarArma(filtro){
-  console.log(filtro)
-  return new Promise((resolve, reject)=>{
-    fetch("http://monkey_skin_arma/filtrar", {
-      method: "POST",
-      body: JSON.stringify({
-        filtro: filtro
-      })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data)
-      })
-      .catch((err) => {
-        console.log(err);
-        reject(err)
-      });
-  })
-}
+// function filtrarArma(filtro){
+//   console.log(filtro)
+//   return new Promise((resolve, reject)=>{
+//     fetch("http://monkey_concessionaria/filtrar", {
+//       method: "POST",
+//       body: JSON.stringify({
+//         filtro: filtro
+//       })
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         resolve(data)
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         reject(err)
+//       });
+//   })
+// }
 
-function filtrarArmaUser(filtro){
-  return new Promise((resolve, reject)=>{
-    fetch("http://monkey_skin_arma/filtrarUser", {
-      method: "POST",
-      body: JSON.stringify({
-        filtro: filtro
-      })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data)
-      })
-      .catch((err) => {
-        console.log(err);
-        reject(err)
-      });
-  })
-}
+// function filtrarArmaUser(filtro){
+//   return new Promise((resolve, reject)=>{
+//     fetch("http://monkey_concessionaria/filtrarUser", {
+//       method: "POST",
+//       body: JSON.stringify({
+//         filtro: filtro
+//       })
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         resolve(data)
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         reject(err)
+//       });
+//   })
+// }
 
 function close() {
   return new Promise(function (resolve, reject) {
@@ -186,95 +172,111 @@ function close() {
 }
 
 function comprarCarro() {
+  return new Promise(function (resolve, reject) {
   fetch("http://monkey_concessionaria/comprarCarro", {
-     method: 'POST',
-     body: JSON.stringify({
-        nome: app.nome_carro_vue,
-        preco: app.valor_vue
-     })
+    method: 'POST',
+    body: JSON.stringify({
+      nome: app.nome_carro,
+      preco: app.valor_carro
+    })
   }).then(function (response) {
-     return response.json()
+    return response.json()
   }).then(function (json) {
-     app.nome_carro_vue = json.nome
-     app.valor_vue = json.preco
-  })
+    app.nome_carro = json.nome
+    app.valor_carro = json.preco
+    resolve();
+  }).catch(function () {
+    reject();
+  });
+})
+}
+
+function testeDrive() {
+  return new Promise(function (resolve, reject) {
+  fetch("http://monkey_concessionaria/testeDrive", {
+    method: 'POST',
+    body: JSON.stringify({
+      nome: app.nome_carro
+    })
+  }).then(function () {
+    resolve();
+  }).catch(function () {
+    reject();
+  });
+  // document.getElementById("app").style.display = "none";
+})
 }
 
 
-// function mostrarCarro(carro) {
-//   app.nome_carro_vue = carro.nome
-//   app.valor_vue = carro.preco
-//   app.kg_vue = carro.kg
-
-//   fetch("http://monkey_concessionaria/mostrarCarro", {
-//      method: 'POST',
-//      body: JSON.stringify({ 
-//         nome: carro.nome 
-//      })
-//   })
-// }
-
 function getCarrosPlayer() {
-  $('#modalMeusCarros').modal('show')
+  $('.card-carro').modal('show')
   toggleLoading(true)
 
   fetch("http://monkey_concessionaria/getCarrosPlayer", {
-     method: 'POST'
+    method: 'POST'
 
   }).then(function (response) {
-     return response.json()
+    return response.json()
 
   }).then(function (json) {
-     toggleLoading(false)
-     app.player_carros = json
+    toggleLoading(false)
+    app.lista_player_carros = json
 
   }).catch(function (json) {
-     toggleLoading(false)
+    toggleLoading(false)
   })
 }
 
 
 function btnTransferir(carro, index) {
-  let veiculo = carro.nomeCarro
-  let placa = carro.placaCarro
-  let detido = carro.carroDetido
+  return new Promise((resolve, reject) => {
+    let veiculo = carro.nomeCarro
+    let placa = carro.placaCarro
+    let detido = carro.carroDetido
 
-  Swal.fire({
-     icon: 'warning',
-     title: 'Transferir veículo',
-     text: "Informe a identidade",
-     input: 'text',
-     inputPlaceholder: 'Identidade',
-     showCancelButton: true,
-     confirmButtonText: 'Confirmar',
-     cancelButtonText: 'Cancelar',
-     inputValidator: (value) => {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Transferir veículo',
+      text: "Informe a identidade",
+      input: 'text',
+      inputPlaceholder: 'Identidade',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      inputValidator: (value) => {
         if (!$.isNumeric(value)) {
-           return 'Identidade inválida!'
+          return 'Identidade inválida!'
         }
-     }
-  }).then(res => {
-     let id = res.value
+      }
+    }).then(res => {
+      let id = res.value
 
-     if (res.isConfirmed) {
+      if (res.isConfirmed) {
         fetch("http://monkey_concessionaria/carroTransfer", {
-           method: 'POST',
-           body: JSON.stringify({
-              vehicle: veiculo,
-              plate: placa,
-              detained: detido,
-              idUser: id
-           }),
+          method: 'POST',
+          body: JSON.stringify({
+            vehicle: veiculo,
+            plate: placa,
+            detained: detido,
+            idUser: id
+          }),
+        }).then(res => {
+          return res.json()
+        }).then(data =>{
+          resolve(data)
+        }).catch(err => {
+          reject(err)
         })
-        
-        app.player_carros.splice(index, 1)
-        
+        app.lista_player_carros.splice(index, 1)
+
         Swal.fire({
-           icon: 'success',
-           title: 'Tranferência bem sucedida!'
+          icon: 'success',
+          title: 'Tranferência bem sucedida!'
         })
-     }
+      }
+    })
   })
+
 }
 
 function btnVender(carro, index) {
@@ -283,30 +285,30 @@ function btnVender(carro, index) {
   let valor = carro.valor
 
   Swal.fire({
-     icon: 'warning',
-     title: 'Vender veículo?',
-     showCancelButton: true,
-     confirmButtonText: 'Confirmar',
-     cancelButtonText: 'Cancelar'
+    icon: 'warning',
+    title: 'Vender veículo?',
+    showCancelButton: true,
+    confirmButtonText: 'Confirmar',
+    cancelButtonText: 'Cancelar'
 
   }).then(res => {
-     if (res.isConfirmed) {
-        fetch("http://monkey_concessionaria/carrosVenda", {
-           method: 'POST',
-           body: JSON.stringify({
-              vehicle: veiculo,
-              plate: placa,
-              sell: valor
-           })
+    if (res.isConfirmed) {
+      fetch("http://monkey_concessionaria/carrosVenda", {
+        method: 'POST',
+        body: JSON.stringify({
+          vehicle: veiculo,
+          plate: placa,
+          sell: valor
         })
+      })
 
-        app.player_carros.splice(index, 1)
-        
-        Swal.fire({
-           icon: 'success',
-           title: 'Venda bem sucedida!'
-        })
-     }
+      app.lista_player_carros.splice(index, 1)
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Venda bem sucedida!'
+      })
+    }
   })
 }
 
