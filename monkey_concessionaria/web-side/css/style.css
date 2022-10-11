@@ -1249,55 +1249,13 @@ span {
   border-bottom: 1px rgb(0, 0, 0) solid;
 }
 
-/* 
-.caixa_search {
-  display: contents;
-  height: 4px;
-  width: 180px;
-}
-
-.caixa_search:hover {
-  border-color: #dc3545;
-}
-
-.caixa_search:hover i {
-  color: #dc3545;
-}
-
 .caixa_texto {
-  border: none;
-  outline: none;
+  width: 50%;
   padding: 0;
-  color: #000;
-  font-size: 16px;
-  transition: 0.4s;
-  line-height: 41px;
-  width: 150px;
-  padding: 0 10px;
-  background-color: transparent;
-  font-family: 'Rubik', sans-serif;
-}
-
-.botao_search {
-  color: #000;
-  float: right;
-  width: 41px;
-  height: 41px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  align-items: center;
-  transition: 0.4s;
-} */
-
-.caixa_texto {
-  width: 100%;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 0.8vw;
   color: white;
-  padding: 5px;
   transition: 0.4s;
   background-color: transparent;
   font-family: 'Rubik', sans-serif;

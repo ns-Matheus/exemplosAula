@@ -72,11 +72,15 @@
   })
 
   function transferir(carro) {
-    btnTransferir(carro).then((data) => { store.lista_player_carros = data }).catch((err) => {console.log(err)})
+    btnTransferir(carro)
+    .then((data) => { store.lista_player_carros = data })
+    .catch((err) => {console.log(err)})
   }
 
   function vender(carro) {
-    btnVender(carro).then((data) => { store.lista_player_carros = data }).catch((err) => {console.log(err)})
+    btnVender(carro)
+    .then((data) => { store.lista_player_carros = data.carros })
+    .catch((err) => {console.log(err)})
   }
 
 

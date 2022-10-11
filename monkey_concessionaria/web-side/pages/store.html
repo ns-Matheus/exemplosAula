@@ -36,7 +36,7 @@
             <div class="item-qtd"><i class="far fa-weight-hanging text-danger"></i> <span>{{ parseInt(carro.kg).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span></div>
             <div class="item-price"><span><small class="text-danger translateY1">$</small> {{ parseInt(carro.preco).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span></div>
             <div class="item-btn-group">
-              <button class="btn btn-danger btn-comprar" @click="teste()"><i class="fal fa-key mx-2"></i><span>Testar</span></button>
+              <button class="btn btn-danger btn-comprar" @click="teste(carro.nome)"><i class="fal fa-key mx-2"></i><span>Testar</span></button>
               <button class="btn btn-success btn-comprar" @click="comprar(carro.nome, carro.preco)"><i class="fa fa-cart-plus mx-2"></i><span>Comprar</span></button>
             </div>
         </div>
@@ -62,9 +62,9 @@
     .catch((err) => {console.log(err)})
   }
 
-  function teste() {
-    testeDrive()
-    .then((data) => { store.nome_carro = data })
+  function teste(nome) {
+    testeDrive(nome)
+    .then((data) => { store.nome = data })
     .catch((err) => {console.log(err)})
   }
 

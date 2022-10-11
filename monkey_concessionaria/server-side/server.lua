@@ -230,7 +230,6 @@ function cnVRP.insertVehicleOnGarage(vehicle, preco)
 						TriggerClientEvent("Notify", source, "amarelo", "Você já possui um <b>" .. vehName .. "</b>.", 3000)
 						return false
 					else
-						print(parseInt(preco))
 						if vRP.paymentBank(user_id, parseInt(preco)) then
 							addToTruckerTrucks(user_id, vehName)
 							local placa_nova = vRP.generatePlateNumber()

@@ -25,13 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("message", (event) => {
 
     let data = event.data;
-    // console.log(JSON.stringify(data));
     if (data.acao == true) {
       changePage("Loja", "Painel", "pages/store.html");
       document.getElementById("app").style.display = "block";
       core.carros = data.carros
       core.lista_player_carros = data.carrosPlayer
-      // console.log(core.lista_player_carros)
     } else {
       document.getElementById("app").style.display = "none";
     }
@@ -182,47 +180,24 @@ function comprarCarro(nome, preco) {
         preco: preco
       })
     }).then(function (data) {
-       nome_carro = data.nome
-       preco = data.preco
+      core.lista_player_carros = data.carros
       resolve(data);
+      close()
     }).catch(function (err) {
       reject(err);
     });
   })
 }
 
-
-// function comprarCarro() {
-//   return new Promise(function (resolve, reject) {
-//     fetch("http://monkey_concessionaria/comprarCarro", {
-//       method: 'POST',
-//       body: JSON.stringify({
-//         nome: core.nome_carro,
-//         preco: core.valor_carro
-//       })
-//     }).then(function (response) {
-//       return response.json()
-//     }).then(function (json) {
-//       core.nome_carro = json.nome
-//       core.valor_carro = json.preco
-//       // console.log(JSON.stringify(data))
-//       resolve(data);
-//     }).catch(function (err) {
-//       reject(err);
-//     });
-//   })
-// }
-
-function testeDrive() {
+function testeDrive(nome) {
   document.getElementById("app").style.display = "none";
   return new Promise(function (resolve, reject) {
     fetch("http://monkey_concessionaria/testeDrive", {
       method: 'POST',
       body: JSON.stringify({
-        nome: core.nome_carro
+        nome: nome
       })
     }).then(function (data) {
-      console.log(JSON.stringify(data))
       resolve(data);
     }).catch(function (err) {
       reject(err);
@@ -288,6 +263,7 @@ function btnTransferir(carro) {
         }).then(res => {
           return res.json()
         }).then(data => {
+          core.lista_player_carros = data
           resolve(data)
         }).catch(err => {
           reject(err)
@@ -329,6 +305,7 @@ function btnVender(carro) {
         }).then(res => {
           return res.json()
         }).then(data => {
+          core.lista_player_carros = data.carros
           resolve(data)
         }).catch(err => {
           reject(err)

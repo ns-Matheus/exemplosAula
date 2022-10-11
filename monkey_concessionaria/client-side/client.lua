@@ -111,9 +111,9 @@ RegisterNUICallback("carrosVenda", function(data, cb)
     local nomeVeiculo = data.vehicle
     local nomePlaca = data.plate
     local valor = data.sell
-    local carros = vSERVER.getVehiclesSell(nomeVeiculo, nomePlaca, valor)
+    vSERVER.getVehiclesSell(nomeVeiculo, nomePlaca, valor)
 
-    cb(carros.carros)
+    cb({carros = vSERVER.getCarrosPlayer()})
 end)
 
 RegisterNUICallback("carroTransfer", function(data, cb)
@@ -153,7 +153,7 @@ end)
 RegisterNUICallback("testeDrive", function(data)
     -- concessionaria_aberta = false
 
-    disableCam()
+    -- disableCam()
     SetNuiFocus(false, false)
     cnVRP.noClip()
 
@@ -172,11 +172,12 @@ RegisterNUICallback("tecladoOn", function(data)
     SetNuiFocus(false, true)
 end)
 
-RegisterNUICallback("comprarCarro", function(data)
+RegisterNUICallback("comprarCarro", function(data,cb)
     local nome_carro = data.nome
     local preco = data.preco
-    -- vSERVER.insertVehicleOnGarage(nome_carro, parseInt(preco))
-    cb(vSERVER.insertVehicleOnGarage(nome_carro, parseInt(preco)))
+    local carros = vSERVER.getCarrosPlayer()
+    vSERVER.insertVehicleOnGarage(nome_carro, parseInt(preco))
+    cb(carros)
 end)
 
 RegisterNUICallback("esconderHUD", function(data)
