@@ -27,23 +27,21 @@
         >
       </li>
     </ul> -->
-    <div class="cards" v-if="carros.length > 0">
-      <div
-        class="card-carro"
+    <div class="cards" v-if="lista_player_carros.length > 0">
+      <div class="card-carro"
         :class="[{'bg-red-carro': carro.raridade == 1},{'bg-blue-carro': carro.raridade == 2}, {'bg-yellow-carro': carro.raridade == 3}, {'bg-purple-carro': carro.raridade == 4}, {'bg-comum': carro.raridade == 0}]"
-        v-for="(carro,index) in carros"
-      >
+        v-for="(carro,index) in lista_player_carros">
         <div class="item-img">
-          <img :src="'https://j4v4.site/MC/carros/'+ carro.nome +'.png'"  onerror="imageError(this)" />
+          <img :src="'https://j4v4.site/MC/carros/'+ carro.nomeCarro +'.png'" onerror="imageError(this)" />
         </div>
-        <div class="item-title">{{carro.nome_Vitrine.toUpperCase()}}</div>
-            <div class="item-price"><span><small class="text-danger translateY1">$</small> <i class="far fa-id-card-alt text-danger font-12 translateY-1 me-1"></i> {{ carro.placaCarro }}</span></div>
-            <div class="item-qtd"><i class="far fa-weight-hanging text-danger"></i> <span>{{ parseInt(carro.kg).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 0 }) }}</span> kg</div>
+        <div class="item-title">{{carro.nomeCarro.toUpperCase()}}</div>
+        <div class="item-qtd"><span><i class="far fa-id-card-alt text-danger font-11 translateY-1 me-1"></i> {{ carro.placaCarro }}</span></div>
+        <div class="item-price"><span><small class="text-danger translateY1">$</small> {{ parseInt(carro.valor).toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span></div>
         <div class="item-btn-group">
-          <button class="btn btn-aplicar" @click="transferir(carro, index)">
+          <button class="btn btn-aplicar" @click="transferir(carro)">
             <i class="far fa-exchange mx-2"></i><span>Transferir</span>
           </button>
-          <button class="btn btn-aplicar" @click="btnVender(carro, index)">
+          <button class="btn btn-aplicar" @click="vender(carro)">
             <i class="far fa-trash mx-2"></i><span>Vender</span>
           </button>
         </div>
@@ -52,7 +50,9 @@
     <div class="msg-vazio" v-else>
       <div class="msg-title">
         <i class="fa fa-info-circle msg-icon"></i>
-        <span><h2>VAZIO</h2></span>
+        <span>
+          <h2>VAZIO</h2>
+        </span>
       </div>
       <div class="msg-text">
         <h6>Infelizmente você não tem nenhum Carro</h6>
@@ -71,16 +71,15 @@
     }
   })
 
-  function transferir(carro, index){
-    btnTransferir(carro, index).then(data => cars.lista_player_carros = data).catch(err => console.log(err))
+  function transferir(carro) {
+    btnTransferir(carro).then((data) => { store.lista_player_carros = data }).catch((err) => {console.log(err)})
   }
 
-  function playerCars(){
-    getCarrosPlayer().then(data => cars.lista_player_carros = data).catch(err => console.log(err))
+  function vender(carro) {
+    btnVender(carro).then((data) => { store.lista_player_carros = data }).catch((err) => {console.log(err)})
   }
 
-  
- 
+
 
 
   // function aplicar(arma) {
@@ -95,5 +94,5 @@
   // function filtrar(filtro){
   //   console.log(filtro)
   // }
-  
+
 </script>

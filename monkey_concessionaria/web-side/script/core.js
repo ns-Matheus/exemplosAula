@@ -25,11 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("message", (event) => {
 
     let data = event.data;
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     if (data.acao == true) {
       changePage("Loja", "Painel", "pages/store.html");
       document.getElementById("app").style.display = "block";
       core.carros = data.carros
+      core.lista_player_carros = data.carrosPlayer
+      // console.log(core.lista_player_carros)
     } else {
       document.getElementById("app").style.display = "none";
     }
@@ -165,51 +167,74 @@ function close() {
         }
         resolve();
       })
-      .catch(function () {
-        reject();
+      .catch(function (err) {
+        reject(err);
       });
   });
 }
 
-function comprarCarro() {
+function comprarCarro(nome, preco) {
   return new Promise(function (resolve, reject) {
-  fetch("http://monkey_concessionaria/comprarCarro", {
-    method: 'POST',
-    body: JSON.stringify({
-      nome: app.nome_carro,
-      preco: app.valor_carro
-    })
-  }).then(function (response) {
-    return response.json()
-  }).then(function (json) {
-    app.nome_carro = json.nome
-    app.valor_carro = json.preco
-    resolve();
-  }).catch(function () {
-    reject();
-  });
-})
+    fetch("http://monkey_concessionaria/comprarCarro", {
+      method: 'POST',
+      body: JSON.stringify({
+        nome: nome,
+        preco: preco
+      })
+    }).then(function (data) {
+       nome_carro = data.nome
+       preco = data.preco
+      resolve(data);
+    }).catch(function (err) {
+      reject(err);
+    });
+  })
 }
 
+
+// function comprarCarro() {
+//   return new Promise(function (resolve, reject) {
+//     fetch("http://monkey_concessionaria/comprarCarro", {
+//       method: 'POST',
+//       body: JSON.stringify({
+//         nome: core.nome_carro,
+//         preco: core.valor_carro
+//       })
+//     }).then(function (response) {
+//       return response.json()
+//     }).then(function (json) {
+//       core.nome_carro = json.nome
+//       core.valor_carro = json.preco
+//       // console.log(JSON.stringify(data))
+//       resolve(data);
+//     }).catch(function (err) {
+//       reject(err);
+//     });
+//   })
+// }
+
 function testeDrive() {
+  document.getElementById("app").style.display = "none";
   return new Promise(function (resolve, reject) {
-  fetch("http://monkey_concessionaria/testeDrive", {
-    method: 'POST',
-    body: JSON.stringify({
-      nome: app.nome_carro
-    })
-  }).then(function () {
-    resolve();
-  }).catch(function () {
-    reject();
-  });
-  // document.getElementById("app").style.display = "none";
-})
+    fetch("http://monkey_concessionaria/testeDrive", {
+      method: 'POST',
+      body: JSON.stringify({
+        nome: core.nome_carro
+      })
+    }).then(function (data) {
+      console.log(JSON.stringify(data))
+      resolve(data);
+    }).catch(function (err) {
+      reject(err);
+    });
+  })
 }
+
+
 
 
 function getCarrosPlayer() {
-  $('.card-carro').modal('show')
+  // $('.card-carro').modal('show')
   toggleLoading(true)
 
   fetch("http://monkey_concessionaria/getCarrosPlayer", {
@@ -220,7 +245,7 @@ function getCarrosPlayer() {
 
   }).then(function (json) {
     toggleLoading(false)
-    app.lista_player_carros = json
+    core.lista_player_carros = json
 
   }).catch(function (json) {
     toggleLoading(false)
@@ -228,7 +253,7 @@ function getCarrosPlayer() {
 }
 
 
-function btnTransferir(carro, index) {
+function btnTransferir(carro) {
   return new Promise((resolve, reject) => {
     let veiculo = carro.nomeCarro
     let placa = carro.placaCarro
@@ -262,12 +287,12 @@ function btnTransferir(carro, index) {
           }),
         }).then(res => {
           return res.json()
-        }).then(data =>{
+        }).then(data => {
           resolve(data)
         }).catch(err => {
           reject(err)
         })
-        app.lista_player_carros.splice(index, 1)
+        // app.lista_player_carros.splice(index, 1)
 
         Swal.fire({
           icon: 'success',
@@ -279,36 +304,44 @@ function btnTransferir(carro, index) {
 
 }
 
-function btnVender(carro, index) {
-  let veiculo = carro.nomeCarro
-  let placa = carro.placaCarro
-  let valor = carro.valor
+function btnVender(carro) {
+  return new Promise((resolve, reject) => {
+    let veiculo = carro.nomeCarro
+    let placa = carro.placaCarro
+    let valor = carro.valor
 
-  Swal.fire({
-    icon: 'warning',
-    title: 'Vender veículo?',
-    showCancelButton: true,
-    confirmButtonText: 'Confirmar',
-    cancelButtonText: 'Cancelar'
+    Swal.fire({
+      icon: 'warning',
+      title: 'Vender veículo por $ ' + valor.toLocaleString('pt-br', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ?',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
 
-  }).then(res => {
-    if (res.isConfirmed) {
-      fetch("http://monkey_concessionaria/carrosVenda", {
-        method: 'POST',
-        body: JSON.stringify({
-          vehicle: veiculo,
-          plate: placa,
-          sell: valor
+    }).then(res => {
+      if (res.isConfirmed) {
+        fetch("http://monkey_concessionaria/carrosVenda", {
+          method: 'POST',
+          body: JSON.stringify({
+            vehicle: veiculo,
+            plate: placa,
+            sell: valor
+          })
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          resolve(data)
+        }).catch(err => {
+          reject(err)
         })
-      })
 
-      app.lista_player_carros.splice(index, 1)
+        // app.lista_player_carros.splice(index, 1)
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Venda bem sucedida!'
-      })
-    }
+        Swal.fire({
+          icon: 'success',
+          title: 'Venda bem sucedida!'
+        })
+      }
+    })
   })
 }
 

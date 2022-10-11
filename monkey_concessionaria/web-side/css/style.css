@@ -1105,7 +1105,7 @@ li .active {
   visibility: visible;
 }
 .btn-comprar {
-  font-size: 13px !important;
+  font-size: 12px !important;
 	font-weight: 600;
 	/* background-color: #fff; */
 	padding: 4px 8px;
@@ -1118,7 +1118,7 @@ li .active {
   width: 100%;
 }
 .btn-comprar:hover{
-  transition: all 0.3s ease-out 0s;
+  transition: all 0.2s ease-out 0s;
   background-color: var(--corDark) !important;
 }
 .btn-comprar i,
@@ -1179,7 +1179,7 @@ span {
 	margin: 0 auto;
 }
 .btn-aplicar:hover {
-  transition: all 0.3s ease-out 0s;
+  transition: all 0.2s ease-out 0s;
   background-color: var(--corDark) !important;
 }
 
@@ -1249,7 +1249,7 @@ span {
   border-bottom: 1px rgb(0, 0, 0) solid;
 }
 
-
+/* 
 .caixa_search {
   display: contents;
   height: 4px;
@@ -1274,6 +1274,31 @@ span {
   line-height: 41px;
   width: 150px;
   padding: 0 10px;
+  background-color: transparent;
+  font-family: 'Rubik', sans-serif;
+}
+
+.botao_search {
+  color: #000;
+  float: right;
+  width: 41px;
+  height: 41px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  align-items: center;
+  transition: 0.4s;
+} */
+
+.caixa_texto {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: white;
+  padding: 5px;
+  transition: 0.4s;
   background-color: transparent;
   font-family: 'Rubik', sans-serif;
 }

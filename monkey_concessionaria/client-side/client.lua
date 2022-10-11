@@ -53,6 +53,7 @@ Citizen.CreateThread(function()
                             SendNUIMessage({
                                 acao = true,
                                 -- onModal = true,
+                                carrosPlayer = vSERVER.getCarrosPlayer(),
                                 carros = vSERVER.TodosVeiculos(value.tipo)
                             })
 
@@ -95,16 +96,16 @@ RegisterNUICallback("sair", function(data,cb)
 end)
 
 
-RegisterNUICallback("mostrarCarro", function(data)
-    local nome_carro = data.nome
-    SpawnVehicleLocal(nome_carro, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z, Config.vitrine_car.grau)
-end)
+-- RegisterNUICallback("mostrarCarro", function(data)
+--     local nome_carro = data.nome
+--     SpawnVehicleLocal(nome_carro, Config.vitrine_car.x, Config.vitrine_car.y, Config.vitrine_car.z, Config.vitrine_car.grau)
+-- end)
 
 
-RegisterNUICallback("getCarrosPlayer", function(data, cb)
-    local carros = vSERVER.getCarrosPlayer()
-    cb(carros)
-end)
+-- RegisterNUICallback("getCarrosPlayer", function(data, cb)
+--     local carros = vSERVER.getCarrosPlayer()
+--     cb(carros)
+-- end)
 
 RegisterNUICallback("carrosVenda", function(data, cb)
     local nomeVeiculo = data.vehicle
@@ -152,7 +153,7 @@ end)
 RegisterNUICallback("testeDrive", function(data)
     -- concessionaria_aberta = false
 
-    -- disableCam()
+    disableCam()
     SetNuiFocus(false, false)
     cnVRP.noClip()
 
@@ -174,7 +175,8 @@ end)
 RegisterNUICallback("comprarCarro", function(data)
     local nome_carro = data.nome
     local preco = data.preco
-    vSERVER.insertVehicleOnGarage(nome_carro, parseInt(preco))
+    -- vSERVER.insertVehicleOnGarage(nome_carro, parseInt(preco))
+    cb(vSERVER.insertVehicleOnGarage(nome_carro, parseInt(preco)))
 end)
 
 RegisterNUICallback("esconderHUD", function(data)

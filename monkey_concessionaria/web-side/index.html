@@ -1,25 +1,13 @@
-﻿<html class="no-js" lang="en">
+﻿<html class="no-js" lang="pt-br">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-      name="viewport"
-    />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monkey Empregos</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/icons_ms728/icons.css"
-    />
+    <title>Monkey Concessionária</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icons_ms728/icons.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/color_skins.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -64,7 +52,7 @@
           </ul>
         </aside>
         <aside class="right_menu">
-          <!-- Painl sobre Desenvolvedores -->
+          <!-- Painel sobre Desenvolvedores -->
           <div class="notif-menu overflow-auto">
             <div class="card">
               <div class="header">
@@ -170,19 +158,22 @@
           </div> -->
           <ul class="nav-bar">
             <li class="navbar-item">
-              <a @click="changePage('Loja','Painel','pages/store.html')"
-                ><i class="fa fa-coins"></i><span>Loja de Carros</span></a
-              >
+              <a @click="changePage('Loja','Painel','pages/store.html')">
+                <i class="fa fa-coins"></i><span>Loja de Carros</span>
+              </a>
             </li>
+
             <li class="navbar-item">
-              <a @click="changePage('Meus Carros','Painel','pages/cars.html')"
-                ><i class="fa fa-user"></i><span>Meus carros</span></a>
+              <a @click="changePage('Meus Carros','Painel','pages/cars.html')">
+                <i class="fa fa-user"></i><span>Meus carros</span>
+              </a>
             </li>
             
-            <div class="caixa_search mb-2">
-              <input class="caixa_texto" placeholder="Pesquisar..." v-model="pesquisa">
-              <a class="botao_search" href="javascript:;"><i class="far fa-search"></i></a>
-            </div>
+            <li class="navbar-item">
+              <a class="botao_search" href="javascript:;"><i class="far fa-search"></i>
+                <input class="caixa_texto" placeholder="Pesquisar..." v-model="pesquisa">
+              </a>
+            </li>
           </ul>
 
 
@@ -202,7 +193,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script/core.js"></script>
   </body>
 </html>
