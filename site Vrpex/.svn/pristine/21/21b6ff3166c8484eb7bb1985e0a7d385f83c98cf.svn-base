@@ -1,0 +1,238 @@
+:root {
+    --bgBranco: rgb(255, 255, 255, 0.8);
+    --bgPreto: rgb(0.0, 0.0, 0.0, 0.8);
+}
+
+body {
+    font-family: "Poppins"!important;
+}
+
+.navbar {
+    width: 80%;
+    height: 80px;
+    position: fixed;
+    top: 20px;
+    left: 10%;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 35px;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.navbar-brand img {
+    float: left;
+    max-width: 200px;
+    min-width: 80px;
+}
+
+#navbarNavDropdown {
+    float: right;
+}
+
+.nav-link {
+    background-color: var(--bgBranco);
+}
+
+.navbar-nav {
+    background-color: var(--bgBranco);
+    border-radius: 10px !important;
+}
+
+.nav-link {
+    background-color: transparent;
+}
+
+.nav-link:hover {
+    animation: hover 1s ease-in-out infinite;
+}
+
+
+@keyframes hover {
+    0% {
+        transform: perspective(200px) translatez(0);
+    }
+
+    50% {
+        transform: perspective(200px) translatez(5px);
+    }
+
+    100% {
+        transform: perspective(200px) translatez(0);
+    }
+}
+
+.escopo {
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.escopo1 {
+    height: 1vh;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.escopo1 p {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.escopo1 p span.typed-text {
+    font-weight: normal;
+    color: #525151;
+}
+
+.escopo1 p span.cursor {
+    display: inline-block;
+    background-color: #ccc;
+    margin-left: 0.1rem;
+    width: 3px;
+    animation: typing 1s infinite;
+}
+
+.escopo1 p span.cursor.typing {
+    animation: none;
+}
+
+@keyframes typing {
+    0% {
+        background-color: #ccc;
+    }
+
+    49% {
+        background-color: #ccc;
+    }
+
+    50% {
+        background-color: transparent;
+    }
+
+    99% {
+        background-color: transparent;
+    }
+
+    100% {
+        background-color: #ccc;
+    }
+}
+
+
+.escopo2 {
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: 100;
+}
+
+.escopo3 {
+    font-family: "Poppins";
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.escopo4 a {
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #292c49;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 20px;
+}
+
+.escopo4 a:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.escopo4 a:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.escopo4 a:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+
+
+.back_monkey {
+    background-image: url('https://media.discordapp.net/attachments/918143224420376608/1030124271965569174/unknown.png');
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    text-align: center;
+}
+
+.corpo_monkey {
+    position: absolute;
+    left: 50%;
+}
+
+
+.logo_img {
+    width: 100%;
+    top: 10%;
+}
+
+
+
+@media (max-width: 768px) {
+    .back_monkey {
+        position: absolute;
+        height: 100%;
+    }
+
+    .corpo_monkey {
+        top: 100%;
+        left: 0%;
+    }
+
+    .navbar {
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .nav-link {
+        text-align: center;
+    }
+
+    .nav-link:hover {
+        color: var(--bgBranco);
+        background-color: var(--bgPreto);
+    }
+}
