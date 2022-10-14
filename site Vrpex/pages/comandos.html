@@ -6,10 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>vRPex Framework</title>
-
+  
+  <!-- FavIcon -->
   <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- CSS personalizado -->
   <link href="../css/style.css" rel="stylesheet">
 
 </head>
@@ -26,7 +29,7 @@
         <div class="col-12 p-5 mt-5">
 
           <div class="escopo col-12 mt-5">
-            <span>GTA V - FiveM Monkey</span>
+            <span>Comandos</span>
           </div>
           <div class="escopo1 col-12 mt-2">
             <p><span class="typed-text"></span><span class="cursor">&nbsp;</span></p>
@@ -42,889 +45,737 @@
           </div>
 
         </div>
-        <row>
 
-          <div id="MonkeySystem" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey System
+
+        <section>
+          <h1>vRP</h1>
+          <!-- mapa -->
+          <div class="doc">
+            <div class="doc_titulo">Mapa</div>
+            <div class="doc_desc">
+              <div class="code">/mostrarmap - Mostra Mini Mapa</div>
             </div>
-            <div class="card-body">
-              <iframe src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <!-- <div class="doc_desc">
+                <div class="code">
+                    /mappequeno  - Mostra  Mapa
+                </div>
+            </div> -->
+          </div>
+          <!-- Admin -->
+          <div class="doc">
+            <div class="doc_titulo">Admin</div>
+            <div class="doc_desc">
+              <div class="code">/nc - Entra no modo Nc</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/ids - Mostra os Ids dos jogadores próximos</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/wall - Mostra os Ids dos objetos próximos</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/fome [valor] - Altera valor da fome</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/clearInv [Id] - Limpa O inventário</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/limparinv - Limpa O Própio Inventário</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /item [nome item] [qtd] - Limpa O Própio Inventário
+              </div>
+            </div>
+            <div class="doc_desc">
+              <!-- Existe a funcçao debugar que faz a mesma coisa -->
+              <div class="code">/admindebug - Modo Debug</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/plate - Cria Placa de Veículo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /addcar [Id Jogador] [nome veiculo]- Adiciona Veiculo a Garagem do
+                Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hood [Id Jogador] - Coloca Capuz na Pessoa</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hood [Id Jogador] - Coloca Capuz na Pessoa</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /kick [Id Jogador] - Remove usuário do servidor no momento
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/ban [Id Jogador] - Bane Jogador do Servidor</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/unban [Id Jogador] - Desbane Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/wl [Id Wl] - Aceita a Wl do Usuário</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/unwl [Id Jogador] - Remove a Wl do Usuário</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /gemas [Id Jogador] [Quantidade] - Adiciona Gemas A Conta do Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /money [Id Jogador] [Quantidade] - Adiciona Dinheiro A Conta do
+                Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/tpcds - Teleporta nas Coordenadas Inserida</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/cds - Paga a Coordenada Atual</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /group [id Jogador] [permissao] - Adiciona Permissao ao Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /ungroup [id Jogador] [permissao] - Remove Permissao do Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /tptome [id Jogador] - Teleporta o Jogador Para Mim
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /tpto [id Jogador] - Teleporte Para o Jogador Selecionado
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/tpway - Teleporta na Marcação Feita no Mapa</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/limbo - Teleporte Para o Limbo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hash - Pega Hash das Portas</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/delnpc - Deleta Npcs Próximos</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /tuning - Realiza Melhorias no Veículo Dirigido
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/fix - Conserta o Veículo Dirigido</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/cone - Cria o Objeto Cone</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/barreira - Cria o Objeto Barreira</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /limpararea - Limpa os Objetos Próximos da Área
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /anuncio [mensagen] - Envia uma mensagem d eanuncnio a todos os
+                jogadores
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/pon - Mostra os Jogadores Online</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /itemall [nome item] [quantidade]- Envia o Item Para Todos os
+                Jogadores No Servidor
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /adm [mensagem]- Envia Mensagem da Prefeitura a todos os jogadores
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /kickall - Desconecta todos os os jogadores online no servidor
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /remcar [id Jogador] [nome carro] - Remove jogador do carro
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/staff - Inicia o serviço staff</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/chatp [mensagem]- Mensagem no chat policial</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/chatmec [mensagem]- Mensagem no chat Mecanico</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/chahp [mensagem]- Mensagem no chat hospital</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/combat - Mostra o Combat Log</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/tela [id Jogador] - Printa Tela da Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /tela_todos - Printa Tela de Todos os Jogadores
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/t - Abre Janela de Teleporte nas Coordenadas</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/c - Pega as Coordenadas Atuais</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/Marker - Abrir Painel de Markers</div>
             </div>
           </div>
-
-          <div id="MonkeyHUD" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey HUD
+          <!-- portas -->
+          <div class="doc">
+            <div class="doc_titulo">Portas</div>
+            <div class="doc_desc">
+              <div class="code">/addPorta - Cria uma Porta no Servidor</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">
+                /debugPorta - Entra no modo Debug nas Portas do servidor
+              </div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">
+                /unirPortas [id porta 1] [id porta 2] - Junta portas Próximas no
+                servidor
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /removerPorta [id porta] - Remove a Porta do Servidor
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/attPortas - Atualiza portas no servidor</div>
             </div>
           </div>
-
-          <div id="MonkeyPolicia" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Polícia
-            </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <!-- Banco -->
+          <div class="doc">
+            <div class="doc_titulo">Fleeca</div>
+            <div class="doc_desc">
+              <div class="code">/resetf - Reseta Ação Fleeca</div>
             </div>
           </div>
-
-          <div id="MonkeyFleeca" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Fleeca
+          <!-- player -->
+          <div class="doc">
+            <div class="doc_titulo">Player</div>
+            <div class="doc_desc">
+              <div class="code">
+                /fps [on / off] - Ativar Melhoria Gráfica Para Otimizar Desempenho
+              </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/vehControl - Mostra o Menu de Carro</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/keybindcuff - Algemar o Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/keybindcarry - Carregar o Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/cr [velocidade]- Ativar o Controle Cruzeiro</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /+radiotalkNox [quantidae]- Aumenta o volume do rádio
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /-radiotalkNox [quantidae]- Diminui o volume do rádio
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/+entityTarget - Ativa o modo de interação</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/-entityTarget - Desativa o modo de interação</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /wecolor [Numero textura] - Muda a Cor da Arma em Mãos
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/welux - Muda para a cor de arma dourada</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /gg - Desiste Imediatamente Após o Timer de Morte
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/e [Nome Animação] - Ativa a Animação Solo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /e2 [Nome Animação] - Ativa a Animação em Grupo
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /e3 [id Jogador] [Nome Animação] - Ativa a Animação em um Player
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /beijar - Ativa a Animação de Beijo em um Player
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /abarcar - Ativa a Animação de Abraço em um Player
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/a - Abre Janela de Animações</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /atm - Abre Conta Bancaria Próximo de um Caixa Eletronico
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/chat - Esconde Mostra Chat</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/premium - Consulta o Tempo de Vip</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hood - Coloca Capuz no Jogador Mais Próximo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/revistar - Revista o Jogador Mais Próximo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/roubar - Rouba o Jogador Mais Próximo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/chamar - Cria uma Caixa Para Fazer Chamado</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hr - Chat Hospital</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /andar [numero] - Muda a Forma de Andar do Personagem
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/fatura - Cria Fatura para Um Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/sequestro - Sequestra o Jogador Mais Próximo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /checktrunk - Verifica O Báu do Carro do Usuário Mais Próximo
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /p [numero do assento] - Muda o Assento no Veículo
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/trabalhando - Verifica se estou em serviço</div>
+            </div>
+            <!-- <div class="doc_desc">
+                <div class="code">
+                    /criarprop - Criar Prop
+                </div>
+            </div> -->
+          </div>
+          <!-- Teleporte -->
+          <div class="doc">
+            <div class="doc_titulo">Teleporte</div>
+            <div class="doc_desc">
+              <div class="code">
+                /createtpmonkeyini - Cria Posição Inicial Teleporte
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /createtpmonkeyfim - Cria Posição Final do Teleporte
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /debugmonkeytp - Mostra do Debug do Blip Teleporte
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/deletemonkeytp - Apaga Blip Teleporte</div>
             </div>
           </div>
-
-          <div id="MonkeyPortas" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Portas
+          <!-- HP Atendimento -->
+          <div class="doc">
+            <div class="doc_titulo">Atendimento</div>
+            <div class="doc_desc">
+              <div class="code">/repouso [tempo] - Aplica Sedativo no Paciente</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">
+                /toggleatendimento - Habilita ou Desabilita o Auto Atendimento
+              </div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">
+                /diagnostico - Realiza diagnostico no paciente próximo
+              </div>
             </div>
-          </div>
-
-          <div id="MonkeyBlip" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Blip
+            <div class="doc_desc">
+              <div class="code">
+                /diagnosticoadm [id Jogador] - Realiza diagnostico no paciente
+              </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">
+                /sangramento - Para o Sengramento do Paciente Próximo
+              </div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">
+                /tratamento - Inicia o Tratamento do Paciente Próximo
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/rv - Remove Jogador Próximo do Veículo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/cv - Coloca Jogador Próximo no Veículo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hr - Chat Hospital</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /gesso - Abre Painel Para Aplicar Gesso no Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/re - Inicia a Animação de Resucitar o Jogador</div>
             </div>
           </div>
-
-          <div id="MonkeyCasas" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Casas
+          <!-- Policia -->
+          <div class="doc">
+            <div class="doc_titulo">Policia</div>
+            <div class="doc_desc">
+              <div class="code">
+                /procurado [id Jogador] - Coloca o Jogador Como Procurado
+              </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/pr - Chat Policial</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/placa - Cria e Salva Placa</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/detido - Apreende Veiculo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /check [id Jogador]- Verifica a Identidade do Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /cam [id Jogador]- Tira Print da Tela do Jogador
+              </div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/rg [id Jogador ]- Pega o Rg do Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/prender - Prende o Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/rprender - Reduzir Pena do Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/multar - Cria uma Multa no Jogador</div>
             </div>
           </div>
-
-          <div id="MonkeyMarkers" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Markers
+          <!-- Bau -->
+          <div class="doc">
+            <div class="doc_titulo">Báus</div>
+            <div class="doc_desc">
+              <div class="code">/createChest - Cria um Báu</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/chestDebug - Debug de Báus</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/excluirChest [id báu] - Excluí Báu Selecionado</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/alterarChestWook [id báu] - Altera WeebHook do Báu</div>
             </div>
           </div>
-
-          <div id="MonkeyCraft" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Craft
+          <!-- Notify -->
+          <div class="doc">
+            <div class="doc_titulo">Notify</div>
+            <div class="doc_desc">
+              <div class="code">/npolice - Cria Uma notificação para Policia</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">
+                /nparamedic - Cria Uma notificação para Paramédico
+              </div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/nadm - Cria Uma notificação para Admin</div>
             </div>
           </div>
-
-          <div id="MonkeyCoordenadas" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Coordenadas
+          <!-- pma -->
+          <div class="doc">
+            <div class="doc_titulo">PMA</div>
+            <div class="doc_desc">
+              <div class="code">
+                /voz [normal / musica] - Alterna Entre o Modo Normal ou Musica
+              </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">
+                /vol [radio / cleular] [numero do volume] - Altera o Volume do Rádio
+                ou Celular
+              </div>
             </div>
           </div>
-
-          <div id="MonkeyLojas" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Lojas
+          <!-- Survivor -->
+          <div class="doc">
+            <div class="doc_titulo">Survival</div>
+            <div class="doc_desc">
+              <div class="code">
+                /god [id Jogador]- Restaura Toda a Vida, Fome, Sede, Colete
+              </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">
+                /good [id Jogador] - Restaura Toda a Vida, Fome, Sede
+              </div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/health [id Jogador] - Revive o jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">
+                /armour [id Jogador] - Coloca Colete No Jogador
+              </div>
             </div>
           </div>
-
-          <div id="MonkeyRoupas" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Roupas
+          <!-- Carros -->
+          <div class="doc">
+            <div class="doc_titulo">Carros</div>
+            <div class="doc_desc">
+              <div class="code">
+                /diminuirGasolina - Diminui Gasolina do Veiculo
+              </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/status - Abre Painel de Carro</div>
             </div>
           </div>
-
-          <div id="MonkeyAnimacoes" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Animações
+          <!-- Garagem -->
+          <div class="doc">
+            <div class="doc_titulo">Garagem</div>
+            <div class="doc_desc">
+              <div class="code">/criargarage - Cria Garagem</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/debuggarage - Debug Garagem</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/excluirgarage - Deletar Garagem</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/dv - Desespwanar Veículo</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/rgarage - Reseta Garagem</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/car [nome carro] - Spwana Carro</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/vehs - Mostra Carros da MInha Garagem</div>
             </div>
           </div>
-
-          <div id="MonkeyTeleport" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Teleport
+          <!-- Inventario -->
+          <div class="doc">
+            <div class="doc_titulo">Inventario</div>
+            <div class="doc_desc">
+              <div class="code">/inventory:moc - Abre Inventário</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/attachs - Aplica Attachs nas Armas</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/resetped - Reseta Ped do Personagem</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/garmas - Desequipa as Armas do Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/bindBack - Habilita/Desabilita o Menu Inferior</div>
             </div>
           </div>
-
-          <div id="MonkeyGesso" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Gesso
+          <!-- Hud -->
+          <div class="doc">
+            <div class="doc_titulo">Java Hud</div>
+            <div class="doc_desc">
+              <div class="code">/configHud- Configura a Hud</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/mostrarHud - Mostra a Hud</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/fecharhud - Esconde a Hud</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/mudarLogoHud - Muda A Logo da Hud</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/mh - Mostra Nível de Voz na Hud</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/clima [Numero Clima] - Altera o Clima do Jogador</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/dia - Muda Para o Dia</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/noite - Muda Para a Noite</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/hora [Numero Hora] [Numero Minutos] - Altera o Horário do Jogo</div>
+            </div>
+            <div class="doc_titulo">Monkey Hud</div>
+            <div class="doc_desc">
+                <div class="code">/monkey_hud - Mostra a Hud</div>
+              </div>
+              <div class="doc_desc">
+                <div class="code">/seatbelt - Tira e Coloca o Cinto de Segurança</div>
+              </div>
+              <div class="doc_desc">
+                <div class="code">/indicatorlights - Liga os Fárois</div>
+              </div>
+          </div>
+          <!-- Monkey -->
+          <div class="doc">
+            <div class="doc_titulo">Monkey Blip</div>
+            <div class="doc_desc">
+              <div class="code">/openmonkeyblip - Abre o Monkey Blip</div>
             </div>
           </div>
-
-          <div id="MonkeyTela" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Tela
-            </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="doc">
+            <div class="doc_titulo">Monkey Hash</div>
+            <div class="doc_desc">
+              <div class="code">/monkeyHash - Pega o Hash dos Objetos 3D</div>
             </div>
           </div>
-
-          <div id="MonkeySkinArmas" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Skin Armas
+          <div class="doc">
+            <div class="doc_titulo">Monkey Homes</div>
+            <div class="doc_desc">
+              <div class="code">/casas list - Lista Todos os Ímoveis </div>
+              <div class="code">/casas sair - Sai do Imovel </div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+                <div class="code">/openhome - Abrir Casa </div>
+              </div>
+              <div class="doc_desc">
+                <div class="code">/openpainel - Abrir Painel Casa </div>
+              </div>
+              <div class="doc_desc">
+                <div class="code">/openchest - Abrir Báu da Casa </div>
+              </div>
+              <div class="doc_desc">
+                <div class="code">/addMoveisLoja - Adiciona Móvies para Casa </div>
+              </div>
+          </div>
+          <div class="doc">
+            <div class="doc_titulo">Monkey Craft</div>
+            <div class="doc_desc">
+              <div class="code">/createcraftmonkey - Cria o Blip de Craft</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/alterarposcraft - Altera a Posição do Blip de Craft</div>
+            </div>
+            <div class="doc_desc">
+              <div class="code">/alterarpermissaocraft - Altera a Permissão do Blip de Craft</div>
             </div>
           </div>
-
-          <div id="MonkeyBaus" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Baús
+          <div class="doc">
+            <div class="doc_titulo">Monkey Outfit</div>
+            <div class="doc_desc">
+              <div class="code">/createoutfitmonkey - Cria o Blip de Outfit</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="doc_desc">
+              <div class="code">/debugoutfitmonkey - Debug de Blip Outfit</div>
             </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/deletaroutfitmonkey [id Blip] - Deletar Blip Outfit </div>
             </div>
           </div>
-
-          <div id="MonkeyGaragem" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Garagem
-            </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="doc">
+            <div class="doc_titulo">Monkey Shops</div>
+            <div class="doc_desc">
+              <div class="code">/createshopmonkey - Cria o Blip de Loja</div>
             </div>
           </div>
-
-          <div id="MonkeyDistribuidora" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Distribuidora
+          <div class="doc">
+            <div class="doc_titulo">Monkey Skin Arma</div>
+            <div class="doc_desc">
+              <div class="code">/skinarma - Abre Painel Skin Arma</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/pegar_todas_skins_armas - Pega Todas as Armas Skins</div>
             </div>
           </div>
-
-          <div id="MonkeyPainelFAC" class="card text-center mt-5">
-            <div class="card-header">
-              Monkey Painel FAC
+          <div class="doc">
+            <div class="doc_titulo">Monkey System</div>
+            <div class="doc_desc">
+              <div class="code">/openpanel - Abre Painel Monkey System</div>
             </div>
-            <div class="card-body">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/nVnSr2yrjp4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="card-footer ">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Comando</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/openpanel</th>
-                    <td>Sistema de tickets e advertências
-                      Gerenciamento de jogadores
-                      Controle de VIPs
-                      Loja de veículos e VIPs
-                      Envie anúncios
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/pegarcoord</th>
-                    <td>
-                      Gerencie itens, permissões e veículos do jogador
-                      Sistema para banimento e whitelist
-                      Controle de salários
-                      Sistema de organizações
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="doc_desc">
+              <div class="code">/pegarcoord - Pega Coordenada Atual</div>
             </div>
           </div>
+    
+        </section>
 
           <section class="contact-area mt-5">
             <div class="container">
@@ -990,12 +841,9 @@
             <li class="nav-item">
               <a class="nav-link" href="comandos.html">Comandos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="bases.html" target="_blank">Bases</a>
-            </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="javacript:;" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">Modulos</a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">Bases</a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="modulos/vrpex.html">Monkey vRPex 3.0</a></li>
                 <li><a class="dropdown-item" href="modulos/creative.html">Monkey Creative</a></li>
