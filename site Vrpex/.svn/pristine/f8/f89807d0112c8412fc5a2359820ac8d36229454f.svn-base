@@ -6,14 +6,26 @@
 }
 
 /* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
 
+::-webkit-scrollbar-track {
+    background: #0000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 0.25rem;
+    transition: opacity 0.2s linear;
+}
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 250, 250, 0) rgba(255, 255, 255, 0);
+    scrollbar-color: #aaa #0000;
     user-select: none;
     box-sizing: border-box;
-    /* overflow-x: hidden; */
 }
 
 body {
@@ -81,11 +93,15 @@ body {
 
 /* CORPO SITE */
 .back_monkey {
-    position: fixed;
-    height: 100%;
     background-image: url('https://media.discordapp.net/attachments/918143224420376608/1030124271965569174/unknown.png');
-    background-size: cover;
     background-position: center;
+    background-size: cover;
+    height: 100%;
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    text-align: center;
 }
 
 .corpo_monkey {
@@ -264,14 +280,13 @@ body {
 
 .doc {
     border: 1px solid #ddd;
-    margin-top: 30px;
+    margin: 5px;
 }
 
 .doc_titulo {
     margin: 5px 2px;
     font-size: 18px;
     font-weight: bold;
-    text-align: center;
 }
 
 .code {
@@ -290,6 +305,8 @@ body {
 
 
 /* FOOTER */
+
+
 .contact-area img {
     max-width: 100%;
     height: auto;
@@ -389,6 +406,12 @@ footer img {
 
     .corpo_monkey {
         top: 100%;
+        left: 0%;
+    }
+
+    .navbar {
+        font-size: 13px;
+        font-weight: 700;
     }
 
 }

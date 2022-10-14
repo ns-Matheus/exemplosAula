@@ -1,34 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Fredoka+One&family=Hubballi&display=swap');
-
 :root {
     --bgBranco: rgb(255, 255, 255, 0.8);
     --bgPreto: rgb(0.0, 0.0, 0.0, 0.8);
 }
 
-/* SCROLLBAR */
-
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 250, 250, 0) rgba(255, 255, 255, 0);
-    user-select: none;
-    box-sizing: border-box;
-    /* overflow-x: hidden; */
-}
-
 body {
-    font-family: 'Fredoka One', cursive;
-    font-size: 15px;
-    font-weight: 500;
+    font-family: "Poppins"!important;
 }
 
-/* NAVBAR */
 .navbar {
     width: 80%;
     height: 80px;
     position: fixed;
     top: 20px;
     left: 10%;
+    font-size: 18px;
+    font-weight: bold;
     border-radius: 35px;
     -webkit-border-radius: 35px;
     -moz-border-radius: 35px;
@@ -64,6 +50,7 @@ body {
     animation: hover 1s ease-in-out infinite;
 }
 
+
 @keyframes hover {
     0% {
         transform: perspective(200px) translatez(0);
@@ -78,50 +65,8 @@ body {
     }
 }
 
-
-/* CORPO SITE */
-.back_monkey {
-    position: fixed;
-    height: 100%;
-    background-image: url('https://media.discordapp.net/attachments/918143224420376608/1030124271965569174/unknown.png');
-    background-size: cover;
-    background-position: center;
-}
-
-.corpo_monkey {
-    position: absolute;
-    right: 0;
-}
-
-.logo_img {
-    width: 100%;
-    top: 10%;
-}
-
-.card-header {
-    font-size: 40px;
-    font-weight: 700;
-}
-
-.card-body iframe {
-    width: 80%;
-    height: 500px;
-}
-
-.card-footer th {
-    font-family: 'Hubballi', cursive;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-/* ESCOPO  */
-.escopogeral {
-    width: 100%;
-}
-
 .escopo {
-
-    font-size: 50px;
+    font-size: 100px;
     font-weight: bold;
 }
 
@@ -182,13 +127,14 @@ body {
 
 
 .escopo2 {
+    font-family: "Poppins";
     font-size: 18px;
     font-weight: 100;
 }
 
 .escopo3 {
-    font-family: "Concert", cursive;
-    font-size: 20px;
+    font-family: "Poppins";
+    font-size: 22px;
     font-weight: 700;
 }
 
@@ -239,147 +185,32 @@ body {
 
 
 
-/* INDEX */
-.sobre {
-    background-color: var(--bgBranco);
-    color: var(--bgPreto);
-}
-
-.sobre h1 {
+.back_monkey {
+    background-image: url('https://media.discordapp.net/attachments/918143224420376608/1030124271965569174/unknown.png');
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    position: fixed;
+    top: 0;
     text-align: center;
 }
 
-.sobre strong {
-    font-weight: 900;
-}
-
-
-
-
-/* AREA PROGRAMADOR */
-
-.docGeral {
-    width: 100%;
-}
-
-.doc {
-    border: 1px solid #ddd;
-    margin-top: 30px;
-}
-
-.doc_titulo {
-    margin: 5px 2px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.code {
-    margin: 5px 2px;
-    padding: 5px;
-
-    background-color: #ddd;
-    border: 1px solid #ccc;
-}
-
-
-
-
-
-
-
-
-/* FOOTER */
-.contact-area img {
-    max-width: 100%;
-    height: auto;
-}
-
-.contact-area ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.contact-area {
-    border-bottom: 1px solid #353C46;
-}
-
-.contact-content p {
-    margin: 30px 0 60px;
-    position: relative;
-}
-
-.contact-content p::after {
-    background: #353C46;
-    bottom: -30px;
-    content: "";
-    height: 1px;
-    left: 50%;
+.corpo_monkey {
     position: absolute;
-    transform: translate(-50%);
-    width: 80%;
-}
-
-.contact-content h6 {
-    color: #8b9199;
-    font-size: 15px;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
-.contact-content span {
-    color: #353c47;
-    margin: 0 10px;
-}
-
-.contact-social {
-    margin-top: 30px;
-}
-
-.contact-social>ul {
-    display: inline-flex;
-}
-
-.contact-social ul li a {
-    border: none;
-    color: #8b9199;
-    display: inline-block;
-    height: 40px;
-    margin: 0 10px;
-    padding-top: 7px;
-    transition: all 0.4s ease 0s;
-    width: 40px;
-}
-
-.contact-social ul li a:hover {
-    border: none;
-    color: #FAB702;
-}
-
-.contact-content img {
-    max-width: 210px;
+    left: 50%;
 }
 
 
-footer {
-    background-color: var(--bgBranco);
-    color: var(--bgPreto);
+.logo_img {
+    width: 100%;
+    top: 10%;
 }
 
-footer p {
-    padding: 40px 0;
-    text-align: center;
+.card-header{
+    font-size: 40px;
+    font-weight: 700;
 }
 
-footer img {
-    width: 100px;
-}
-
-
-
-
-/* RESPONSIVOS */
 
 @media (max-width: 768px) {
     .back_monkey {
@@ -389,6 +220,12 @@ footer img {
 
     .corpo_monkey {
         top: 100%;
+        left: 0%;
+    }
+
+    .navbar {
+        font-size: 13px;
+        font-weight: 700;
     }
 
 }
@@ -402,9 +239,4 @@ footer img {
         color: var(--bgBranco);
         background-color: var(--bgPreto);
     }
-
-    .card {
-        overflow: hidden;
-    }
-
 }
