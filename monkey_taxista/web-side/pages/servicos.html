@@ -1,0 +1,97 @@
+<div id="servicos">
+  <!-- Texto inicio -->
+  <div class="text">
+    <h5>Bem-vindo <span class="fw-bold">{{core.user.nome}}</span></h5>
+    <h6>
+      <span class="fw-light">Configure o valor dos trabalhos abaixo</span>
+    </h6>
+  </div>
+  <!-- <div class="cards-3">
+    <div class="card-config" v-for="servico in servicos">
+      <div class="config-img">
+        <img :src="servico.url" alt="" />
+      </div>
+      <div class="config-interact">
+        <div class="config-title">{{servico.nome.toUpperCase()}}</div>
+        <input class="config-input" :id="servico.nome" type="number" :value="servico.mult" min="1" max="10" />
+      </div>
+      <div class="config-body">
+        <div class="config-status">
+          <div class="status">Pago</div>
+          <div class="valor">{{moeda.format(servico.valorPagar)}}</div>
+        </div>
+        <div class="config-status">
+          <div class="status">Recebido</div>
+          <div class="valor">{{moeda.format(servico.valorRecebido)}}</div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="card-config">
+    <div class="config-interact">
+      <div class="config-title">Configure o valor dos serviços</div>
+      <input
+        class="config-input"
+        id="teste"
+        type="number"
+        min="1"
+        max="100"
+        v-model="percentValue"
+      />
+    </div>
+    <div class="config-body">
+      <div class="config-status">
+        <div class="status">Porcentagem pagar por serviço para empresa</div>
+        <div class="valor">{{percent.format(percentValue/100)}}</div>
+      </div>
+      <div class="config-status">
+        <div class="status">Porcentagem paga para funcionários por serviço</div>
+        <div class="valor">{{percent.format((100 - percentValue)/100)}}</div>
+      </div>
+      <div class="config-status">
+        <button
+          class="btn btn-primary"
+          @click="addPorcentagem(percentValue, idLoja)"
+        >
+          Aplicar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var servicos = new Vue({
+    el: "#servicos",
+    data: {
+      multiplicador: 0,
+      percentValue: core.percentageValue,
+      percent: core.percent,
+      moeda: core.moeda,
+      servicos: core.servicos,
+      idLoja: core.idLoja,
+    },
+  });
+  function addPorcentagem(percent, id) {
+    if(percent > 100){
+      Swal.fire({
+      title: "Valor Acima de 100",
+      text: "Não é póssivel inserir valores Acima de 100",
+      icon: "error",
+      confirmButtonText: "Continuar",
+    })
+    }else if(percent < 1){
+      Swal.fire({
+      title: "Valor abaixo de 1",
+      text: "Não é póssivel inserir valores Abaixo de 1",
+      icon: "error",
+      confirmButtonText: "Continuar",
+    })
+    }else{
+      aplicarPorcentagem(percent, id)
+        .then((data) =>{
+          servicos.percentValue = data
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+</script>

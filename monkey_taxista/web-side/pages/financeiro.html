@@ -1,0 +1,79 @@
+<div id="financeiro">
+  <!-- Texto inicio -->
+  <div class="card-nv">
+    <div class="card-head text-center">
+      <div class="nv-object">
+        <div class="nv-text">
+          <h1 class="nv-title">{{nivel}}</h1>
+        </div>
+        <img
+          src="https://cdn.discordapp.com/attachments/895016171651334154/1022136049671098439/Design_sem_nome.png"
+          alt=""
+        />
+      </div>
+      <div class="head-object">
+        <h6>
+          <span class="fw-light"
+            >Veja seu banco, e abaixo gerencie as rotas desbloquedas</span
+          >
+        </h6>
+      </div>
+    </div>
+  </div>
+  <div class="money">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-text text-center">
+          <div>Total em Caixa: {{moeda.format(caixa)}}</div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-success" @click="depositar()">
+            depositar
+          </button>
+          <button class="btn btn-danger" @click="sacar()">sacar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banco e Upgrades -->
+  <div class="main">
+    <div class="cards-2">
+      <div class="card-upg" v-for="servico in servicos">
+        <div class="card-img" :class="servico.nivel <= nivel ? ' ': ' bloqueado' ">
+          <img :src="servico.url" alt="" />
+        </div>
+        <div class="item-upg-buttom">
+          <button class="btn btn-primary" v-if="servico.nivel > nivel">
+            <i class="far fa-lock"></i><span class="mx-2">Bloqueado</span>
+          </button>
+          <!-- <button class="btn btn-primary"  v-if="rota.nivel <= nivel">Melhorar</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var financeiro = new Vue({
+      el: "#financeiro",
+      data: {
+        caixa: core.caixaAtual,
+        idLoja: core.idLoja,
+        moeda: core.moeda,
+        nivel: core.nivel,
+        servicos: core.servicos
+      },
+    });
+
+    function depositar() {
+      depositarDinheiro().then((data) => {
+        console.log(data)
+        // financeiro.caixa = data;
+      });
+    }
+
+    function sacar() {
+      sacarDinheiro().then((data) => {
+        financeiro.caixa = data;
+      });
+    }
+  </script>
+</div>

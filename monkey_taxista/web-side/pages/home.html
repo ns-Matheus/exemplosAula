@@ -1,0 +1,31 @@
+<div id="home">
+  <!-- Texto inicio -->
+  <div class="text">
+    <h5>Bem-vindo <span class="fw-bold">{{core.user.nome}}</span></h5>
+    <h6><span class="fw-light">Selecione A Sua rota de ônibus Abaixo</span></h6>
+  </div>
+  <!-- Selecionar rota -->
+  <div class="cards">
+    <div class="card-item" v-for="servico in servicos">
+      <div class="card-img" :class="servico.nivel > nivel ? ' bloqueado': ' ' ">
+        <img :src="servico.url" alt="" />
+      </div>
+      <div class="item-add-btn">
+        <button class="btn btn-primary" v-if="servico.nivel > nivel">
+          <i class="far fa-lock"></i><span class="mx-2">Bloqueado</span>
+        </button>
+        <button v-if="servico.nivel <= nivel" class="btn btn-primary" @click="iniciarRota(servico.nome)">Iniciar Trabalho</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var home = new Vue({
+    el: "#home",
+    data:{
+      servicos: core.servicos,
+      nivel: core.nivel
+    }
+  });
+</script>
