@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Overlock+SC&family=Scheherazade+New&display=swap');
+
+:root {
+    --bgBlack: rgb(0.0, 0.0, 0.0, 0.8);
+    --bgWhite: rgb(255, 255, 255, 0.8);
+}
+
+body {
+    /* font-family: 'Overlock SC', cursive; */
+    font-family: 'Scheherazade New', serif;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.navbar {
+    background-color: var(--bgBlack);
+}
+
+.navbar-brand img {
+    width: 80px;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-brand img {
+        width: 100px;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+        padding: 0 1em;
+    }
+}
+
+.nav-link:hover {
+    animation: hover 1s ease-in-out infinite;
+ }
+ 
+ @keyframes hover {
+    0% {
+       transform: perspective(200px) translatez(0);
+    }
+ 
+    50% {
+       transform: perspective(200px) translatez(5px);
+    }
+ 
+    100% {
+       transform: perspective(200px) translatez(0);
+    }
+ }
