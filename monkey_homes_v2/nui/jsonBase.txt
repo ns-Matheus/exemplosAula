@@ -1,0 +1,185 @@
+[
+   {
+      'hasOwner': true,
+      'ownerName': 'Matheus souza',
+      'ownerPhone': '123-456',
+      'ownerId': 21,
+      'idPlayer': 21,
+      'homeValue': 9999999,
+      'homeName': 'casa_sub_01',
+      'homePhoto': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+      'homeChestWeight': 100,
+      'homeKeyAmount': 3,
+      'homeApto': -1,
+      'homeId': 555,
+      'homeValueCoins': 555,
+      'expirationDate': 1667148747,
+      'homeInterior': 'casa_fav',
+      'locked': true,
+      'authorizedPersons': [
+         {
+            'name': 'Matheus souza',
+            'phone': '123-456',
+            'id': 21
+         },
+         {
+            'name': 'Fulano silva',
+            'phone': '435-654',
+            'id': 99
+         }
+      ],
+      'interiors': [
+         {
+            'name': 'bronze',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'prata',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'ouro',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         }
+      ]
+   },
+   {
+      'hasOwner': true,
+      'ownerName': 'Matheus souza',
+      'ownerPhone': '123-456',
+      'ownerId': 21,
+      'idPlayer': 21,
+      'homeValue': 9999999,
+      'homeName': 'casa_sub_01',
+      'homePhoto': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+      'homeChestWeight': 100,
+      'homeKeyAmount': 3,
+      'homeApto': -1,
+      'homeId': 555,
+      'homeValueCoins': 555,
+      'expirationDate': 1667148747,
+      'homeInterior': 'casa_fav',
+      'locked': false,
+      'authorizedPersons': [
+         {
+            'name': 'Matheus souza',
+            'phone': '123-456',
+            'id': 21
+         },
+         {
+            'name': 'Fulano silva',
+            'phone': '435-654',
+            'id': 99
+         }
+      ],
+      'interiors': [
+         {
+            'name': 'bronze',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'prata',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'ouro',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         }
+      ]
+   },
+   {
+      'hasOwner': false,
+      'ownerName': 'Matheus souza',
+      'ownerPhone': '123-456',
+      'ownerId': 21,
+      'idPlayer': 21,
+      'homeValue': 9999999,
+      'homeName': 'casa_sub_01',
+      'homePhoto': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+      'homeChestWeight': 100,
+      'homeKeyAmount': 3,
+      'homeApto': -1,
+      'homeId': 555,
+      'homeValueCoins': 555,
+      'expirationDate': 1667148747,
+      'homeInterior': 'casa_fav',
+      'locked': true,
+      'authorizedPersons': [
+         {
+            'name': 'Matheus souza',
+            'phone': '123-456',
+            'id': 21
+         },
+         {
+            'name': 'Fulano silva',
+            'phone': '435-654',
+            'id': 99
+         }
+      ],
+      'interiors': [
+         {
+            'name': 'bronze',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'prata',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'ouro',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         }
+      ]
+   },
+   {
+      'hasOwner': true,
+      'ownerName': 'Matheus souza',
+      'ownerPhone': '123-456',
+      'ownerId': 99,
+      'idPlayer': 21,
+      'homeValue': 9999999,
+      'homeName': 'casa_sub_01',
+      'homePhoto': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+      'homeChestWeight': 100,
+      'homeKeyAmount': 3,
+      'homeApto': -1,
+      'homeId': 555,
+      'homeValueCoins': 555,
+      'expirationDate': 1667148747,
+      'homeInterior': 'casa_fav',
+      'locked': false,
+      'authorizedPersons': [
+         {
+            'name': 'Fulano silva',
+            'phone': '435-654',
+            'id': 99
+         }
+      ],
+      'interiors': [
+         {
+            'name': 'bronze',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'prata',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         },
+         {
+            'name': 'ouro',
+            'photo': 'https://cdn.discordapp.com/attachments/795099022439481390/1010242611686166668/download.png',
+            'value': 99999
+         }
+      ]
+   },
+]

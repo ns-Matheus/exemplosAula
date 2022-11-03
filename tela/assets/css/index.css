@@ -30,6 +30,24 @@ body {
     padding: 0.5em 1em;
 }
 
+.nav-link:hover {
+    animation: hover 1s ease-in-out infinite;
+}
+
+@keyframes hover {
+    0% {
+        transform: perspective(200px) translatez(0);
+    }
+
+    50% {
+        transform: perspective(200px) translatez(5px);
+    }
+
+    100% {
+        transform: perspective(200px) translatez(0);
+    }
+}
+
 @media screen and (min-width: 768px) {
     .navbar-brand img {
         width: 100px;
@@ -40,21 +58,3 @@ body {
         padding: 0 1em;
     }
 }
-
-.nav-link:hover {
-    animation: hover 1s ease-in-out infinite;
- }
- 
- @keyframes hover {
-    0% {
-       transform: perspective(200px) translatez(0);
-    }
- 
-    50% {
-       transform: perspective(200px) translatez(5px);
-    }
- 
-    100% {
-       transform: perspective(200px) translatez(0);
-    }
- }

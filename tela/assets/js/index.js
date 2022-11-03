@@ -1,5 +1,6 @@
-Vue.component('corpo', {
+Vue.component('cabecalho', {
   template: `
+  <header>
   <nav class="navbar navbar-expand-md navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand d-md-none" href="#">
@@ -29,6 +30,15 @@ Vue.component('corpo', {
     </div>
   </div>
 </nav>
+</header>
+  `
+})
+
+Vue.component('rodape', {
+  template: `
+  <footer>
+    
+  </footer>
   `
 })
 

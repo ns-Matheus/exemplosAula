@@ -1,0 +1,105 @@
+<div id="local">
+   <div class="row">
+      <div class="col-12">
+         <div class="card">
+            <div id="infoPlayer" class="body">
+               <div id="user" class="fas fa-user"></div>
+               <div class="col backUser">
+                  <i class="far fa-hashtag text-primary"></i><small>Identidade:</small>
+                  <span id="infoId"></span>
+               </div>
+               <div class="col backUser">
+                  <i class="far fa-address-card text-primary"></i><small>Passaporte:</small>
+                  <span id="infoIdentidade"></span>
+               </div>
+               <div class="col backUser">
+                  <i class="far fa-male text-primary"></i><small>Nome:</small>
+                  <span id="infoNome"></span>
+               </div>
+               <div class="col backUser">
+                  <i class="far fa-phone-alt text-primary"></i><small>Número:</small>
+                  <span id="infoNumero"></span>
+               </div>
+               <div class="col backUser">
+                  <i class="far fa-money-bill-wave-alt text-primary"></i><small>Banco:</small>
+                  <span id="infoBanco"></span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-12 p-0">
+         <div class="row">
+            <div class="col">
+               <div class="card">
+                  <div class="body weight">
+                     <div class="weightTextLeft"></div>
+                     <div class="weightBarLeft"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="width-150">
+               <div class="card">
+                  <div class="body invMiddle">
+                     <label><i class="far fa-exchange text-primary"></i></label>
+                     <input class="form-control amount" type="text" onkeypress="validate(event)" value="" placeholder="Quantidade"/>
+                  </div>
+               </div>
+            </div>
+            <div class="col">
+               <div class="card">
+                  <div class="body weight">
+                     <div class="weightTextRight"></div>
+                     <div class="weightBarRight"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-6">
+         <div class="card">
+            <div class="body p-2">
+               <div class="invLeft cards"></div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-6">
+         <div class="card">
+            <div class="body p-2">
+               <div class="invRight cards"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script src="script/chest.js"></script>
+
+<script>
+   var local = new Vue({
+      el: '#local'
+   })
+
+   updateChest()
+
+   function validate(evt) {
+      var theEvent = evt || window.event;
+
+      if (theEvent.type === 'paste') {
+         key = event.clipboardData.getData('text/plain');
+      } else {
+         var key = theEvent.keyCode || theEvent.which;
+         key = String.fromCharCode(key);
+      }
+
+      var regex = /[0-9]|\./;
+
+      if(!regex.test(key)) {
+         theEvent.returnValue = false;
+
+         if(theEvent.preventDefault) theEvent.preventDefault();
+      }
+   }
+</script>

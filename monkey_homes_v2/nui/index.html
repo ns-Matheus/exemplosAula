@@ -1,0 +1,96 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Monkey Homes</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icons_ms728/icons.css">
+   <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="css/color_skins.css">
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/bootstrap-select.css">
+</head>
+<body class="theme-black" style="background-color: transparent !important;">
+<!-- <body class="theme-black" style="background: url('https://www.maistecnologia.com/wp-content/uploads/2020/06/fivem-uma-alternativa-ao-gta-online-www.maistecnologia.com.jpg') !important;"> -->
+   <div id="app" style="display: none;">
+      <div :id="page.titulo" class="corpo">
+         <!-- Page Loader -->
+         <div class="page-loader-wrapper">
+            <div class="loader">
+               <img src="images/logo-icon.png" width="150" alt="Monkey">
+               <p class="mt-5">Carregando...</p>
+            </div>
+         </div>
+
+         <div class="overlay"></div><!-- Overlay For Sidebars -->
+
+         <!-- Left Sidebar -->
+         <aside id="minileftbar" class="minileftbar">
+            <ul class="menu_list">
+               <li><a href="javascript:void(0);" class="bars"></a></li>
+               <li><a class="navbar-brand" href="javascript:;"><img src="images/logo-icon.png" alt="Monkey"></a></li>
+               <li class="notifications"><a href="javascript:void(0);"><i class="fal fa-info-circle normal font-16"></i></a></li>
+               <li class="power">
+                  <a href="javascript:;" @click="close" class="mega-menu"><i class="fas fa-power-off"></i></a>
+               </li>
+            </ul>    
+         </aside>
+
+         <aside class="right_menu">
+            <div class="notif-menu overflow-auto">
+               <div class="card">
+                  <div class="header">
+                     <h2><strong>Sobre os desenvolvedores</strong></h2>
+                  </div>
+                  <div class="body">
+                     <img src="https://cdn.discordapp.com/attachments/928755706235064350/935182233780768838/perfil.png" class="w-100 mb-2">
+                     <div class="font-13 text-center text-secondary">
+                        <strong class="font-18">Monkey Homes</strong><br>
+                        <small class="mt-1">by Creative Monkey</small><br>
+                        <br>
+                        <i class="fab fa-discord normal font-18"></i><br>
+                        <small>Nosso discord</small><br>
+                        <strong>discord.gg/5NR4k3WdnV</strong>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </aside>
+
+         <!-- Carregando -->
+         <div class="loadingContent">
+            <div class="loading">
+               <p>Carregando</p><span></span>
+            </div>
+         </div>
+
+         <!-- Main Content -->
+         <section class="content p-0 overflow-hidden">
+            <div class="block-header mb-0 mt-2 mx-1 px-4 py-3">
+               <h2>{{ page.titulo }}</h2>
+               <ul class="breadcrumb padding-0">
+                  <li class="breadcrumb-item"><a href="javascript:;"><i class="far fa-home normal"></i></a></li>
+                  <li class="breadcrumb-item"><a href="javascript:void(0);">{{ page.titulo == 'Vitrine' || page.titulo == 'Possuídos' ? 'Loja' : 'Principal' }}</a></li>
+                  <li class="breadcrumb-item active">{{ page.titulo }}</li>
+               </ul>
+            </div>
+
+            <div id="content-body"></div>
+         </section>
+      </div>
+   </div>
+
+   <script src="script/libscripts.bundle.js"></script>
+   <script src="script/vendorscripts.bundle.js"></script>
+   <script src="script/mainscripts.bundle.js"></script>
+   <script src="script/bootstrap-select.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+   <script src="script/functions.js"></script>
+   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+</body>
+</html>

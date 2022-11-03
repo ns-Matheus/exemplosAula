@@ -1,0 +1,79 @@
+<div id="local" class="h-100">
+   <div class="row align-items-center h-100" v-if="casa.hasOwner">
+      <div class="col-6 text-center">
+         <h3 class="mb-5 mt-0 font-29" v-if="casa.locked">
+            <i class="far fa-lock text-primary font-80 mb-3"></i><br>
+            Trancado
+         </h3>
+         <h3 class="mb-5 mt-0 font-29" v-else>
+            <i class="far fa-lock-open text-primary font-80 mb-3"></i><br>
+            Aberto
+         </h3>
+         <h5 class="mb-4 mt-0 weight-400">
+            <i class="far fa-home text-primary font-20"></i><br>
+            Imóvel nº {{ casa.homeId }}
+         </h5>
+      </div>
+      <div class="col-6 text-center" v-if="new Date(casa.expirationDate * 1000) > new Date()">
+         <img class="border-dark border border-2 rounded mb-4" :src="casa.homePhoto == null ? '' : casa.homePhoto" @error="imageError" />
+
+         <button class="btn btn-primary" v-if="!casa.locked" @click="enterHome(casa.homeId, casa.homeApto)">Entrar</button>
+         <button class="btn btn-primary" v-if="!casa.locked && isAuthorized(casa)" @click="lockHome(casa)">Trancar</button>
+         <button class="btn btn-primary" v-if="casa.locked && isAuthorized(casa)" @click="unlockHome(casa)">Destrancar</button>
+      </div>
+      <div class="col-6 text-center" v-else>
+         <img class="border-dark border border-2 rounded mb-4" :src="casa.homePhoto == null ? '' : casa.homePhoto" @error="imageError" />
+         <button class="btn btn-primary" v-if="casa.ownerId == casa.idPlayer" @click="payHomeTax(casa.homeId, casa.homeApto, casa.iptu)">Pagar IPTU</button>
+      </div>
+   </div>
+
+   <div class="row align-items-center h-100" v-else>
+      <div class="col-6 text-center">
+         <h3 class="mb-5 mt-0 font-29">
+            <i class="far fa-home text-primary font-80 mb-3"></i><br>
+            Imóvel nº {{ casa.homeId }}
+         </h3>
+         <h5 class="mb-4 mt-0 weight-400">
+            <i class="far fa-treasure-chest text-primary font-20"></i><br>
+            {{ casa.homeChestWeight }} Kg
+         </h5>
+         <h5 class="mb-4 mt-0 weight-400">
+            <i class="far fa-key text-primary font-20"></i><br>
+            {{ casa.homeKeyAmount }} Chaves
+         </h5>
+
+         <div class="row">
+            <div class="col mt-3">
+               <h5 class="mb-4 mt-0 weight-400 font-22">
+                  <i class="far fa-dollar-sign text-primary font-19"></i><br>
+                  <small class="weight-400 font-12 text-secondary">$</small> {{ casa.homeValue }}<br>
+               </h5>
+            </div>
+            <div class="col mt-3" v-if="casa.homeValueCoins != null && !isNaN(casa.homeValueCoins)">
+               <h5 class="mb-4 mt-0 weight-400 font-22">
+                  <i class="far fa-coins text-primary font-19"></i><br>
+                  {{ casa.homeValueCoins }} <small class="weight-400 font-16 text-secondary">Coins</small>
+               </h5>
+            </div>
+         </div>
+      </div>
+      <div class="col-6 text-center">
+         <img class="border-dark border border-2 rounded mb-2" :src="casa.homePhoto" @error="imageError" />
+         <h4 class="text-primary my-4">Disponível!</h4>
+         <button class="btn btn-success" @click="configBuyHome(casa)">Comprar</button>
+      </div>
+   </div>
+</div>
+
+<script>
+   var local = new Vue({
+      el: '#local',
+      data: {
+         casa: {}
+      }
+   })
+
+   setTimeout(() => {
+      local.casa = global.page.data
+   }, 300);
+</script>

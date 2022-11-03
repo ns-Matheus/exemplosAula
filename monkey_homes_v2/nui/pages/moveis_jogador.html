@@ -1,0 +1,79 @@
+<div id="local" class="h-100">
+   <div class="row m-0" v-if="loja.authorizedPersons != null && isAuthorized(loja)">
+      <div class="icon-sm mt-1">
+         <div class="card mb-1">
+            <div class="body p-3 text-center rounded-1 cursor-pointer" :class="global.page.titulo == 'Possuídos' ? 'border-selected' : ''" @click="changePage('Possuídos', 'pages/moveis_jogador.html')">
+               <i class="far fa-user text-primary font-30 mb-3"></i><br>
+               <h6 class="my-0">Possuídos</h6>
+            </div>
+         </div>
+         <div class="card mb-1">
+            <div class="body p-3 text-center rounded-1 cursor-pointer" :class="global.page.titulo == 'Vitrine' ? 'border-selected' : ''" @click="changePage('Vitrine', 'pages/moveis_loja.html')">
+               <i class="far fa-store text-primary font-30 mb-3"></i><br>
+               <h6 class="my-0">Loja</h6>
+            </div>
+         </div>
+      </div>
+
+      <div class="col p-0">
+         <div class="cards-1">
+            <div class="product__item product__electronic-item" v-for="(p, index) in loja.moveis" :key="index">
+               <div class="product__thumb position-relative">
+                  <a href="javascript:;" class="w-img">
+                     <img :src="p.url_foto == null ? '' : p.url_foto" alt="product" @error="imageError">
+                  </a>
+               </div>
+               <div class="product__content">
+                  <h6 class="product-name">{{ p.nome_vitrine }}</h6>
+                  <span class="price" :class="p.usado == true ? 'text-danger' : 'text-success'">{{ p.usado == true ? 'Em uso' : 'Dispoível' }}</span>
+               </div>
+               <div class="product__add-btn" v-if="p.usado != true">
+                  <div class="row w-100">
+                     <div class="col-6">
+                        <button type="button" @click="configPlaceFurniture(p.id, index)"><i class="far fa-map-marker-alt text-success"></i></button>
+                     </div>
+                     <div class="col-6">
+                        <button type="button" @click="configSellFurniture(p.id, index)"><i class="far fa-trash text-danger"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      
+         <div class="text-center" v-if="loja.moveis == null || loja.moveis.length == 0">Nenhum produto encontrado.</div>
+      </div>
+
+      <a href="javascript:;" class="btn-float btn-primary" @click="takeFurniture">
+         <i class="far fa-backpack normal"></i>
+      </a>
+   </div>
+
+   <div class="row h-100 text-center align-items-center" v-else>
+      <h3><i class="far fa-lock text-primary font-80 mb-3"></i><br>Bloqueado</h3>
+   </div>
+</div>
+
+<script>
+   var local = new Vue({
+      el: '#local',
+      data: {
+         loja: {}
+      }
+   })
+
+   getMyFurnitures().then((data) => {
+      local.loja = data
+   })
+
+   function configSellFurniture(id, index) {
+      sellFurniture(id).then((data) => {
+         local.loja.moveis.splice(index, 1)
+      })
+   }
+
+   function configPlaceFurniture(id, index) {
+      placeFurniture(id).then((data) => {
+         local.loja.moveis[index].usado = true;
+      })
+   }
+</script>

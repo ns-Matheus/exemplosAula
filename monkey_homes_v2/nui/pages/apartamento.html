@@ -1,0 +1,102 @@
+<div id="local" class="h-100">
+   <div class="card mb-1">
+      <div class="body p-2 mx-1">
+         <input type="text" class="form-control" placeholder="Pesquisar por apartamento..." onkeypress="validate(event)" v-model="search" />
+      </div>
+   </div>
+
+   <div class="cards-2">
+      <div class="card mb-0" v-for="(ap, index) in aptos" :key="index">
+         <div class="body text-center p-3 h-100" v-if="ap.hasOwner">
+            <div class="row align-items-center h-100">
+               <div class="w-max-content">
+                  <i v-if="ap.locked" class="far fa-lock text-primary font-40"></i>
+                  <i v-else class="far fa-lock-open text-primary font-40"></i>
+               </div>
+               <div class="col">
+                  <h4 class="my-0">Apto nº {{ ap.homeApto }}</h4>
+                  <p class="mb-2 mt-0 font-11 text-secondary">(Imóvel nº {{ ap.homeId }})</p>
+               </div>
+               <div class="col-12">
+                  <h5 class="mb-2 mt-0 text-danger" v-if="ap.locked">Trancado</h5>
+                  <h5 class="mb-2 mt-0 text-success" v-else>Aberto</h5>
+               </div>
+               <div class="col-12" v-if="new Date(ap.expirationDate * 1000) > new Date()">
+                  <button class="btn btn-primary" v-if="!ap.locked" @click="enterHome(ap.homeId, ap.homeApto)">Entrar</button>
+                  <button class="btn btn-primary" v-if="!ap.locked && isAuthorized(ap)" @click="lockHome(ap)">Trancar</button>
+                  <button class="btn btn-primary" v-if="ap.locked && isAuthorized(ap)" @click="unlockHome(ap)">Destrancar</button>
+               </div>
+               <div class="col-12" v-else>
+                  <button class="btn btn-primary" v-if="ap.ownerId == ap.idPlayer" @click="payHomeTax(ap.homeId, ap.homeApto, ap.iptu)">Pagar IPTU</button>
+               </div>
+            </div>
+         </div>
+
+         <div class="body text-center p-3  h-100" v-else>
+            <div class="row align-items-center h-100">
+               <div class="w-max-content">
+                  <i class="far fa-tags text-primary font-35"></i>
+               </div>
+               <div class="col">
+                  <h4 class="my-0">Apto nº {{ ap.homeApto }}</h4>
+                  <p class="mb-2 mt-0 font-11 text-secondary">(Imóvel nº {{ ap.homeId }})</p>
+               </div>
+               <div class="col-12 mt-2">
+                  <p class="mb-2 mt-0">
+                     <i class="far fa-treasure-chest text-primary font-13 me-1"></i> {{ ap.homeChestWeight }} <small class="font-11 text-secondary">Kg</small>
+                     <span class="mx-2"> | </span>
+                     <i class="far fa-key text-primary font-13 me-1"></i> {{ ap.homeKeyAmount }} <small class="font-11 text-secondary">Chaves</small>
+                  </p>
+               </div>
+               <div class="col-12">
+                  <button class="btn btn-success" @click="configBuyHome(ap)">Comprar</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script>
+   var local = new Vue({
+      el: '#local',
+      data: {
+         aptos: {},
+         search: ''
+      },
+      watch: {
+         'search' : function (val) {
+            var value = val.toLowerCase()
+
+            $(".cards-2 h4").filter(function () {
+               $(this.parentElement.parentElement.parentElement.parentElement).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            })
+         }
+      }
+   })
+
+   setTimeout(() => {
+      local.aptos = global.page.data
+
+      $("input").focus()
+   }, 300);
+
+   function validate(evt) {
+      var theEvent = evt || window.event;
+
+      if (theEvent.type === 'paste') {
+         key = event.clipboardData.getData('text/plain');
+      } else {
+         var key = theEvent.keyCode || theEvent.which;
+         key = String.fromCharCode(key);
+      }
+
+      var regex = /[0-9]|\./;
+
+      if(!regex.test(key)) {
+         theEvent.returnValue = false;
+
+         if(theEvent.preventDefault) theEvent.preventDefault();
+      }
+   }
+</script>

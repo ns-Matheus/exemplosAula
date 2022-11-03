@@ -1,0 +1,59 @@
+<div id="local" class="h-100">
+   <div class="row m-0" v-if="loja.authorizedPersons != null && isAuthorized(loja)">
+      <div class="icon-sm mt-1">
+         <div class="card mb-1">
+            <div class="body p-3 text-center rounded-1 cursor-pointer" :class="global.page.titulo == 'Possuídos' ? 'border-selected' : ''" @click="changePage('Possuídos', 'pages/moveis_jogador.html')">
+               <i class="far fa-user text-primary font-30 mb-3"></i><br>
+               <h6 class="my-0">Possuídos</h6>
+            </div>
+         </div>
+         <div class="card mb-1">
+            <div class="body p-3 text-center rounded-1 cursor-pointer" :class="global.page.titulo == 'Vitrine' ? 'border-selected' : ''" @click="changePage('Vitrine', 'pages/moveis_loja.html')">
+               <i class="far fa-store text-primary font-30 mb-3"></i><br>
+               <h6 class="my-0">Loja</h6>
+            </div>
+         </div>
+      </div>
+
+      <div class="col p-0">
+         <div class="cards-1">
+            <div class="product__item product__electronic-item" v-for="(p, index) in loja.moveis" :key="index">
+               <div class="product__thumb position-relative">
+                  <a href="javascript:;" class="w-img">
+                     <img :src="p.url_foto == null ? '' : p.url_foto" alt="product" @error="imageError">
+                  </a>
+               </div>
+               <div class="product__content">
+                  <h6 class="product-name">{{ p.nome_vitrine }}</h6>
+                  <span class="price font-14 delimitarTexto">
+                     <small class="font-11 text-secondary">$</small> {{ parseInt(p.preco).toLocaleString('pt-br', {minimumFractionDigits: 0, maximumFractionDigits: 0 }) }}
+                     <small class="mx-1 text-primary"> | </small> {{ parseInt(p.coins).toLocaleString('pt-br', {minimumFractionDigits: 0, maximumFractionDigits: 0 }) }} <small class="font-11 text-secondary">Coins</small>
+                  </span>
+               </div>
+               <div class="product__add-btn">
+                  <button type="button" @click="configBuyFurniture(p)"><i class="far fa-shopping-cart me-1"></i> Comprar</button>
+               </div>
+            </div>
+         </div>
+      
+         <div class="text-center" v-if="loja.moveis == null || loja.moveis.length == 0">Nenhum produto encontrado.</div>
+      </div>
+   </div>
+
+   <div class="row h-100 text-center align-items-center" v-else>
+      <h3><i class="far fa-lock text-primary font-80 mb-3"></i><br>Bloqueado</h3>
+   </div>
+</div>
+
+<script>
+   var local = new Vue({
+      el: '#local',
+      data: {
+         loja: {}
+      }
+   })
+
+   getFurnitures().then((data) => {
+      local.loja = data
+   })
+</script>

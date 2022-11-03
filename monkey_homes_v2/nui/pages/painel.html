@@ -1,0 +1,169 @@
+<div id="local" class="h-100">
+   <div class="row" v-if="painel.authorizedPersons != null && isAuthorized(painel)">
+      <div class="col">
+         <div class="card">
+            <div class="body">
+               <h4 class="mt-0 mb-3">Sobre</h4>
+
+               <div class="cards-1">
+                  <div class="body p-3 removeToHover2" @click="upgradeKeys(painel.homeId, painel.homeApto, painel.upgradeKeysValue)">
+                     <h4 class="mt-0 mb-1">{{ painel.authorizedPersons.length }} de {{ painel.homeKeyAmount }}</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-chevron-double-up text-warning font-18 me-2"></i>Melhorar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-male text-warning me-1"></i> Moradores</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="unlockHome(painel)" v-if="painel.locked">
+                     <h4 class="mt-0 mb-1">Trancado</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-door-open text-success font-18 me-2"></i>Destrancar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-door-closed text-success me-1"></i> Porta</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="lockHome(painel)" v-else>
+                     <h4 class="mt-0 mb-1">Aberto</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-door-closed text-success font-18 me-2"></i>Trancar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-door-open text-success me-1"></i> Porta</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="payHomeTax(painel.homeId, painel.homeApto, painel.iptu)">
+                     <h4 class="mt-0 mb-1">{{ new Date(painel.expirationDate * 1000).toLocaleDateString('pt-BR') }}</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-money-bill-wave-alt text-danger font-18 me-2"></i>Pagar IPTU</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-calendar-times text-danger me-1"></i> Expiração</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="upgradeChest(painel.homeId, painel.homeApto, painel.upgradeChestValue)">
+                     <h4 class="mt-0 mb-1">{{ painel.homeChestWeight }} Kg</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-chevron-double-up text-info font-18 me-2"></i>Melhorar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-treasure-chest text-info me-1"></i> Baú</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="upgradeKeys(painel.homeId, painel.homeApto, painel.upgradeKeysValue)">
+                     <h4 class="mt-0 mb-1">{{ painel.homeKeyAmount }} Chaves</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-chevron-double-up text-warning font-18 me-2"></i>Melhorar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-key text-warning me-1"></i> Chaves</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="configInterior(painel)">
+                     <h4 class="mt-0 mb-1">{{ painel.homeInterior }}</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-sync text-success font-18 me-2"></i>Trocar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-lamp text-success me-1"></i> Interior</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="goToFurnitureMenu">
+                     <h4 class="mt-0 mb-1">Mobília</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-eye text-danger font-18 me-2"></i>Visualizar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-couch text-danger me-1"></i> Loja</p>
+                  </div>
+                  <div class="body p-3 removeToHover2" @click="viewCommmands">
+                     <h4 class="mt-0 mb-1">Comandos</h4>
+                     <h4 class="mt-0 mb-2 text-center font-21"><i class="far fa-eye text-info font-18 me-2"></i>Visualizar</h4>
+                     <p class="mt-1 mb-0"><i class="far fa-info-circle text-info me-1"></i> Ajuda</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="width-600 mb-2">
+         <div class="row">
+            <div class="col-6 ps-0">
+               <div class="card">
+                  <div class="body">
+                     <div class="row">
+                        <img :src="painel.homePhoto == null ? '' : painel.homePhoto" class="icon-lg" @error="imageError">
+                        <h4 class="mt-2 text-center" :class="painel.homeApto != -1 ? 'mb-0' : 'mb-2'">Imóvel nº {{ painel.homeId }}</h4>
+                        <p class="mt-0 mb-2 text-center" v-if="painel.homeApto != -1">Apartamento {{ painel.homeApto }}</p>
+                        <button class="btn btn-primary w-75 mx-auto" @click="transferHomeUnknown(painel.homeId, painel.homeApto)" v-if="painel.ownerId == painel.idPlayer">Vender casa</button>
+                        <button class="btn btn-primary w-75 mx-auto" @click="authorizePerson(painel.homeId, painel.homeApto)"
+                           v-if="painel.authorizedPersons.length < painel.homeKeyAmount && painel.ownerId == painel.idPlayer">Adicionar morador
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-6 pe-0">
+               <div class="card">
+                  <div class="body">
+                     <h4 class="mt-0 mb-3">Moradores</h4>
+
+                     <div class="card mb-2 w-100" v-for="(user, index) in painel.authorizedPersons" :key="index">
+                        <div v-if="painel.ownerId == painel.idPlayer && painel.idPlayer != user.id" class="body text-center removeToHover" @click="personOptions(user, painel, index)">
+                           <h5 class="delimitarTexto mb-2">{{ user.name }}</h5>
+                           <h5 class="delimitarTexto mb-2 pb-3 pt-2">
+                              <i class="far fa-info-circle text-primary"></i><br>Opções
+                           </h5>
+                           <p class="text-muted m-b-0">
+                              <i class="far fa-hashtag text-primary font-12 me-2"></i><small>Identidade:</small> {{ user.id }}
+                           </p>
+                           <p class="text-muted m-b-0"> 
+                              <i class="far fa-phone-alt text-primary font-12 me-2"></i><small>Telefone:</small> {{ user.phone }} 
+                           </p>
+                        </div>
+                        <div v-else class="body text-center">
+                           <h5 class="delimitarTexto mb-2">{{ user.name }}</h5>
+                           <p class="text-muted m-b-0">
+                              <i class="far fa-hashtag text-primary font-12 me-2"></i><small>Identidade:</small> {{ user.id }}
+                           </p>
+                           <p class="text-muted m-b-0"> 
+                              <i class="far fa-phone-alt text-primary font-12 me-2"></i><small>Telefone:</small> {{ user.phone }} 
+                           </p>
+                        </div>
+                     </div>
+                     <div v-if="painel.authorizedPersons.length == 0">Nenhum morador encontrado.</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Modal mensagens -->
+      <div class="modal" id="modalInterior" role="dialog">
+         <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="title" id="modalInteriorLabel">Trocar interior</h4>
+               </div>
+               <div class="modal-body py-3">
+                  <div class="cards-2">
+                     <div class="card mb-0" v-for="(i, index) in painel.interiors" :key="index">
+                        <div class="body p-2 icon-bg removeToHover2" :style="'background-image: url('+ i.photo +'), url(images/semFoto.jpg)'" 
+                           v-if="i.name != painel.homeInterior" @click="changeInterior(painel.homeId, painel.homeApto, i.name, i.value)">
+                           <div class="w-max-content">
+                              <h5 class="my-0 text-center font-18 me-1">
+                                 <i class="far fa-dollar-sign text-success2 font-13 me-1 translateY-1"></i> {{ i.value }}
+                              </h5>
+                              <h5 class="my-0 text-center font-18 me-1">
+                                 <i class="far fa-plus text-success2 font-16 me-1 translateY1"></i> Comprar
+                              </h5>
+                           </div>
+                        </div>
+                        <div class="body p-2 icon-bg border-dark" :style="'background-image: url('+ i.photo +'), url(images/semFoto.jpg)'" v-else>
+                           <div class="w-max-content font-18 me-1">
+                              <i class="far fa-check text-success2 font-16 me-1 translateY1"></i> Comprado
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-simple waves-effect" data-dismiss="modal">Fechar</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row h-100 text-center align-items-center" v-else>
+      <h3><i class="far fa-lock text-primary font-80 mb-3"></i><br>Bloqueado</h3>
+   </div>
+</div>
+
+<script>
+   var local = new Vue({
+      el: '#local',
+      data: {
+         painel: {}
+      }
+   })
+
+   setTimeout(() => {
+      local.painel = global.page.data
+   }, 300);
+
+   function configInterior(home) {
+      $('#modalInterior').modal('show')
+   }
+</script>
