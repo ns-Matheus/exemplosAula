@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cardo&family=Overlock+SC&family=Scheherazade+New&display=swap');
 
 :root {
-    --bgBlack: rgb(0.0, 0.0, 0.0, 0.8);
-    --bgWhite: rgb(255, 255, 255, 0.8);
+    --bgB: rgb(0.0, 0.0, 0.0, 0.8);
+    --bgW: rgb(255, 255, 255, 0.8);
+    --bgBlack: #25272e;
 }
 
 body {
@@ -57,4 +58,103 @@ body {
         margin-right: 0;
         padding: 0 1em;
     }
+}
+
+
+
+/* FOOTER */
+
+#footer-wrapper {
+    padding-top: 70px;
+}
+
+#footer-wrapper.footer-dark {
+    background-color: var(--bgBlack);
+}
+
+#footer-wrapper.footer-light {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.footer-dark .footer-widget-container .text-big {
+    color: #fff;
+}
+
+.footer-dark .footer-widget-container .widget .title h3 {
+    color: #fff;
+}
+
+.footer-widget-container>li {
+    list-style: none;
+}
+
+.footer-dark .footer-widget-container p,
+.footer-dark .footer-widget-container a,
+.footer-dark .footer-widget-container address,
+.footer-dark .footer-widget-container span,
+.footer-dark .copyright-container p,
+.footer-dark .copyright-container a,
+.footer-dark .copyright-container span {
+    color: #bcc0c4;
+}
+
+.copyright-container .row {
+    margin-bottom: 0;
+}
+
+.footer-dark .copyright-container .row {
+    border-top: 1px solid #384653;
+    padding: 15px 0 10px 0;
+}
+
+.footer-light .copyright-container .row {
+    border-top: 1px solid #ddd;
+    padding: 15px 0 10px 0;
+}
+
+/* FOOTER ICONES ------------------------------------------------------------------------- */
+.footer-social-icons {
+    margin-top: 15px;
+}
+
+.footer-social-icons>li {
+    list-style: none !important;
+    background-image: none !important;
+    float: left;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+}
+
+.footer-social-icons li a {
+    width: 30px;
+    height: 30px;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0;
+    text-align: center;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.footer-social-icons li a:hover {
+    color: #fff;
+}
+
+.footer-dark .footer-social-icons li a {
+    background-color: #565f66;
+    color: #fff;
+}
+
+.footer-light .footer-social-icons li a {
+    background-color: #f6f6f6;
+}
+
+.footer-dark .footer-widget-container .newsletter {
+    color: #bcc0c4;
+    background-color: #565f66;
+    border: none;
 }
